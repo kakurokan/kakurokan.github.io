@@ -16,7 +16,7 @@ export const PROJECTS = [
       { en: 'Worked on an 8-service Docker Compose stack with Prometheus monitoring; my 4 Alembic migrations are CI-checked as reversible and drift-free.',
         pt: 'Trabalho numa stack Docker Compose de 8 serviços monitorizada com Prometheus; as minhas 4 migrações Alembic são validadas em CI como reversíveis e sem drift.' }
     ],
-    tags: ['Python', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'DDD', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
+    tags: ['Python', 'TDD', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'DDD', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
     links: [ ['website', 'https://www.eneifaro.pt/'] ],
     repo: 'https://github.com/Dep-tech-coenei-faro-27/event-site' },
   { slug: 'fintlist', name: 'FintList',
@@ -35,7 +35,7 @@ export const PROJECTS = [
       { en: "Its iterative deepCopy handled lists far larger than the course list's recursive copy, which overflowed the stack.",
         pt: 'O deepCopy iterativo aguentou listas muito maiores do que a cópia recursiva da lista da cadeira, que rebentava a stack.' }
     ],
-    tags: ['Java', 'Maven', 'JUnit 5', 'GitHub Actions', { en: 'Benchmarks', pt: 'Benchmarks' }],
+    tags: ['Java', 'TDD', 'Maven', 'JUnit 5', 'GitHub Actions', { en: 'Benchmarks', pt: 'Benchmarks' }],
     repo: 'https://github.com/kakurokan/FintList' },
   { slug: 'maritime-navigation', name: { en: 'Maritime Navigation Simulator', pt: 'Simulador de Navegação Marítima' },
     meta: { en: 'Route planning simulator · 3-person team · Apr – Jun 2026', pt: 'Simulador com planeamento de rotas · equipa de 3 · abr – jun 2026' },
@@ -51,7 +51,7 @@ export const PROJECTS = [
       { en: 'The GUI reads read-only simulation snapshots, so the interface stays decoupled from the navigation logic.',
         pt: 'A interface lê snapshots só de leitura da simulação, por isso fica desacoplada da lógica de navegação.' }
     ],
-    tags: ['Java', 'Swing', 'JUnit 5', 'Maven', 'GitHub Actions', 'Design patterns'],
+    tags: ['Java', 'TDD', 'Swing', 'JUnit 5', 'Maven', 'GitHub Actions', 'Design patterns'],
     repo: 'https://github.com/kakurokan/Maritime_Navigation' },
   { slug: 'hashing-trees', name: { en: 'Hash Table & Tree Library', pt: 'Biblioteca de Hash Tables e Árvores' },
     meta: { en: 'Co-built with a classmate', pt: 'Feita com um colega' },
@@ -65,20 +65,20 @@ export const PROJECTS = [
       { en: 'A multi-level hash table with double hashing and a Bloom-filter-style marker per bucket. Across 10 million keys, lookups averaged 1.0 key comparisons on hits and 0.0 on misses.',
         pt: 'Uma hash table multinível com double hashing e um marcador estilo Bloom filter por bucket. Com 10 milhões de chaves, as pesquisas fizeram em média 1,0 comparações nos acertos e 0,0 nas falhas.' }
     ],
-    tags: ['Java 17', 'Maven', 'JUnit 5', 'GitHub Actions'],
+    tags: ['Java 17', 'TDD', 'Maven', 'JUnit 5', 'GitHub Actions'],
     repo: 'https://github.com/kakurokan/non-linear_and_hashing_data_structures' },
   { slug: 'bookswipe', name: 'BookSwipe',
     desc: { en: "Tinder-style app for books: swipe on the ones you like and get recommendations. I'm building the backend in Java with Spring Boot; the React/TypeScript frontend is my teammate's.",
             pt: 'App ao estilo Tinder para livros: deslizas nos que gostas e recebes recomendações. Estou a fazer o backend em Java com Spring Boot; o frontend em React e TypeScript é do meu colega de equipa.' },
-    tags: ['Java', 'Spring Boot', 'REST'],
+    tags: ['Java', 'TDD', 'Spring Boot', 'REST'],
     repo: 'https://github.com/kakurokan/BookSwipe' }
 ];
 
 // lista compacta do cartão "More projects"
 export const MORE = [
-  { name: 'DNS Client from Scratch', url: 'https://github.com/kakurokan/DNSClient', tech: 'Python · UDP sockets · Wireshark',
+  { name: 'DNS Client from Scratch', url: 'https://github.com/kakurokan/DNSClient', tech: 'Python · TDD · UDP sockets · Wireshark',
     desc: { en: 'Builds DNS query packets byte by byte.', pt: 'Constrói os pacotes de consulta DNS byte a byte.' } },
-  { name: 'PuzzleAI Collection', url: 'https://github.com/kakurokan/PuzzleAI-Collection', tech: 'Java · Best-First search · JUnit 5',
+  { name: 'PuzzleAI Collection', url: 'https://github.com/kakurokan/PuzzleAI-Collection', tech: 'Java · TDD · Best-First search · JUnit 5',
     desc: { en: 'Ball Sort solver.', pt: 'Solver de Ball Sort.' } },
   { name: 'SWERC Team Notebook', url: 'https://github.com/kakurokan/SwercNotebookUALG', tech: 'C++',
     desc: { en: "The team's reference notebook of graph, DP, segment-tree, string and number-theory algorithms.",

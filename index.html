@@ -136,7 +136,7 @@
         <p>Backend of the website and ticketing API for ENEI, the National Gathering of Informatics Students, coming to Faro. Domain-driven FastAPI, SQLAlchemy 2 and PostgreSQL.</p>
         <div class="stats"><span class="stat"><b>12</b><span>PRs merged</span></span><span class="stat"><b>13</b><span>PRs reviewed</span></span><span class="stat"><b>500+</b><span>test suite</span></span><span class="stat"><b>4</b><span>migrations</span></span></div>
         <ul class="points"><li>Built the authentication and account flows: JWT auth middleware, password recovery, remember-me, terms acceptance and an admin-promotion CLI.</li><li>Designed the HMAC-signed, PII-free ticket QR payload, so a ticket can be verified without exposing personal data.</li><li>Wrote 25+ of the 500+ tests. Every change passes GitHub Actions CI (lint, tests, smoke test) before deploy.</li><li>Worked on an 8-service Docker Compose stack with Prometheus monitoring; my 4 Alembic migrations are CI-checked as reversible and drift-free.</li></ul>
-        <div class="chips"><button type="button" class="chip" data-tag="Python">Python</button><button type="button" class="chip" data-tag="FastAPI">FastAPI</button><button type="button" class="chip" data-tag="SQLAlchemy 2">SQLAlchemy 2</button><button type="button" class="chip" data-tag="PostgreSQL">PostgreSQL</button><button type="button" class="chip" data-tag="DDD">DDD</button><button type="button" class="chip" data-tag="Alembic">Alembic</button><button type="button" class="chip" data-tag="Docker Compose">Docker Compose</button><button type="button" class="chip" data-tag="Prometheus">Prometheus</button><button type="button" class="chip" data-tag="CI/CD">CI/CD</button></div>
+        <div class="chips"><button type="button" class="chip" data-tag="Python">Python</button><button type="button" class="chip" data-tag="TDD">TDD</button><button type="button" class="chip" data-tag="FastAPI">FastAPI</button><button type="button" class="chip" data-tag="SQLAlchemy 2">SQLAlchemy 2</button><button type="button" class="chip" data-tag="PostgreSQL">PostgreSQL</button><button type="button" class="chip" data-tag="DDD">DDD</button><button type="button" class="chip" data-tag="Alembic">Alembic</button><button type="button" class="chip" data-tag="Docker Compose">Docker Compose</button><button type="button" class="chip" data-tag="Prometheus">Prometheus</button><button type="button" class="chip" data-tag="CI/CD">CI/CD</button></div>
         <div class="row">
           <a class="btn raised" href="https://github.com/Dep-tech-coenei-faro-27/event-site" target="_blank" rel="noopener">View repository…</a>
           <a class="btn raised" href="https://www.eneifaro.pt/" target="_blank" rel="noopener">Website</a>
@@ -151,7 +151,7 @@
         <p>A doubly linked list for primitive int stored in three parallel arrays instead of node objects, which cuts allocations and garbage-collector pressure.</p>
         <div class="stats"><span class="stat"><b>~8×</b><span>faster addAt/removeAt</span></span><span class="stat"><b>~10M</b><span>elements</span></span><span class="stat"><b>1.63</b><span>doubling ratio (vs 2.10)</span></span></div>
         <ul class="points"><li>Reuses free slots, caches the last access and starts each traversal from the head, the tail or the last accessed node, whichever is closer.</li><li>About 8× faster addAt/removeAt than the course's linked list at ~10M elements. Both are O(n): the gain comes from smaller constant factors, not from a complexity change.</li><li>Benchmarked with Monte Carlo random positions and doubling-ratio tests (mean ratio for addAt 1.63 vs 2.10).</li><li>Its iterative deepCopy handled lists far larger than the course list's recursive copy, which overflowed the stack.</li></ul>
-        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button><button type="button" class="chip" data-tag="Benchmarks">Benchmarks</button></div>
+        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="TDD">TDD</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button><button type="button" class="chip" data-tag="Benchmarks">Benchmarks</button></div>
         <div class="row">
           <a class="btn raised" href="https://github.com/kakurokan/FintList" target="_blank" rel="noopener">View repository…</a>
           
@@ -166,7 +166,7 @@
         <p>A discrete-time maritime traffic simulator with a Swing GUI, built test-first.</p>
         
         <ul class="points"><li>Dijkstra route planning on a graph that contains no obstacle-crossing edges.</li><li>Design patterns: Strategy (pluggable routing algorithms), State (ship life cycle), Mediator (a control tower that resolves collisions), Iterator (on-time ship departures), Command (GUI actions).</li><li>Collision avoidance: ship areas are circles, priority goes by trip code, and the yielding ship waits and then resumes its route.</li><li>The GUI reads read-only simulation snapshots, so the interface stays decoupled from the navigation logic.</li></ul>
-        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="Swing">Swing</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button><button type="button" class="chip" data-tag="Design patterns">Design patterns</button></div>
+        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="TDD">TDD</button><button type="button" class="chip" data-tag="Swing">Swing</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button><button type="button" class="chip" data-tag="Design patterns">Design patterns</button></div>
         <div class="row">
           <a class="btn raised" href="https://github.com/kakurokan/Maritime_Navigation" target="_blank" rel="noopener">View repository…</a>
           
@@ -181,7 +181,7 @@
         <p>Two non-linear data structures in Java 17, measured under their worst-case loads.</p>
         <div class="stats"><span class="stat"><b>1.31</b><span>max/min depth ratio</span></span><span class="stat"><b>1.0</b><span>comparisons per hit</span></span><span class="stat"><b>0.0</b><span>comparisons per miss</span></span></div>
         <ul class="points"><li>A weight-balanced tree whose searches rotate frequently used keys toward the root. After 100,000 sorted insertions (a plain BST's worst case), the max/min depth ratio stayed at 1.31.</li><li>A multi-level hash table with double hashing and a Bloom-filter-style marker per bucket. Across 10 million keys, lookups averaged 1.0 key comparisons on hits and 0.0 on misses.</li></ul>
-        <div class="chips"><button type="button" class="chip" data-tag="Java 17">Java 17</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button></div>
+        <div class="chips"><button type="button" class="chip" data-tag="Java 17">Java 17</button><button type="button" class="chip" data-tag="TDD">TDD</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button></div>
         <div class="row">
           <a class="btn raised" href="https://github.com/kakurokan/non-linear_and_hashing_data_structures" target="_blank" rel="noopener">View repository…</a>
           
@@ -196,7 +196,7 @@
         <p>Tinder-style app for books: swipe on the ones you like and get recommendations. I'm building the backend in Java with Spring Boot; the React/TypeScript frontend is my teammate's.</p>
         
         
-        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="Spring Boot">Spring Boot</button><button type="button" class="chip" data-tag="REST">REST</button></div>
+        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="TDD">TDD</button><button type="button" class="chip" data-tag="Spring Boot">Spring Boot</button><button type="button" class="chip" data-tag="REST">REST</button></div>
         <div class="row">
           <a class="btn raised" href="https://github.com/kakurokan/BookSwipe" target="_blank" rel="noopener">View repository…</a>
           
@@ -212,10 +212,10 @@
         <h2 id="h-more" data-t="more.title">#More projects</h2>
         <ul class="more" id="more-list"><!--prerender:more-->
     <li><a href="https://github.com/kakurokan/DNSClient" target="_blank" rel="noopener">DNS Client from Scratch</a>
-      <span class="mtech" data-tech="Python · UDP sockets · Wireshark">Python · UDP sockets · Wireshark</span>
+      <span class="mtech" data-tech="Python · TDD · UDP sockets · Wireshark">Python · TDD · UDP sockets · Wireshark</span>
       <span>Builds DNS query packets byte by byte.</span></li>
     <li><a href="https://github.com/kakurokan/PuzzleAI-Collection" target="_blank" rel="noopener">PuzzleAI Collection</a>
-      <span class="mtech" data-tech="Java · Best-First search · JUnit 5">Java · Best-First search · JUnit 5</span>
+      <span class="mtech" data-tech="Java · TDD · Best-First search · JUnit 5">Java · TDD · Best-First search · JUnit 5</span>
       <span>Ball Sort solver.</span></li>
     <li><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">SWERC Team Notebook</a>
       <span class="mtech" data-tech="C++">C++</span>
