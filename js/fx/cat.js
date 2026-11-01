@@ -34,7 +34,17 @@ let jump = null, vy = 0, last = 0, running = false;
 
 // plataformas = topo de cada cartão visível (dentro da área visível da sua coluna) + a barra de tarefas
 // loose: usado ao cair, aceita cartões cujo topo está quase no fundo da coluna ou do ecrã
+// fundo de um cartão onde o gato foi largado (já passou o topo): aterra ali, como se o rebordo o apanhasse
+const edges = new Map();
+const edgeOf = c => { if (!edges.has(c)) edges.set(c, { edge: c }); return edges.get(c); };
 function rectOf(p, loose = false) {
+  if (p.edge) {
+    const c = p.edge;
+    if (!c.isConnected || c.hidden || c.classList.contains('expanded')) return null;
+    const r = c.getBoundingClientRect();
+    if (!r.width || r.bottom > document.querySelector('.taskbar').getBoundingClientRect().top) return null;
+    return { left: r.left, right: r.right, top: r.bottom };
+  }
   if (p === FLOOR) { const tb = document.querySelector('.taskbar').getBoundingClientRect(); return { left: 0, right: innerWidth, top: tb.top }; }
   if (!p.isConnected || p.hidden || p.classList.contains('expanded')) return null;
   const r = p.getBoundingClientRect();
@@ -81,10 +91,17 @@ function land(target) {
     setTimeout(() => { if (state === 'sit') { say(t('cat.huff'), 1400); } }, 150);
   }
 }
-function fallTarget() {
+function fallTarget(from = y) {   // from: onde o gato estava antes deste passo (um passo grande não pode saltar por cima da plataforma)
   // cartão mais perto por baixo do gato, senão a barra de tarefas
-  const below = platforms(true).filter(p => p.r.top >= y - 2 && x + W / 2 > p.r.left && x + W / 2 < p.r.right).sort((a, b) => a.r.top - b.r.top);
-  return below.length ? below[0].el : FLOOR;
+  const cx = x + W / 2;
+  const opts = platforms(true).filter(p => p.r.top >= from - 2 && cx > p.r.left && cx < p.r.right).map(p => ({ el: p.el, top: p.r.top }));
+  // largado dentro de um cartão: o fundo dele também pára a queda
+  for (const c of cards) {
+    const e = edgeOf(c), r = rectOf(e);
+    if (r && cx > r.left && cx < r.right && c.getBoundingClientRect().top < from - 2 && r.top >= from - 2) opts.push({ el: e, top: r.top });
+  }
+  opts.sort((a, b) => a.top - b.top);
+  return opts.length ? opts[0].el : FLOOR;
 }
 
 function step(dt) {
@@ -102,8 +119,9 @@ function step(dt) {
   }
   if (state === 'fall') {
     show('jump');
+    const from = y;
     vy += 1600 * dt; y += vy * dt;
-    const tgt = fallTarget(), tr = rectOf(tgt, true);
+    const tgt = fallTarget(from), tr = rectOf(tgt, true);
     if (tr && y >= tr.top) { y = tr.top; land(tgt); }
     if (y > innerHeight) { y = rectOf(FLOOR).top; land(FLOOR); }
     return;
