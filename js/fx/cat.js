@@ -33,18 +33,19 @@ let plat = null, x = 0, y = 0, dir = 1, state = 'sit', timer = 1.5, anim = 0;
 let jump = null, vy = 0, last = 0, running = false;
 
 // plataformas = topo de cada cartão visível (dentro da área visível da sua coluna) + a barra de tarefas
-function rectOf(p) {
+// loose: usado ao cair, aceita cartões cujo topo está quase no fundo da coluna ou do ecrã
+function rectOf(p, loose = false) {
   if (p === FLOOR) { const tb = document.querySelector('.taskbar').getBoundingClientRect(); return { left: 0, right: innerWidth, top: tb.top }; }
   if (!p.isConnected || p.hidden || p.classList.contains('expanded')) return null;
   const r = p.getBoundingClientRect();
   if (!r.width) return null;
   const col = p.parentElement && p.parentElement.classList.contains('col') ? p.parentElement.getBoundingClientRect() : null;
-  if (col && (r.top < col.top - 2 || r.top > col.bottom - 50)) return null;
-  if (r.top < 20 || r.top > innerHeight - 60) return null;
+  if (col && (r.top < col.top - 2 || r.top > col.bottom - (loose ? 6 : 50))) return null;
+  if (r.top < 20 || r.top > (loose ? document.querySelector('.taskbar').getBoundingClientRect().top - 6 : innerHeight - 60)) return null;
   return { left: r.left, right: r.right, top: r.top };
 }
-function platforms() {
-  return cards.map(c => ({ el: c, r: rectOf(c) })).filter(p => p.r);
+function platforms(loose = false) {
+  return cards.map(c => ({ el: c, r: rectOf(c, loose) })).filter(p => p.r);
 }
 function clampX(r) { x = Math.max(r.left, Math.min(r.right - W, x)); }
 
@@ -82,7 +83,7 @@ function land(target) {
 }
 function fallTarget() {
   // cartão mais perto por baixo do gato, senão a barra de tarefas
-  const below = platforms().filter(p => p.r.top >= y - 2 && x + W / 2 > p.r.left && x + W / 2 < p.r.right).sort((a, b) => a.r.top - b.r.top);
+  const below = platforms(true).filter(p => p.r.top >= y - 2 && x + W / 2 > p.r.left && x + W / 2 < p.r.right).sort((a, b) => a.r.top - b.r.top);
   return below.length ? below[0].el : FLOOR;
 }
 
@@ -102,7 +103,7 @@ function step(dt) {
   if (state === 'fall') {
     show('jump');
     vy += 1600 * dt; y += vy * dt;
-    const tgt = fallTarget(), tr = rectOf(tgt);
+    const tgt = fallTarget(), tr = rectOf(tgt, true);
     if (tr && y >= tr.top) { y = tr.top; land(tgt); }
     if (y > innerHeight) { y = rectOf(FLOOR).top; land(FLOOR); }
     return;
@@ -171,6 +172,15 @@ el.addEventListener('pointermove', e => {
   y = Math.max(H, Math.min(innerHeight - 4, e.clientY + H - 6));
   if (!running) render();
 });
+// cartão que está por trás do gato (centro do corpo), se houver
+function cardUnder() {
+  const px = x + W / 2, py = y - H / 2;
+  return cards.find(c => {
+    if (c.hidden || c.classList.contains('expanded')) return false;
+    const r = c.getBoundingClientRect();
+    return r.width && px > r.left && px < r.right && py > r.top && py < r.bottom;
+  });
+}
 function release() {
   if (!grab) return;
   const wasDrag = grab.moved; grab = null;
@@ -178,8 +188,10 @@ function release() {
   el.classList.remove('held');
   meowEl.hidden = true; el.classList.remove('meowing');
   huff = true; vy = 0; state = 'fall';
+  const under = cardUnder();   // solto em cima de um cartão: sobe para o topo dele (a primeira aba que encontra)
+  if (under && running && startJump(under)) return;
   if (!running) {   // movimento reduzido: aterra logo
-    const tgt = fallTarget(), tr = rectOf(tgt); y = tr ? tr.top : y; plat = tgt; state = 'sleep'; show('sleep'); render();
+    const tgt = under || fallTarget(), tr = rectOf(tgt, true); y = tr ? tr.top : y; plat = tgt; state = 'sleep'; show('sleep'); render();
   }
 }
 el.addEventListener('pointerup', release);
