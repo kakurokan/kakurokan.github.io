@@ -8,6 +8,8 @@ The site is a retro desktop. Cards work like windows: you can drag one onto anot
 
 ![Screenshot of the retro desktop, Game Boy theme](docs/screenshot.png)
 
+![Screenshot of the simple version for recruiters](docs/screenshot-simple.png)
+
 ## Features
 
 - **Projects, contests, education and stack** in draggable cards. Only the most relevant ones are open on load.
