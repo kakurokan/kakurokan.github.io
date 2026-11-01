@@ -6,6 +6,8 @@ Personal portfolio of **Léo Souza**, software engineer (Java, Python), finishin
 
 The site is a retro desktop. Cards work like windows: you can drag one onto another to swap them, minimize, expand or close them, and reopen any of them from the taskbar. A small pixel-art cat, Koji, walks across the cards, jumps between them and naps now and then.
 
+![Screenshot of the retro desktop, Game Boy theme](docs/screenshot.png)
+
 ## Features
 
 - **Projects, contests, education and stack** in draggable cards. Only the most relevant ones are open on load.
