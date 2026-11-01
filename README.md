@@ -9,6 +9,7 @@ The site is a retro desktop. Cards work like windows: you can drag one onto anot
 ## Features
 
 - **Projects, contests, education and stack** in draggable cards. Only the most relevant ones are open on load.
+- **Simple version for recruiters:** the "Recruiter? Simple version" button (top right, always visible) swaps the desktop for a plain single-column page. Link straight to it with `?simple`, e.g. `https://kakurokan.github.io/?simple`.
 - **English / Portuguese**, switchable from the taskbar or with `?lang=pt` in the URL.
 - **Five themes:** Game Boy (default, with an animated pixel-art wallpaper drawn on a canvas), vaporwave, pink, mint and night.
 - **Search** across every card, including closed ones, accent-insensitive.

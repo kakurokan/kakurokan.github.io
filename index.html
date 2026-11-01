@@ -413,6 +413,35 @@
     .tray .avail2 span:last-child { display: none; }
     .sun { left: 50%; }
   }
+
+  /* ================= botão de modo + MODO SIMPLES (para recrutadores) ================= */
+  .modebar { position: fixed; top: 8px; right: 14px; z-index: 4500; display: flex; gap: 8px; align-items: center; }
+  .modebar .lang-switch { display: none; }
+  .btn.raised.modebtn { min-height: 34px; padding: 0 14px; background: var(--bar); color: #fff; font-weight: 700; font-size: 14px; letter-spacing: .02em; }
+  .btn.raised.modebtn:hover { filter: brightness(1.15); }
+  body.simple {
+    --bg: #F5F4EF; --dots: transparent; --card: #FFFFFF; --text: #1B1F1B; --muted: #4F5A4F; --bar: #0F380F; --shadow: transparent;
+    --head: #0F380F; --link: #0A5C1A; --chip: #E7EFDC; --sel: #0F380F; --side-text: #0F380F;
+    --display: 'Nunito', system-ui, sans-serif; --body: 'Nunito', system-ui, sans-serif; --pixel: 'Nunito', system-ui, sans-serif; --ui: 'Nunito', system-ui, sans-serif;
+    --face: #FFFFFF; --light: #FFFFFF; --hi: #EEEEEE; --gray: #BBBBBB; --dark: #888888;
+    height: auto; overflow: auto; padding-bottom: 0; font-size: 16px; line-height: 1.55; background-image: none;
+  }
+  body.simple .scene, body.simple .gbwall, body.simple .crt, body.simple .taskbar, body.simple .startmenu,
+  body.simple #backdrop, body.simple .cat, body.simple .side, body.simple .bar, body.simple #w-simple { display: none !important; }
+  body.simple .modebar .lang-switch { display: flex; }
+  body.simple .layout { display: block; max-width: 820px; height: auto; margin: 0 auto; padding: 76px 18px 60px; }
+  body.simple .board { display: block; height: auto; }
+  body.simple .col { display: flex; flex-direction: column; gap: 20px; overflow: visible; padding: 0; height: auto; }
+  body.simple .col .card { flex: none; min-height: 0; margin: 0; display: block; background: #fff; border: 1px solid #D8D6CC; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  body.simple .card[hidden] { display: none; }
+  body.simple .col .inner { overflow: visible; }
+  body.simple .card.collapsed .inner { display: block; }
+  body.simple .card h2 { font-family: var(--display); font-weight: 800; color: var(--head); text-transform: none; letter-spacing: -.01em; }
+  body.simple .card h2::before { content: none; }
+  body.simple .projects .path { display: none; }
+  body.simple .card.flash { animation: none; }
+  @media (max-width: 860px) { .layout { padding-top: 60px; } body.simple .layout { padding-top: 64px; } }
+  @media print { .modebar { display: none; } }
   body.idle *, body.idle *::before, body.idle *::after { animation-play-state: paused !important; }
   @media (prefers-reduced-motion: reduce) { .grid, .stars, .welcome .blink rect.h, .card.flash { animation: none; } html { scroll-behavior: auto; } }
 </style>
@@ -467,6 +496,7 @@
         </div>
         <span class="avail"><span class="led" aria-hidden="true"></span><span data-t="avail.long"></span></span>
         <div class="links">
+          <a href="?simple" id="w-simple"><svg class="px" data-px="love"></svg><span data-t="mode.simple"></span></a>
           <a href="#cv"><svg class="px" data-px="cv"></svg>CV</a>
           <a href="https://github.com/kakurokan" target="_blank" rel="noopener"><svg class="px" data-px="disk"></svg>github/kakurokan</a>
           <a href="https://www.linkedin.com/in/leo-kakali" target="_blank" rel="noopener"><svg class="px" data-px="note"></svg>LinkedIn</a>
@@ -585,7 +615,7 @@
           <div><h3 data-t="stack.practices"></h3><div class="chips"><span class="chip">TDD</span><span class="chip">JUnit 5</span><span class="chip">pytest</span><span class="chip">Code review</span><span class="chip">Git</span><span class="chip">Maven</span><span class="chip">Agile/Scrum</span><span class="chip">Domain-Driven Design</span><span class="chip">OOP</span><span class="chip">Design patterns</span><span class="chip" data-t="stack.ai"></span></div></div>
           <div><h3 data-t="stack.fundamentals"></h3><div class="chips"><span class="chip" data-t="stack.algo"></span><span class="chip">Benchmarking</span><span class="chip">Cache locality</span><span class="chip">DNS</span><span class="chip">UDP sockets</span><span class="chip">Wireshark</span></div></div>
           <div><h3 data-t="stack.spoken"></h3><div class="chips"><span class="chip" data-t="stack.pt"></span><span class="chip" data-t="stack.en"></span><span class="chip" data-t="stack.es"></span></div></div>
-          <div><h3 data-t="stack.certs"></h3><div class="chips"><span class="chip">Beginner's TypeScript (Total TypeScript, 2026)</span><span class="chip">Linux Unhatched</span><span class="chip">Spring Boot for Beginners</span><span class="chip">Java (Basic)</span></div></div>
+          <div><h3 data-t="stack.certs"></h3><div class="chips certs"><span class="chip">Beginner's TypeScript (Total TypeScript, 2026)</span><span class="chip">Linux Unhatched</span><span class="chip">Spring Boot for Beginners</span><span class="chip">Java (Basic)</span></div></div>
         </div>
       </div>
     </article>
@@ -681,6 +711,14 @@
   </div>
 </footer>
 
+<div class="modebar" id="modebar">
+  <div class="lang-switch" role="group" aria-label="Language / Língua">
+    <button class="btn raised lang-btn" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button class="btn raised lang-btn" data-lang="pt" lang="pt" aria-label="Português">PT</button>
+  </div>
+  <button class="btn raised modebtn" id="modebtn" type="button"></button>
+</div>
+
 <div class="cat" id="cat" aria-hidden="true" hidden><svg viewBox="0 0 16 12"></svg><span class="zzz">z</span><span class="grr" aria-hidden="true">#!</span><span class="nm">koji</span><span class="meow" hidden></span></div>
 <div class="crt" aria-hidden="true"></div>
 
@@ -717,7 +755,7 @@ const I18N = {
     'contests.aria': 'MIUP problems solved: 0 in 2025, 4 in 2026',
     'contests.note': '0 → 4 problems after a year of training · 13th of 20 teams',
     'contests.swerc': '<b>SWERC 2025 (Lisbon):</b> represented UAlg at the ICPC Southwestern Europe regional.',
-    'contests.notebook': '<b>Team notebook:</b> I maintain our C++ reference of graph, DP, segment-tree, string and number-theory algorithms.',
+    'contests.notebook': '<b><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">Team notebook</a>:</b> I maintain our C++ reference of graph, DP, segment-tree, string and number-theory algorithms.',
     'education.title': '#Education', 'education.degree': 'BSc Informatics Engineering', 'education.dates': 'Sep 2024 – Jun 2027',
     'education.overall': 'overall grade', 'education.ads': 'Algorithms & Data Structures', 'education.oop': 'Object-Oriented Programming', 'education.se': 'Software Engineering',
     'education.scholarship': '<b>SOUAlg2.0</b> Academic Merit & Success Scholarship (top 1st-year cohort).',
@@ -742,6 +780,7 @@ const I18N = {
     'contact.based': 'Based in Faro, Portugal · Available from July 2027', 'contact.title': '#Hire me', 'contact.text': "Looking for a junior backend role (Java or Python) from July 2027. If you hire juniors, tell me what a junior's first project looks like, and I'll tell you how I'd approach it.",
     'drag.title': '#Drag',
     'drag.text': 'Grab a card by its bar and drop it on another one to swap places. The order is saved. <span class="muted">(On a computer.)</span>',
+    'mode.simple': 'Recruiter? Simple version', 'mode.retro': 'Retro version',
     'start.menu': 'Start menu', 'start.button': 'Start', 'start.about': 'About me', 'start.projects': 'Projects', 'start.prompt': 'Command prompt',
     'start.contact': 'Hire me…', 'start.theme': 'Change theme', 'start.lang': 'Português', 'start.reset': 'Reset desktop',
     'tasks.label': 'Cards'
@@ -776,7 +815,7 @@ const I18N = {
     'contests.aria': 'Problemas resolvidos na MIUP: 0 em 2025, 4 em 2026',
     'contests.note': '0 → 4 problemas depois de um ano de treino · 13.º de 20 equipas',
     'contests.swerc': '<b>SWERC 2025 (Lisboa):</b> representei a UAlg na regional ICPC do Sudoeste da Europa.',
-    'contests.notebook': '<b>Caderno da equipa:</b> mantenho a nossa referência C++ de grafos, DP, segment trees, strings e teoria dos números.',
+    'contests.notebook': '<b><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">Caderno da equipa</a>:</b> mantenho a nossa referência C++ de grafos, DP, segment trees, strings e teoria dos números.',
     'education.title': '#Formação', 'education.degree': 'Licenciatura em Engenharia Informática', 'education.dates': 'set 2024 – jun 2027',
     'education.overall': 'média', 'education.ads': 'Algoritmos e Estruturas de Dados', 'education.oop': 'Programação Orientada a Objetos', 'education.se': 'Engenharia de Software',
     'education.scholarship': '<b>SOUAlg2.0</b>: Bolsa de Mérito e Sucesso Académico (melhores alunos do 1.º ano).',
@@ -802,6 +841,7 @@ const I18N = {
     'contact.based': 'Em Faro, Portugal · Disponível a partir de julho de 2027', 'contact.title': '#Contrata-me', 'contact.text': 'À procura de uma vaga júnior de backend (Java ou Python) a partir de julho de 2027. Se contratas juniores, conta-me como é o primeiro projeto de um júnior, e eu digo-te como o abordaria.',
     'drag.title': '#Arrasta',
     'drag.text': 'Agarra um cartão pela barra e larga-o em cima de outro para trocarem de lugar. A ordem fica guardada. <span class="muted">(Num computador.)</span>',
+    'mode.simple': 'Recrutador? Versão simples', 'mode.retro': 'Versão retro',
     'start.menu': 'Menu Iniciar', 'start.button': 'Iniciar', 'start.about': 'Sobre mim', 'start.projects': 'Projetos', 'start.prompt': 'Prompt de comando',
     'start.contact': 'Contrata-me…', 'start.theme': 'Mudar de tema', 'start.lang': 'English', 'start.reset': 'Repor ambiente',
     'tasks.label': 'Cartões'
@@ -959,7 +999,10 @@ function hydrateIcons(root = document) {
 const cards = [...document.querySelectorAll('.card')];
 const backdrop = document.getElementById('backdrop');
 const tasks = document.getElementById('tasks');
-const isSmall = () => matchMedia('(max-width: 860px)').matches;
+// modo simples: uma coluna, sem desktop retro, para quem só quer ler o essencial
+const SIMPLE_ORDER = ['welcome', 'projects', 'more', 'stack', 'education', 'contests', 'about', 'path', 'cv', 'contact'];
+let simple = false;
+const isSmall = () => simple || matchMedia('(max-width: 860px)').matches;
 let zTop = 10;
 
 const CTL = {
@@ -1121,10 +1164,10 @@ const searchIn = document.getElementById('search');
 const searchMsg = document.getElementById('search-msg');
 // visibilidade: sem pesquisa mostra os cartões abertos; com pesquisa mostra os que têm o texto, mesmo fechados
 function refresh() {
-  const q = norm(searchIn.value.trim());
+  const q = simple ? '' : norm(searchIn.value.trim());
   let n = 0;
   cards.forEach(c => {
-    const show = q ? norm(c.textContent).includes(q) : !closed.has(c.id);
+    const show = simple ? SIMPLE_ORDER.includes(c.id) : (q ? norm(c.textContent).includes(q) : !closed.has(c.id));
     c.hidden = !show;
     if (show) n++;
   });
@@ -1295,7 +1338,7 @@ const wall = (() => {
     clearTimeout(rt); rt = setTimeout(() => { build(); draw(); }, 150);
   });
   document.addEventListener('visibilitychange', () => document.body.classList.toggle('idle', document.hidden));
-  document.addEventListener('visibilitychange', () => set(document.body.dataset.theme === 'gameboy' && !document.hidden));
+  document.addEventListener('visibilitychange', () => set(document.body.dataset.theme === 'gameboy' && !document.hidden && !simple));
   return { set };
 })();
 
@@ -1306,7 +1349,7 @@ function setTheme(theme) {
   document.body.dataset.theme = theme;
   const gb = theme === 'gameboy';
   if (gb !== (activePal === GB_PAL)) { activePal = gb ? GB_PAL : PAL; hydrateIcons(); }
-  wall.set(gb);
+  wall.set(gb && !simple);
   document.querySelectorAll('.theme').forEach(b => b.setAttribute('aria-pressed', b.dataset.set === theme));
   try { localStorage.setItem('theme', theme); } catch (e) {}
 }
@@ -1422,7 +1465,7 @@ document.addEventListener('click', e => {
 });
 document.getElementById('tag-clear').addEventListener('click', () => setTag(null));
 // as tags do cartão #Stack também filtram (as que são tecnologias)
-document.querySelectorAll('#stack .chip:not([data-t])').forEach(sp => {
+document.querySelectorAll('#stack .chips:not(.certs) .chip:not([data-t])').forEach(sp => {
   const b = document.createElement('button');
   b.type = 'button'; b.className = 'chip'; b.dataset.tag = sp.textContent.trim(); b.textContent = sp.textContent;
   sp.replaceWith(b);
@@ -1598,6 +1641,7 @@ function setLang(l, { save = true } = {}) {
   bootTerminal();
   tick();
   if (searchIn.value) filter();
+  if (typeof updateMode === 'function' && typeof modeBtn !== 'undefined') { updateMode(); trimTitles(); }
   if (save) try { localStorage.setItem('lang', lang); } catch (e) {}
 }
 
@@ -1611,7 +1655,9 @@ function layout() {
   board.replaceChildren(...cols);
   // posição fixa por índice: cartão i vai para a coluna i % n, por isso uma troca mantém-se ao redimensionar
   let i = 0;
-  cards.forEach(card => { (card.hidden ? cols[n - 1] : cols[i++ % n]).appendChild(card); });
+  const rank = c => SIMPLE_ORDER.indexOf(c.id);
+  const list = simple ? [...cards].sort((a, b) => rank(a) - rank(b)) : cards;
+  list.forEach(card => { (card.hidden ? cols[n - 1] : cols[i++ % n]).appendChild(card); });
 }
 let resizeT;
 window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(layout, 120); });
@@ -1818,6 +1864,28 @@ const cat = (() => {
   return { start };
 })();
 
+/* ================== MODO SIMPLES ================== */
+const modeBtn = document.getElementById('modebtn');
+function trimTitles() { if (simple) document.querySelectorAll('.card h2').forEach(h => { h.textContent = h.textContent.replace(/^#\s*/, ''); }); }
+function updateMode() { modeBtn.textContent = (simple ? '← ' : '★ ') + t(simple ? 'mode.retro' : 'mode.simple'); }
+function setSimple(on, { save = true } = {}) {
+  simple = on;
+  document.body.classList.toggle('simple', on);
+  if (on) { collapseExpanded(); toggleStart(false); }
+  wall.set(document.body.dataset.theme === 'gameboy' && !on);
+  if (!on) setLang(lang, { save: false });
+  updateMode(); trimTitles();
+  refresh();
+  cat.start();
+  window.scrollTo(0, 0);
+  if (save) {
+    try { localStorage.setItem('mode', on ? 'simple' : 'retro'); } catch (e) {}
+    try { const u = new URL(location.href); if (on) u.searchParams.set('simple', '1'); else u.searchParams.delete('simple'); history.replaceState(null, '', u); } catch (e) {}
+  }
+}
+modeBtn.addEventListener('click', () => setSimple(!simple));
+document.getElementById('w-simple').addEventListener('click', e => { e.preventDefault(); setSimple(true); });
+
 /* ================== ARRANQUE ================== */
 // por defeito: inglês + tema Game Boy. Um link com ?lang=pt abre logo em português.
 let savedTheme = null, savedLang = null;
@@ -1827,6 +1895,10 @@ restoreOrder();
 setTheme(THEMES.includes(savedTheme) ? savedTheme : 'gameboy');
 setLang(LANGS.includes(urlLang) ? urlLang : (LANGS.includes(savedLang) ? savedLang : 'en'), { save: !urlLang });
 hydrateIcons();
+const urlSimple = new URLSearchParams(location.search).get('simple');
+let savedMode = null; try { savedMode = localStorage.getItem('mode'); } catch (e) {}
+if (urlSimple !== null ? urlSimple !== '0' : savedMode === 'simple') { simple = true; document.body.classList.add('simple'); }
+updateMode(); trimTitles();
 refresh();
 document.fonts && document.fonts.ready.then(() => { layout(); cat.start(); });
 setTimeout(() => cat.start(), 300);
