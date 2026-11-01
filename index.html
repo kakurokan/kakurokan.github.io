@@ -163,8 +163,8 @@
 
   /* ecrã grande: ambiente de trabalho fixo, sem scroll na página */
   @media (min-width: 861px) {
-    body { height: 100vh; overflow: hidden; }
-    .layout { height: calc(100vh - var(--taskbar)); padding-bottom: 22px; }
+    body { height: 100vh; height: 100dvh; overflow: hidden; }
+    .layout { height: calc(100vh - var(--taskbar)); height: calc(100dvh - var(--taskbar)); padding-bottom: 22px; }
     .side { position: static; max-height: 100%; overflow: auto; scrollbar-width: none; }
     .board { display: flex; gap: 30px; height: 100%; min-height: 0; }
     .col { flex: 1 1 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 30px; padding: 0 10px 10px 0;
@@ -1012,7 +1012,10 @@ cards.forEach(card => {
         target && target.classList.add('drop-target');
       }
     };
+    let done = false;
     const up = () => {
+      if (done) return; done = true;
+      bar.removeEventListener('lostpointercapture', up);
       bar.removeEventListener('pointermove', move);
       bar.removeEventListener('pointerup', up);
       bar.removeEventListener('pointercancel', up);
@@ -1030,6 +1033,7 @@ cards.forEach(card => {
     bar.addEventListener('pointermove', move);
     bar.addEventListener('pointerup', up);
     bar.addEventListener('pointercancel', up);
+    bar.addEventListener('lostpointercapture', up);
   });
 });
 
