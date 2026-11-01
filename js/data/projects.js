@@ -2,8 +2,8 @@
 export const PROJECTS = [
   { slug: 'enei-2027', name: { en: 'ENEI 2027 Platform', pt: 'Plataforma ENEI 2027' },
     meta: { en: 'Volunteer backend developer · Jun 2026 – present · hybrid', pt: 'Backend developer voluntário · jun 2026 – presente · híbrido' },
-    desc: { en: 'Backend of the website and ticketing API for ENEI, the National Gathering of Informatics Students, coming to Faro. Domain-driven FastAPI, SQLAlchemy 2 and PostgreSQL.',
-            pt: 'Backend do site e da API de bilhetes do ENEI, o Encontro Nacional de Estudantes de Informática, que vem a Faro. FastAPI com Domain-Driven Design, SQLAlchemy 2 e PostgreSQL.' },
+    desc: { en: 'Backend of the website and ticketing API for ENEI, the National Gathering of Informatics Students, coming to Faro. FastAPI with a domain-oriented modular architecture, SQLAlchemy 2 and PostgreSQL.',
+            pt: 'Backend do site e da API de bilhetes do ENEI, o Encontro Nacional de Estudantes de Informática, que vem a Faro. FastAPI com arquitetura modular orientada a domínios, SQLAlchemy 2 e PostgreSQL.' },
     stats: [ ['12', { en: 'PRs merged', pt: 'PRs aceites' }], ['13', { en: 'PRs reviewed', pt: 'PRs revistos' }],
              ['500+', { en: 'test suite', pt: 'testes na suite' }], ['4', { en: 'migrations', pt: 'migrações' }] ],
     points: [
@@ -16,7 +16,7 @@ export const PROJECTS = [
       { en: 'Worked on an 8-service Docker Compose stack with Prometheus monitoring; my 4 Alembic migrations are CI-checked as reversible and drift-free.',
         pt: 'Trabalho numa stack Docker Compose de 8 serviços monitorizada com Prometheus; as minhas 4 migrações Alembic são validadas em CI como reversíveis e sem drift.' }
     ],
-    tags: ['Python', 'TDD', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'DDD', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
+    tags: ['Python', 'TDD', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
     links: [ ['website', 'https://www.eneifaro.pt/'] ],
     repo: 'https://github.com/Dep-tech-coenei-faro-27/event-site' },
   { slug: 'fintlist', name: 'FintList',
@@ -62,8 +62,8 @@ export const PROJECTS = [
     points: [
       { en: "A weight-balanced tree whose searches rotate frequently used keys toward the root. After 100,000 sorted insertions (a plain BST's worst case), the max/min depth ratio stayed at 1.31.",
         pt: 'Uma árvore equilibrada por peso em que as pesquisas rodam as chaves mais usadas para a raiz. Depois de 100 000 inserções ordenadas (o pior caso de uma BST simples), a razão entre profundidade máxima e mínima ficou em 1,31.' },
-      { en: 'A multi-level hash table with double hashing and a Bloom-filter-style marker per bucket. Across 10 million keys, lookups averaged 1.0 key comparisons on hits and 0.0 on misses.',
-        pt: 'Uma hash table multinível com double hashing e um marcador estilo Bloom filter por bucket. Com 10 milhões de chaves, as pesquisas fizeram em média 1,0 comparações nos acertos e 0,0 nas falhas.' }
+      { en: 'A multi-level hash table with a Bloom-filter-style marker per bucket. Across 10 million keys, lookups averaged 1.0 key comparisons on hits and 0.0 on misses.',
+        pt: 'Uma hash table multinível com um marcador estilo Bloom filter por bucket. Com 10 milhões de chaves, as pesquisas fizeram em média 1,0 comparações nos acertos e 0,0 nas falhas.' }
     ],
     tags: ['Java 17', 'TDD', 'Maven', 'JUnit 5', 'GitHub Actions'],
     repo: 'https://github.com/kakurokan/non-linear_and_hashing_data_structures' },
