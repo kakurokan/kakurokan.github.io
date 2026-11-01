@@ -89,7 +89,7 @@ function fallTarget() {
 
 function step(dt) {
   anim += dt;
-  if (state === 'held') return;
+  if (state === 'held' || grab) return;   // agarrado (ou com o rato premido): fica quieto
   if (state === 'jump') {
     const tr = rectOf(jump.target);
     if (!tr) { state = 'fall'; jump = null; return; }
@@ -130,7 +130,7 @@ function step(dt) {
   }
 }
 function render() {
-  el.classList.toggle('left', dir < 0 && state !== 'held');
+  el.classList.toggle('left', dir < 0);
   el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y - H + 1)}px)`;
   el.classList.toggle('sleeping', state === 'sleep');
   el.classList.toggle('low', y - H < 34);   // perto do topo: nome e miau aparecem por baixo
@@ -161,15 +161,15 @@ el.addEventListener('pointerdown', e => {
   if (e.button !== 0) return;
   e.preventDefault();
   el.setPointerCapture(e.pointerId);
-  grab = { sx: e.clientX, sy: e.clientY, moved: false };
+  // ox/oy: onde, dentro do gato, o rato o apanhou (para ele não saltar para debaixo do cursor)
+  grab = { sx: e.clientX, sy: e.clientY, ox: e.clientX - x, oy: e.clientY - (y - H + 1), moved: false };
 });
 el.addEventListener('pointermove', e => {
   if (!grab) return;
   if (!grab.moved && Math.hypot(e.clientX - grab.sx, e.clientY - grab.sy) < 5) return;
   if (!grab.moved) { grab.moved = true; state = 'held'; jump = null; plat = null; el.classList.add('held'); show('angry'); say(t('cat.angry'), 60000); }
-  // seguro pelo cachaço: o rato fica no topo da cabeça
-  x = Math.max(0, Math.min(innerWidth - W, e.clientX - W / 2));
-  y = Math.max(H, Math.min(innerHeight - 4, e.clientY + H - 6));
+  x = Math.max(0, Math.min(innerWidth - W, e.clientX - grab.ox));
+  y = Math.max(H, Math.min(innerHeight - 4, e.clientY - grab.oy + H - 1));
   if (!running) render();
 });
 // cartão que está por trás do gato (centro do corpo), se houver
@@ -198,6 +198,7 @@ el.addEventListener('pointerup', release);
 el.addEventListener('pointercancel', release);
 
 function start() {
+  if (state === 'held' || grab) return;   // não mexer no gato enquanto alguém o tem na mão
   if (isSmall()) { el.hidden = true; running = false; return; }
   el.hidden = false;
   if (!plat || !rectOf(plat)) {
