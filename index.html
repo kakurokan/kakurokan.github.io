@@ -208,6 +208,19 @@
   .muted { color: var(--muted); }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip { padding: 3px 10px; background: var(--chip); border: 2px solid var(--bar); font-size: 13px; font-weight: 700; }
+  button.chip { font-family: inherit; color: var(--text); cursor: pointer; line-height: inherit; }
+  button.chip:hover { background: var(--card); box-shadow: 2px 2px 0 var(--shadow); }
+  button.chip[aria-pressed="true"] { background: var(--bar); color: #fff; }
+  mark { background: var(--head); color: var(--card); padding: 0 1px; }
+  .chip mark, .stat mark { background: var(--sel); color: #fff; }
+  .tagbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 6px 10px; border: 2px dashed var(--bar); background: var(--chip); font-size: 13px; font-weight: 700; }
+  .tagbar[hidden] { display: none; }
+  .tagbar .btn { min-height: 26px; padding: 0 10px; }
+  .tagbar .btn:active { padding: 2px 8px 0 12px; }
+  .projects details.tag-out { display: none; }
+  .more li.tag-out { display: none; }
+  .tag-none { font-size: 14px; color: var(--muted); }
+  .tag-none[hidden] { display: none; }
 
   /* expandido */
   .card.expanded {
@@ -347,6 +360,14 @@
   .cat.low .nm, .cat.low .meow { bottom: auto; top: 40px; }
   .cat.meowing .nm { opacity: 0; }
   .cat[hidden] { display: none; }
+  .cat.held { cursor: grabbing; z-index: 4200; }
+  .cat.held svg { animation: thrash .12s steps(2) infinite; }
+  @keyframes thrash { 0% { transform: translate(-2px, 0) rotate(-4deg); } 100% { transform: translate(2px, 1px) rotate(4deg); } }
+  .cat.held .nm { opacity: 0; }
+  .cat .grr { position: absolute; left: -6px; top: -14px; font: 700 15px var(--pixel); color: #E01818; pointer-events: none; opacity: 0; }
+  [data-theme="gameboy"] .cat .grr { color: #0F380F; }
+  .cat.held .grr { opacity: 1; animation: grr .3s steps(2) infinite; }
+  @keyframes grr { 50% { transform: translate(2px, -2px) scale(1.2); } }
 
   /* ================= barra de tarefas ================= */
   .taskbar {
@@ -492,7 +513,12 @@
     <article class="card" id="projects" aria-labelledby="h-projects">
       <div class="inner">
         <h2 id="h-projects" data-t="projects.title"></h2>
+        <div class="tagbar" id="tagbar" hidden>
+          <span id="tagbar-text"></span>
+          <button class="btn raised" id="tag-clear" data-t="tags.clear"></button>
+        </div>
         <div class="projects" id="project-list"></div>
+        <p class="tag-none" id="tag-none" hidden></p>
       </div>
     </article>
 
@@ -654,7 +680,7 @@
   </div>
 </footer>
 
-<div class="cat" id="cat" aria-hidden="true" hidden><svg viewBox="0 0 16 12"></svg><span class="zzz">z</span><span class="nm">koji</span><span class="meow" hidden></span></div>
+<div class="cat" id="cat" aria-hidden="true" hidden><svg viewBox="0 0 16 12"></svg><span class="zzz">z</span><span class="grr" aria-hidden="true">#!</span><span class="nm">koji</span><span class="meow" hidden></span></div>
 <div class="crt" aria-hidden="true"></div>
 
 <script>
@@ -683,6 +709,8 @@ const I18N = {
     'about.p2': "Java is where I'm strongest, and right now I ship Python (FastAPI) in production on ENEI 2027. I like test-first code, CI that catches things before deploy, and benchmarks that explain where the time goes. Competitive programming taught me to hunt for the edge case before it bites.",
     'projects.title': '#Projects', 'projects.repo': 'View repository…', 'projects.website': 'Website', 'projects.dir': 'Projects',
     'more.title': '#More projects',
+    'tags.clear': 'Show all', 'tags.filter': (tag, n, m) => `${n} project(s) with ${tag}` + (m ? ` · +${m} in More projects` : ''), 'tags.none': tag => `No main project uses ${tag} yet, but it's in my stack!`, 'tags.hint': 'Click a tag to see the projects that use it.',
+    'cat.angry': 'hss!', 'cat.huff': 'hmph.',
     'contests.title': '#Contests',
     'contests.text': "Member of UAlg's ICPC team (C++/Java): graph, dynamic-programming and data-structure problems under time and memory limits.",
     'contests.aria': 'MIUP problems solved: 0 in 2025, 4 in 2026',
@@ -740,6 +768,8 @@ const I18N = {
     'about.p2': 'É em Java que sou mais forte, e neste momento ponho Python (FastAPI) em produção no ENEI 2027. Gosto de código escrito com testes primeiro, de CI que apanha os problemas antes do deploy e de benchmarks que explicam para onde vai o tempo. A programação competitiva ensinou-me a procurar o caso-limite antes que ele me apanhe.',
     'projects.title': '#Projetos', 'projects.repo': 'Ver repositório…', 'projects.website': 'Site', 'projects.dir': 'Projetos',
     'more.title': '#Mais projetos',
+    'tags.clear': 'Mostrar todos', 'tags.filter': (tag, n, m) => `${n} projeto(s) com ${tag}` + (m ? ` · +${m} em Mais projetos` : ''), 'tags.none': tag => `Ainda nenhum projeto principal usa ${tag}, mas está na minha stack!`, 'tags.hint': 'Clica numa tag para ver os projetos que a usam.',
+    'cat.angry': 'hss!', 'cat.huff': 'hmpf.',
     'contests.title': '#Competições',
     'contests.text': 'Membro da equipa ICPC da UAlg (C++/Java): problemas de grafos, programação dinâmica e estruturas de dados com limites de tempo e memória.',
     'contests.aria': 'Problemas resolvidos na MIUP: 0 em 2025, 4 em 2026',
@@ -794,7 +824,7 @@ const PROJECTS = [
       { en: 'Worked on an 8-service Docker Compose stack with Prometheus monitoring; my 4 Alembic migrations are CI-checked as reversible and drift-free.',
         pt: 'Trabalho numa stack Docker Compose de 8 serviços monitorizada com Prometheus; as minhas 4 migrações Alembic são validadas em CI como reversíveis e sem drift.' }
     ],
-    tags: ['Python', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'DDD', 'Alembic', 'Docker Compose', 'CI/CD'],
+    tags: ['Python', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'DDD', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
     links: [ ['website', 'https://www.eneifaro.pt/'] ],
     repo: 'https://github.com/Dep-tech-coenei-faro-27/event-site' },
   { slug: 'fintlist', name: 'FintList',
@@ -1083,11 +1113,52 @@ function refresh() {
     c.hidden = !show;
     if (show) n++;
   });
+  highlight(q);
   searchMsg.textContent = q ? (n ? t('search.found')(n) : t('search.none')) : '';
   renderTasks();
   layout();
 }
 const filter = refresh;
+
+// destaca o texto encontrado dentro dos cartões e abre os projetos que o têm
+let savedOpen = null;
+function unmark() {
+  document.querySelectorAll('.board mark').forEach(m => { const t = document.createTextNode(m.textContent); m.replaceWith(t); t.parentNode.normalize(); });
+}
+function highlight(q) {
+  unmark();
+  const details = [...projectList.querySelectorAll('details')];
+  if (!q) {
+    if (savedOpen) { details.forEach((d, i) => { d.open = savedOpen[i] ?? d.open; }); savedOpen = null; }
+    return;
+  }
+  if (!savedOpen) savedOpen = details.map(d => d.open);
+  details.forEach(d => { d.open = norm(d.textContent).includes(q); });
+  const walker = document.createTreeWalker(document.getElementById('board'), NodeFilter.SHOW_TEXT, {
+    acceptNode: n => (n.parentElement.closest('.bar, svg, script, style, .card[hidden], input') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT)
+  });
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    const text = node.nodeValue;
+    // texto normalizado + mapa de volta para as posições originais (para ignorar acentos)
+    let flat = '', map = [];
+    for (let i = 0; i < text.length; i++) { const c = norm(text[i]); for (const ch of c) { flat += ch; map.push(i); } }
+    let from = 0, idx, parts = [], last = 0;
+    while ((idx = flat.indexOf(q, from)) !== -1) {
+      const a = map[idx], b = map[idx + q.length - 1] + 1;
+      parts.push([a, b]); from = idx + q.length;
+    }
+    if (!parts.length) return;
+    const frag = document.createDocumentFragment();
+    parts.forEach(([a, b]) => {
+      frag.append(text.slice(last, a));
+      const m = document.createElement('mark'); m.textContent = text.slice(a, b); frag.append(m);
+      last = b;
+    });
+    frag.append(text.slice(last));
+    node.replaceWith(frag);
+  });
+}
 searchIn.addEventListener('input', filter);
 document.getElementById('search-form').addEventListener('submit', e => {
   e.preventDefault(); filter();
@@ -1279,7 +1350,7 @@ function renderProjects() {
         <p>${tr(p.desc)}</p>
         ${p.stats ? `<div class="stats">${p.stats.map(([n, l]) => `<span class="stat"><b>${n}</b><span>${tr(l)}</span></span>`).join('')}</div>` : ''}
         ${p.points ? `<ul class="points">${p.points.map(x => `<li>${tr(x)}</li>`).join('')}</ul>` : ''}
-        <div class="chips">${p.tags.map(x => `<span class="chip">${tr(x)}</span>`).join('')}</div>
+        <div class="chips">${p.tags.map(x => `<button type="button" class="chip" data-tag="${tr(x)}">${tr(x)}</button>`).join('')}</div>
         <div class="row">
           ${p.repo ? `<a class="btn raised" href="${p.repo}" target="_blank" rel="noopener">${t('projects.repo')}</a>` : ''}
           ${(p.links || []).map(([k, u]) => `<a class="btn raised" href="${u}" target="_blank" rel="noopener">${t('projects.' + k)}</a>`).join('')}
@@ -1289,9 +1360,57 @@ function renderProjects() {
   hydrateIcons(projectList);
   document.getElementById('more-list').innerHTML = MORE.map(m => `
     <li><a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>
-      <span class="mtech">${m.tech}</span>
+      <span class="mtech" data-tech="${m.tech}">${m.tech}</span>
       <span>${tr(m.desc)}</span></li>`).join('');
+  applyTag();
 }
+
+/* ================== FILTRO POR TECNOLOGIA ================== */
+let activeTag = null, moreHits = 0;
+const projectsCard = document.getElementById('projects');
+// "Java" apanha "Java" e "Java 17", mas não "JavaScript"
+const TAG_ALIAS = { 'domain-driven design': 'ddd', 'java swing': 'swing', 'benchmarking': 'benchmarks', 'rest apis': 'rest', 'github actions ci/cd': 'github actions', 'udp sockets': 'udp sockets' };
+const tagKey = x => { const k = norm(x); return TAG_ALIAS[k] || k; };
+const tagHit = (list, tag) => list.some(x => { const a = tagKey(x), b = tagKey(tag); return a === b || a.startsWith(b + ' ') || a.startsWith(b + '/'); });
+function applyTag() {
+  const bar = document.getElementById('tagbar'), none = document.getElementById('tag-none');
+  let n = 0;
+  projectList.querySelectorAll('details').forEach((d, i) => {
+    const hit = !activeTag || tagHit(PROJECTS[i].tags.map(tr), activeTag);
+    d.classList.toggle('tag-out', !hit);
+    if (activeTag && hit) { d.open = true; n++; }
+  });
+  moreHits = 0;
+  document.querySelectorAll('#more-list li').forEach((li, i) => {
+    const hit = !activeTag || tagHit(MORE[i].tech.split(' · '), activeTag);
+    li.classList.toggle('tag-out', !hit);
+    if (activeTag && hit) moreHits++;
+  });
+  document.querySelectorAll('button.chip[data-tag]').forEach(b => b.setAttribute('aria-pressed', !!activeTag && norm(b.dataset.tag) === norm(activeTag)));
+  bar.hidden = !activeTag;
+  if (activeTag) document.getElementById('tagbar-text').textContent = t('tags.filter')(activeTag, n, moreHits);
+  none.hidden = !activeTag || n > 0;
+  if (activeTag && !n) none.textContent = t('tags.none')(activeTag);
+}
+function setTag(tag) {
+  activeTag = tag && (!activeTag || norm(activeTag) !== norm(tag)) ? tag : null;
+  applyTag();
+  if (activeTag) {
+    goTo(projectsCard);
+    if (moreHits) goTo(document.getElementById('more'));
+  }
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('button.chip[data-tag]');
+  if (b) setTag(b.dataset.tag);
+});
+document.getElementById('tag-clear').addEventListener('click', () => setTag(null));
+// as tags do cartão #Stack também filtram (as que são tecnologias)
+document.querySelectorAll('#stack .chip:not([data-t])').forEach(sp => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.dataset.tag = sp.textContent.trim(); b.textContent = sp.textContent;
+  sp.replaceWith(b);
+});
 
 /* ================== PROMPT DE COMANDO ================== */
 const termOut = document.getElementById('term-out');
@@ -1496,6 +1615,7 @@ const cat = (() => {
     sit:   ['...........O..O.','..........OBOOBO','..........OBSSBO','..........OBEBEO','..........OBBPBO','........OOOBBBO.','.......OBSBBSBO.','......OBBSBBSBO.','......OBBSBBSBO.','O.....OBBSBBSBO.','OS....OBBOBBBBO.','.OOOOOOOOOOOOOO.'],
     sleep: ['................','................','................','................','................','........O..O....','...OOOOOOBOOBO..','..OBSBBSBBSBBBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
     sleep2:['................','................','................','................','................','................','...OOOOOO.O..O..','..OBSBBSBOBOOBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
+    angry: ['...OOO....OOO...','....OBOOOOBO....','....OOBBBBOO....','....OEOBBOEO....','....OBBPPBBO....','.....OBBBBO.....','..OOOBSBBSBOOO..','.OBBOBSBBSBOBBO.','.OO.OBSBBSBO.OO.','....OBBBBBBO....','...OBBOOOOBBO.SO','...OO......OO.OS'],
     jump:  ['................','...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OBOOOOOOOBBPBO','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','.OBOOOOOOOOOBO..','OBO.........OBO.','OO...........OO.','................']
   };
   const CLS = { O: 'o', B: 'b', S: 's', E: 'e', P: 'p' };
@@ -1557,6 +1677,10 @@ const cat = (() => {
   }
   function land(target) {
     plat = target; jump = null; state = 'sit'; timer = rnd(0.6, 1.6); vy = 0;
+    if (huff) {   // acabou de ser largado: resmunga e afasta-se
+      huff = false; timer = 1.2;
+      setTimeout(() => { if (state === 'sit') { say(t('cat.huff'), 1400); } }, 150);
+    }
   }
   function fallTarget() {
     // cartão mais perto por baixo do gato, senão a barra de tarefas
@@ -1566,6 +1690,7 @@ const cat = (() => {
 
   function step(dt) {
     anim += dt;
+    if (state === 'held') return;
     if (state === 'jump') {
       const tr = rectOf(jump.target);
       if (!tr) { state = 'fall'; jump = null; return; }
@@ -1606,8 +1731,8 @@ const cat = (() => {
     }
   }
   function render() {
+    el.classList.toggle('left', dir < 0 && state !== 'held');
     el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y - H + 1)}px)`;
-    el.classList.toggle('left', dir < 0);
     el.classList.toggle('sleeping', state === 'sleep');
     el.classList.toggle('low', y - H < 34);   // perto do topo: nome e miau aparecem por baixo
   }
@@ -1619,13 +1744,48 @@ const cat = (() => {
   }
 
   let meowT;
-  el.addEventListener('click', () => {
-    meowEl.textContent = lang === 'pt' ? 'miau!' : 'meow!';
-    meowEl.hidden = false; el.classList.add('meowing'); clearTimeout(meowT); meowT = setTimeout(() => { meowEl.hidden = true; el.classList.remove('meowing'); }, 1300);
+  function say(text, ms = 1300) {
+    meowEl.textContent = text;
+    meowEl.hidden = false; el.classList.add('meowing'); clearTimeout(meowT);
+    meowT = setTimeout(() => { meowEl.hidden = true; el.classList.remove('meowing'); }, ms);
+  }
+  function meow() {
+    say(lang === 'pt' ? 'miau!' : 'meow!');
     if (reduce) return;
     if (state === 'sleep') { state = 'sit'; timer = rnd(1, 2); }
     else if (state !== 'jump' && state !== 'fall') jumpSomewhere();
+  }
+
+  // arrastar o gato: fica irritado enquanto está no ar e, ao largar, cai no cartão de baixo
+  let grab = null, huff = false;
+  el.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    el.setPointerCapture(e.pointerId);
+    grab = { sx: e.clientX, sy: e.clientY, moved: false };
   });
+  el.addEventListener('pointermove', e => {
+    if (!grab) return;
+    if (!grab.moved && Math.hypot(e.clientX - grab.sx, e.clientY - grab.sy) < 5) return;
+    if (!grab.moved) { grab.moved = true; state = 'held'; jump = null; plat = null; el.classList.add('held'); show('angry'); say(t('cat.angry'), 60000); }
+    // seguro pelo cachaço: o rato fica no topo da cabeça
+    x = Math.max(0, Math.min(innerWidth - W, e.clientX - W / 2));
+    y = Math.max(H, Math.min(innerHeight - 4, e.clientY + H - 6));
+    if (!running) render();
+  });
+  function release() {
+    if (!grab) return;
+    const wasDrag = grab.moved; grab = null;
+    if (!wasDrag) { meow(); return; }
+    el.classList.remove('held');
+    meowEl.hidden = true; el.classList.remove('meowing');
+    huff = true; vy = 0; state = 'fall';
+    if (!running) {   // movimento reduzido: aterra logo
+      const tgt = fallTarget(), tr = rectOf(tgt); y = tr ? tr.top : y; plat = tgt; state = 'sleep'; show('sleep'); render();
+    }
+  }
+  el.addEventListener('pointerup', release);
+  el.addEventListener('pointercancel', release);
 
   function start() {
     if (isSmall()) { el.hidden = true; running = false; return; }
