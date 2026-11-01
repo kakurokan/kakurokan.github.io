@@ -155,7 +155,7 @@ function meow() {
   else if (state !== 'jump' && state !== 'fall') jumpSomewhere();
 }
 
-// arrastar o gato: fica irritado enquanto está no ar e, ao largar, cai no cartão de baixo
+// arrastar o gato: fica irritado enquanto está no ar e, ao largar, cai e pára na primeira aba que encontra
 let grab = null, huff = false;
 el.addEventListener('pointerdown', e => {
   if (e.button !== 0) return;
@@ -172,15 +172,6 @@ el.addEventListener('pointermove', e => {
   y = Math.max(H, Math.min(innerHeight - 4, e.clientY - grab.oy + H - 1));
   if (!running) render();
 });
-// cartão que está por trás do gato (centro do corpo), se houver
-function cardUnder() {
-  const px = x + W / 2, py = y - H / 2;
-  return cards.find(c => {
-    if (c.hidden || c.classList.contains('expanded')) return false;
-    const r = c.getBoundingClientRect();
-    return r.width && px > r.left && px < r.right && py > r.top && py < r.bottom;
-  });
-}
 function release() {
   if (!grab) return;
   const wasDrag = grab.moved; grab = null;
@@ -188,10 +179,8 @@ function release() {
   el.classList.remove('held');
   meowEl.hidden = true; el.classList.remove('meowing');
   huff = true; vy = 0; state = 'fall';
-  const under = cardUnder();   // solto em cima de um cartão: sobe para o topo dele (a primeira aba que encontra)
-  if (under && running && startJump(under)) return;
-  if (!running) {   // movimento reduzido: aterra logo
-    const tgt = under || fallTarget(), tr = rectOf(tgt, true); y = tr ? tr.top : y; plat = tgt; state = 'sleep'; show('sleep'); render();
+  if (!running) {   // movimento reduzido: aterra logo; senão cai e pára na primeira aba que encontra
+    const tgt = fallTarget(), tr = rectOf(tgt, true); y = tr ? tr.top : y; plat = tgt; state = 'sleep'; show('sleep'); render();
   }
 }
 el.addEventListener('pointerup', release);
