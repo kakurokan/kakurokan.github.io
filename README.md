@@ -1,6 +1,6 @@
 # kakurokan.github.io
 
-Personal portfolio of **Léo Kakali**, software engineer (Java, Python), finishing a BSc in Informatics Engineering at the University of the Algarve and available from **July 2027**.
+Personal portfolio of **Léo Souza**, software engineer (Java, Python), finishing a BSc in Informatics Engineering at the University of the Algarve and available from **July 2027**.
 
 **Live:** https://kakurokan.github.io · Portuguese: https://kakurokan.github.io/?lang=pt
 
@@ -48,4 +48,4 @@ GitHub Pages serves the `main` branch from the repository root. Pushing to `main
 
 [LinkedIn](https://www.linkedin.com/in/leo-kakali) · [GitHub](https://github.com/kakurokan) · leokakali7@gmail.com
 
-© 2026 Léo Kakali
+© 2026 Léo Souza
