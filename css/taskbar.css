@@ -1,0 +1,30 @@
+/* ================= barra de tarefas ================= */
+.taskbar {
+  position: fixed; left: 0; right: 0; bottom: 0; height: var(--taskbar); z-index: 4000;
+  display: flex; align-items: center; gap: 4px; padding: 3px 4px;
+  border-width: 1px 0 0 !important; font-family: var(--ui); font-size: 13px;
+}
+.start { padding: 0 10px; font-weight: 700; font-size: 14px; flex: none; }
+.start svg.px { width: 18px; height: 18px; }
+.tasks { flex: 1; min-width: 0; display: flex; gap: 3px; overflow-x: auto; scrollbar-width: none; }
+.tasks .btn { flex: 0 0 auto; padding: 0 10px; }
+.tray { flex: none; height: 28px; display: flex; align-items: center; gap: 8px; padding: 0 10px; color: #000; }
+.lang-switch { display: flex; gap: 2px; }
+.lang-btn { min-height: 22px; height: 22px; padding: 0 8px; font-weight: 700; }
+.lang-btn:active, .lang-btn.pressed { padding: 1px 7px 0 9px; }
+.lang-btn:not(.pressed) { font-weight: 400; }
+.tray .avail2 { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+
+.startmenu { position: fixed; left: 2px; bottom: calc(var(--taskbar) - 2px); z-index: 4500; display: flex; padding: 2px; min-width: 250px; font-family: var(--ui); }
+.startmenu[hidden] { display: none; }
+.startmenu .sidebar { width: 30px; background: linear-gradient(#FF2FB3, #6A2CFF 60%, var(--navy)); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; }
+.startmenu .sidebar b { writing-mode: vertical-rl; transform: rotate(180deg); color: #fff; font-family: var(--pixel); font-size: 20px; }
+.startmenu .sidebar b i { font-style: normal; color: #FFD6F2; font-weight: 400; }
+.startmenu ul { list-style: none; margin: 0; padding: 0; flex: 1; }
+.startmenu li > button, .startmenu li > a {
+  width: 100%; display: flex; align-items: center; gap: 12px; min-height: 40px; padding: 4px 16px 4px 8px;
+  background: none; border: 0; text-align: left; cursor: pointer; color: #000; text-decoration: none; font-size: 14px; font-weight: 400;
+}
+.startmenu li > button:hover, .startmenu li > a:hover, .startmenu li > button:focus-visible, .startmenu li > a:focus-visible { background: var(--navy); color: #fff; outline: none; }
+.startmenu svg.px { width: 26px; height: 26px; flex: none; }
+.startmenu hr { margin: 3px 2px; border: 0; border-top: 1px solid var(--gray); border-bottom: 1px solid var(--light); }

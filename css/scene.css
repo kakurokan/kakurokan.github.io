@@ -1,0 +1,33 @@
+/* ================= cena vaporwave (tema vaporwave) ================= */
+.scene { display: var(--scene); position: fixed; inset: 0; z-index: -1; overflow: hidden; background: linear-gradient(#05010D 0%, #0B0220 55%, #1A0433 70%, #05010D 100%); }
+.stars {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 23px 41px, #fff, transparent),
+    radial-gradient(1px 1px at 141px 97px, #ffffffb0, transparent),
+    radial-gradient(1px 1px at 77px 163px, #ffffff80, transparent),
+    radial-gradient(1.5px 1.5px at 190px 19px, #fff, transparent),
+    radial-gradient(1px 1px at 251px 213px, #ffffffa0, transparent),
+    radial-gradient(1px 1px at 311px 131px, #ffffff70, transparent);
+  background-size: 340px 260px;
+  animation: twinkle 6s steps(2) infinite;
+}
+@keyframes twinkle { 50% { opacity: .75; } }
+.sun {
+  position: absolute; left: 58%; bottom: 36%; width: min(52vh, 480px); aspect-ratio: 1; transform: translate(-50%, 50%);
+  border-radius: 50%; background: linear-gradient(#FFE66E 0%, #FFB347 35%, #FF6A5C 62%, #FF2FB3 100%);
+  box-shadow: 0 0 80px 10px #ff2fb355, 0 0 160px 40px #ff6a5c22;
+}
+.sun::after { content: ''; position: absolute; left: 0; right: 0; top: 52%; bottom: 0; background: repeating-linear-gradient(to bottom, transparent 0 16px, #0B0220 16px 22px); }
+.horizon { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; overflow: hidden; background: linear-gradient(#2A0640, #05010D); border-top: 2px solid #FF2FB3; box-shadow: 0 -4px 30px #FF2FB3aa; }
+.grid {
+  position: absolute; left: -50%; width: 200%; top: 0; height: 200%;
+  background-image: linear-gradient(#FF2FB3 2px, transparent 2px), linear-gradient(90deg, #FF2FB3 2px, transparent 2px);
+  background-size: 64px 64px; transform: perspective(260px) rotateX(62deg); transform-origin: 50% 0; opacity: .7;
+  animation: drive 2.4s linear infinite;
+}
+@keyframes drive { to { background-position: 0 64px, 0 64px; } }
+.fog { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, #FF2FB3, transparent); opacity: .5; }
+.fog.a { width: 46vw; height: 22vh; left: 14vw; bottom: 28%; }
+.fog.b { width: 40vw; height: 20vh; right: 0; bottom: 26%; background: radial-gradient(closest-side, #B83CFF, transparent); opacity: .45; }
+.crt { display: var(--crt); position: fixed; inset: 0; pointer-events: none; z-index: 5000; background: repeating-linear-gradient(rgba(0,0,0,.13) 0 1px, transparent 1px 3px); }

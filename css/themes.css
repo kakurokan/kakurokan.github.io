@@ -1,0 +1,50 @@
+/* ================= TEMAS ================= */
+:root, [data-theme="vapor"] {
+  --bg: #05010D; --dots: transparent; --side-text: #FFFFFF; --side-shadow: #000;
+  --card: #FFF7FC; --text: #2A0640; --muted: #5E4A75; --bar: #6A2CFF; --shadow: #FF2FB3;
+  --head: #6A2CFF; --link: #5B1FE0; --chip: #EFE6FF; --sel: #6A2CFF;
+  --scene: block; --crt: block;
+}
+[data-theme="rosa"] {
+  --bg: #FFC6EC; --dots: rgba(91,33,255,.13); --side-text: #4A10C8; --side-shadow: transparent;
+  --card: #F8F4FF; --text: #2B1660; --muted: #594A80; --bar: #5B21FF; --shadow: #8F5BFF;
+  --head: #5B21FF; --link: #4A10C8; --chip: #E9E1FF; --sel: #5B21FF;
+  --scene: none; --crt: none;
+}
+[data-theme="menta"] {
+  --bg: #C7F5E6; --dots: rgba(11,122,104,.14); --side-text: #075E50; --side-shadow: transparent;
+  --card: #F4FFFB; --text: #0B3B33; --muted: #3E6A62; --bar: #0B7A68; --shadow: #FF8A5B;
+  --head: #0B7A68; --link: #07614F; --chip: #DDF5EE; --sel: #0B7A68;
+  --scene: none; --crt: none;
+}
+[data-theme="noite"] {
+  --bg: #0E0B1F; --dots: rgba(255,47,179,.10); --side-text: #EDE7FF; --side-shadow: #000;
+  --card: #1C1733; --text: #EDE7FF; --muted: #B6AACF; --bar: #A72BFF; --shadow: #FF2FB3;
+  --head: #FF8AD8; --link: #FF9BDE; --chip: #2C2550; --sel: #FF2FB3;
+  --scene: none; --crt: block;
+}
+
+[data-theme="gameboy"] {
+  --bg: #9BBC0F; --dots: rgba(15,56,15,.14); --side-text: #0F380F; --side-shadow: transparent;
+  --card: #8BAC0F; --text: #0F380F; --muted: #0F380F; --bar: #0F380F; --shadow: #306230;
+  --head: #0F380F; --link: #0F380F; --chip: #9BBC0F; --sel: #0F380F;
+  --scene: none; --crt: block;
+  --face: #8BAC0F; --light: #9BBC0F; --hi: #9BBC0F; --gray: #306230; --dark: #0F380F; --navy: #0F380F;
+  --display: 'Pixelify Sans', monospace; --body: 'Pixelify Sans', monospace; --ui: 'Pixelify Sans', monospace;
+}
+.gbwall { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; image-rendering: pixelated; }
+[data-theme="gameboy"] .gbwall { display: block; }
+[data-theme="gameboy"] .icon span { background: #9BBC0F; border: 2px solid #0F380F; }
+[data-theme="gameboy"] .search-msg:not(:empty) { background: #9BBC0F; padding: 2px 6px; align-self: flex-start; }
+[data-theme="gameboy"] .card h2 { font-weight: 700; letter-spacing: .02em; }
+[data-theme="gameboy"] .term { background: #0F380F; color: #9BBC0F; }
+[data-theme="gameboy"] .term input { color: #9BBC0F; caret-color: #9BBC0F; }
+[data-theme="gameboy"] .term .y, [data-theme="gameboy"] .term .m { color: #FFFFFF; }
+[data-theme="gameboy"] .term .c { color: #8BAC0F; }
+[data-theme="gameboy"] .sheet { background: #9BBC0F; color: #0F380F; box-shadow: 4px 4px 0 #0F380F; }
+[data-theme="gameboy"] .sheet span, [data-theme="gameboy"] .sheet h4 { color: #0F380F; }
+[data-theme="gameboy"] .post .av, [data-theme="gameboy"] .startmenu .sidebar { background: #306230; }
+[data-theme="gameboy"] .led { background: #0F380F; box-shadow: none; }
+[data-theme="gameboy"] .crt { background: repeating-linear-gradient(90deg, rgba(15,56,15,.07) 0 1px, transparent 1px 3px), repeating-linear-gradient(rgba(15,56,15,.07) 0 1px, transparent 1px 3px); }
+[data-theme="gameboy"] .btn, [data-theme="gameboy"] .tray, [data-theme="gameboy"] .startmenu li > a, [data-theme="gameboy"] .startmenu li > button { color: #0F380F; }
+

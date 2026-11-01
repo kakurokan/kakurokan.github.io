@@ -1,0 +1,36 @@
+/* ================= estrutura ================= */
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 32px; padding: 46px 32px 48px; max-width: 1760px; margin: 0 auto; }
+.side { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; gap: 20px; }
+.icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 4px; }
+.icon {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 2px; min-height: 92px;
+  background: none; border: 0; color: var(--side-text); cursor: pointer; text-decoration: none;
+  font-family: var(--pixel); font-size: 14px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  text-shadow: 1px 1px var(--side-shadow);
+}
+.icon svg { width: 52px; height: 52px; transition: transform .12s steps(2); }
+.icon:hover svg { transform: translateY(-3px); }
+.icon span { padding: 1px 4px; border: 1px dotted transparent; }
+.icon:focus-visible { outline: none; }
+.icon:focus-visible span, .icon:hover span { background: var(--sel); color: #fff; text-shadow: none; }
+.search { display: flex; border: 3px solid var(--bar); box-shadow: 6px 6px 0 var(--shadow); background: var(--card); }
+.search input { flex: 1; min-width: 0; border: 0; padding: 0 12px; height: 42px; background: transparent; color: var(--text); font: 600 15px var(--body); outline: none; }
+.search input::placeholder { color: var(--muted); }
+.search button { width: 44px; border: 0; border-left: 3px solid var(--bar); background: var(--card); color: var(--bar); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.search-msg { margin: -8px 0 0; color: var(--side-text); font-family: var(--pixel); font-size: 14px; text-shadow: 1px 1px var(--side-shadow); min-height: 1em; }
+
+/* ecrã grande: ambiente de trabalho fixo, sem scroll na página */
+@media (min-width: 861px) {
+  body { height: 100vh; height: 100dvh; overflow: hidden; }
+  .layout { height: calc(100vh - var(--taskbar)); height: calc(100dvh - var(--taskbar)); padding-bottom: 22px; }
+  .side { position: static; max-height: 100%; overflow: auto; scrollbar-width: none; }
+  .board { display: flex; gap: 30px; height: 100%; min-height: 0; }
+  .col { flex: 1 1 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 30px; padding: 0 10px 10px 0;
+         overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: var(--bar) transparent; }
+  .board.drag-active .col { overflow: visible; }
+  .col .card { margin: 0; flex: 0 1 auto; min-height: 130px; display: flex; flex-direction: column; }
+  .col .card.collapsed { min-height: 0; flex: none; }
+  .col .bar { flex: none; }
+  .col .inner { min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--bar) transparent; }
+  .col .term { height: auto; min-height: 140px; max-height: 300px; }
+}

@@ -1,0 +1,46 @@
+:root {
+  --face: #C0C0C0; --light: #FFFFFF; --hi: #DFDFDF; --gray: #808080; --dark: #404040; --navy: #000080;
+  --display: 'Dela Gothic One', 'Arial Black', sans-serif;
+  --body: 'Nunito', system-ui, sans-serif;
+  --pixel: 'Pixelify Sans', Tahoma, sans-serif;
+  --term: 'VT323', 'Courier New', monospace;
+  --ui: Tahoma, Verdana, 'Segoe UI', sans-serif;
+  --taskbar: 36px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body {
+  margin: 0; min-height: 100%; color: var(--text); font-family: var(--body); font-size: 15px;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dots) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+  padding-bottom: var(--taskbar);
+}
+a { color: var(--link); font-weight: 700; }
+button { font-family: inherit; font-size: inherit; color: inherit; }
+:focus-visible { outline: 2px dashed var(--sel); outline-offset: 2px; }
+svg.px { image-rendering: pixelated; shape-rendering: crispEdges; display: block; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ================= relevos estilo anos 90 ================= */
+.raised {
+  background-color: var(--face); color: #000;
+  border: 1px solid; border-color: var(--light) var(--dark) var(--dark) var(--light);
+  box-shadow: inset 1px 1px var(--hi), inset -1px -1px var(--gray);
+}
+.sunken {
+  border: 1px solid; border-color: var(--gray) var(--light) var(--light) var(--gray);
+  box-shadow: inset 1px 1px var(--dark), inset -1px -1px var(--hi);
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 30px; padding: 0 14px; font-family: var(--ui); font-size: 13px; font-weight: 400;
+  cursor: pointer; text-decoration: none; color: #000;
+}
+.btn:active, .btn.pressed {
+  border-color: var(--dark) var(--light) var(--light) var(--dark);
+  box-shadow: inset 1px 1px var(--gray), inset -1px -1px var(--hi);
+  padding-top: 2px; padding-left: 16px;
+}
+.btn.pressed { background: repeating-conic-gradient(#C0C0C0 0 25%, #E8E8E8 0 50%) 0 0 / 2px 2px; }
+.btn svg.px { width: 16px; height: 16px; }

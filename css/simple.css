@@ -1,0 +1,30 @@
+/* ================= botão de modo + MODO SIMPLES (para recrutadores) ================= */
+.modebar { position: fixed; top: 8px; right: 14px; z-index: 4500; display: flex; gap: 8px; align-items: center; }
+.modebar .lang-switch { display: none; }
+.btn.raised.modebtn { min-height: 34px; padding: 0 14px; background: var(--bar); color: #fff; font-weight: 700; font-size: 14px; letter-spacing: .02em; }
+.btn.raised.modebtn:hover { filter: brightness(1.15); }
+body.simple {
+  --bg: #F5F4EF; --dots: transparent; --card: #FFFFFF; --text: #1B1F1B; --muted: #4F5A4F; --bar: #0F380F; --shadow: transparent;
+  --head: #0F380F; --link: #0A5C1A; --chip: #E7EFDC; --sel: #0F380F; --side-text: #0F380F;
+  --display: 'Nunito', system-ui, sans-serif; --body: 'Nunito', system-ui, sans-serif; --pixel: 'Nunito', system-ui, sans-serif; --ui: 'Nunito', system-ui, sans-serif;
+  --face: #FFFFFF; --light: #FFFFFF; --hi: #EEEEEE; --gray: #BBBBBB; --dark: #888888;
+  height: auto; overflow: auto; padding-bottom: 0; font-size: 16px; line-height: 1.55; background-image: none;
+}
+body.simple .scene, body.simple .gbwall, body.simple .crt, body.simple .taskbar, body.simple .startmenu,
+body.simple #backdrop, body.simple .cat, body.simple .side, body.simple .bar, body.simple #w-simple { display: none !important; }
+body.simple .modebar .lang-switch { display: flex; }
+body.simple .layout { display: block; max-width: 820px; height: auto; margin: 0 auto; padding: 76px 18px 60px; }
+body.simple .board { display: block; height: auto; }
+body.simple .col { display: flex; flex-direction: column; gap: 20px; overflow: visible; padding: 0; height: auto; }
+body.simple .col .card { flex: none; min-height: 0; margin: 0; display: block; background: #fff; border: 1px solid #D8D6CC; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+body.simple .card[hidden] { display: none; }
+body.simple .col .inner { overflow: visible; }
+body.simple .card.collapsed .inner { display: block; }
+body.simple .card h2 { font-family: var(--display); font-weight: 800; color: var(--head); text-transform: none; letter-spacing: -.01em; }
+body.simple .card h2::before { content: none; }
+body.simple .projects .path { display: none; }
+body.simple .card.flash { animation: none; }
+@media (max-width: 860px) { .layout { padding-top: 60px; } body.simple .layout { padding-top: 64px; } }
+@media print { .modebar { display: none; } }
+body.idle *, body.idle *::before, body.idle *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .grid, .stars, .welcome .blink rect.h, .card.flash { animation: none; } html { scroll-behavior: auto; } }

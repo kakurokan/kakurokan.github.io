@@ -18,11 +18,27 @@ The site is a retro desktop. Cards work like windows: you can drag one onto anot
 
 ## Stack
 
-Plain HTML, CSS and JavaScript in a single `index.html`. There is no framework and no bundler. Fonts come from Google Fonts. Every icon and the wallpaper is pixel art defined in code.
+Plain HTML, CSS and JavaScript (native ES modules). There is no framework, no bundler and no build step, so GitHub Pages serves the files as they are. Fonts come from Google Fonts. Every icon and the wallpaper is pixel art defined in code.
+
+```
+index.html          markup, with the English text already inside (see "Editing content")
+css/                one file per concern: themes, base, scene, layout, cards, cat, taskbar, responsive, simple
+js/
+  main.js           startup: wires the modules together
+  state.js          shared state + a tiny event bus (on / emit)
+  store.js util.js  localStorage wrapper, small helpers
+  i18n/             en.js, pt.js, index.js (t / tr). Portuguese is only downloaded when needed
+  data/             projects.js, terminal.js
+  ui/               cards, layout, taskbar, search, tags, themes, startmenu, lang, mode, terminal, clock
+  fx/               icons.js, wallpaper.js, cat.js, loader.js. Wallpaper and cat load on demand
+tools/prerender.mjs writes the English text into index.html
+```
+
+Modules never call each other to ask for a redraw. They emit an event (`refresh`, `layout`, `tasks`, `goto`, `lang`…) and whoever cares listens to it. The list is in `js/state.js`.
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder:
+ES modules do not work from `file://`, so serve the folder:
 
 ```bash
 python3 -m http.server 8000
@@ -31,15 +47,22 @@ python3 -m http.server 8000
 
 ## Editing content
 
-Everything lives in the `<script>` at the end of `index.html`:
-
 | What | Where |
 | --- | --- |
-| All text, in English and Portuguese | `I18N` |
-| Projects (description, stats, tags, links) | `PROJECTS` |
-| Compact "More projects" list | `MORE` |
-| Card order and which cards start closed | `DEFAULT_ORDER`, `DEFAULT_CLOSED` |
-| CV file per language | `cv.file` in `I18N` (`cv-en.pdf`) |
+| All text, in English and Portuguese | `js/i18n/en.js`, `js/i18n/pt.js` |
+| Projects (description, stats, tags, links) | `PROJECTS` in `js/data/projects.js` |
+| Compact "More projects" list | `MORE` in `js/data/projects.js` |
+| Prompt command texts | `js/data/terminal.js` |
+| Card order and which cards start closed | `DEFAULT_ORDER`, `DEFAULT_CLOSED` in `js/state.js` |
+| CV file per language | `cv.file` in `js/i18n/*.js` (`cv-en.pdf`) |
+
+The English text is also written into `index.html` so search engines, link previews and visitors without JavaScript see content. After changing text or projects, run:
+
+```bash
+node tools/prerender.mjs
+```
+
+Browsers cache files for a few minutes on GitHub Pages. If a visitor (or you) still sees an old script right after a deploy, a hard refresh fixes it.
 
 ## Deploy
 

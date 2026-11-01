@@ -4,447 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Léo Souza — Backend Developer</title>
-<meta name="description" content="Léo Souza — Java backend developer. Informatics Engineering student at the University of the Algarve.">
+<meta name="description" content="Léo Souza — software engineer (Java, Python), backend developer on ENEI 2027. Informatics Engineering at the University of the Algarve, 17/20. Available from July 2027.">
+<link rel="canonical" href="https://kakurokan.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Léo Souza — Backend Developer">
+<meta property="og:description" content="Léo Souza — software engineer (Java, Python), backend developer on ENEI 2027. Informatics Engineering at the University of the Algarve, 17/20. Available from July 2027.">
+<meta property="og:url" content="https://kakurokan.github.io/">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Nunito:wght@400;600;700;800&family=Pixelify+Sans:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
-<style>
-  /* ================= TEMAS ================= */
-  :root, [data-theme="vapor"] {
-    --bg: #05010D; --dots: transparent; --side-text: #FFFFFF; --side-shadow: #000;
-    --card: #FFF7FC; --text: #2A0640; --muted: #5E4A75; --bar: #6A2CFF; --shadow: #FF2FB3;
-    --head: #6A2CFF; --link: #5B1FE0; --chip: #EFE6FF; --sel: #6A2CFF;
-    --scene: block; --crt: block;
-  }
-  [data-theme="rosa"] {
-    --bg: #FFC6EC; --dots: rgba(91,33,255,.13); --side-text: #4A10C8; --side-shadow: transparent;
-    --card: #F8F4FF; --text: #2B1660; --muted: #594A80; --bar: #5B21FF; --shadow: #8F5BFF;
-    --head: #5B21FF; --link: #4A10C8; --chip: #E9E1FF; --sel: #5B21FF;
-    --scene: none; --crt: none;
-  }
-  [data-theme="menta"] {
-    --bg: #C7F5E6; --dots: rgba(11,122,104,.14); --side-text: #075E50; --side-shadow: transparent;
-    --card: #F4FFFB; --text: #0B3B33; --muted: #3E6A62; --bar: #0B7A68; --shadow: #FF8A5B;
-    --head: #0B7A68; --link: #07614F; --chip: #DDF5EE; --sel: #0B7A68;
-    --scene: none; --crt: none;
-  }
-  [data-theme="noite"] {
-    --bg: #0E0B1F; --dots: rgba(255,47,179,.10); --side-text: #EDE7FF; --side-shadow: #000;
-    --card: #1C1733; --text: #EDE7FF; --muted: #B6AACF; --bar: #A72BFF; --shadow: #FF2FB3;
-    --head: #FF8AD8; --link: #FF9BDE; --chip: #2C2550; --sel: #FF2FB3;
-    --scene: none; --crt: block;
-  }
-
-  [data-theme="gameboy"] {
-    --bg: #9BBC0F; --dots: rgba(15,56,15,.14); --side-text: #0F380F; --side-shadow: transparent;
-    --card: #8BAC0F; --text: #0F380F; --muted: #0F380F; --bar: #0F380F; --shadow: #306230;
-    --head: #0F380F; --link: #0F380F; --chip: #9BBC0F; --sel: #0F380F;
-    --scene: none; --crt: block;
-    --face: #8BAC0F; --light: #9BBC0F; --hi: #9BBC0F; --gray: #306230; --dark: #0F380F; --navy: #0F380F;
-    --display: 'Pixelify Sans', monospace; --body: 'Pixelify Sans', monospace; --ui: 'Pixelify Sans', monospace;
-  }
-  .gbwall { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; image-rendering: pixelated; }
-  [data-theme="gameboy"] .gbwall { display: block; }
-  [data-theme="gameboy"] .icon span { background: #9BBC0F; border: 2px solid #0F380F; }
-  [data-theme="gameboy"] .search-msg:not(:empty) { background: #9BBC0F; padding: 2px 6px; align-self: flex-start; }
-  [data-theme="gameboy"] .card h2 { font-weight: 700; letter-spacing: .02em; }
-  [data-theme="gameboy"] .term { background: #0F380F; color: #9BBC0F; }
-  [data-theme="gameboy"] .term input { color: #9BBC0F; caret-color: #9BBC0F; }
-  [data-theme="gameboy"] .term .y, [data-theme="gameboy"] .term .m { color: #FFFFFF; }
-  [data-theme="gameboy"] .term .c { color: #8BAC0F; }
-  [data-theme="gameboy"] .sheet { background: #9BBC0F; color: #0F380F; box-shadow: 4px 4px 0 #0F380F; }
-  [data-theme="gameboy"] .sheet span, [data-theme="gameboy"] .sheet h4 { color: #0F380F; }
-  [data-theme="gameboy"] .post .av, [data-theme="gameboy"] .startmenu .sidebar { background: #306230; }
-  [data-theme="gameboy"] .led { background: #0F380F; box-shadow: none; }
-  [data-theme="gameboy"] .crt { background: repeating-linear-gradient(90deg, rgba(15,56,15,.07) 0 1px, transparent 1px 3px), repeating-linear-gradient(rgba(15,56,15,.07) 0 1px, transparent 1px 3px); }
-  [data-theme="gameboy"] .btn, [data-theme="gameboy"] .tray, [data-theme="gameboy"] .startmenu li > a, [data-theme="gameboy"] .startmenu li > button { color: #0F380F; }
-
-  :root {
-    --face: #C0C0C0; --light: #FFFFFF; --hi: #DFDFDF; --gray: #808080; --dark: #404040; --navy: #000080;
-    --display: 'Dela Gothic One', 'Arial Black', sans-serif;
-    --body: 'Nunito', system-ui, sans-serif;
-    --pixel: 'Pixelify Sans', Tahoma, sans-serif;
-    --term: 'VT323', 'Courier New', monospace;
-    --ui: Tahoma, Verdana, 'Segoe UI', sans-serif;
-    --taskbar: 36px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 24px; }
-  body {
-    margin: 0; min-height: 100%; color: var(--text); font-family: var(--body); font-size: 15px;
-    background-color: var(--bg);
-    background-image: radial-gradient(var(--dots) 1.5px, transparent 1.5px);
-    background-size: 22px 22px;
-    padding-bottom: var(--taskbar);
-  }
-  a { color: var(--link); font-weight: 700; }
-  button { font-family: inherit; font-size: inherit; color: inherit; }
-  :focus-visible { outline: 2px dashed var(--sel); outline-offset: 2px; }
-  svg.px { image-rendering: pixelated; shape-rendering: crispEdges; display: block; }
-  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-  /* ================= relevos estilo anos 90 ================= */
-  .raised {
-    background-color: var(--face); color: #000;
-    border: 1px solid; border-color: var(--light) var(--dark) var(--dark) var(--light);
-    box-shadow: inset 1px 1px var(--hi), inset -1px -1px var(--gray);
-  }
-  .sunken {
-    border: 1px solid; border-color: var(--gray) var(--light) var(--light) var(--gray);
-    box-shadow: inset 1px 1px var(--dark), inset -1px -1px var(--hi);
-  }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    min-height: 30px; padding: 0 14px; font-family: var(--ui); font-size: 13px; font-weight: 400;
-    cursor: pointer; text-decoration: none; color: #000;
-  }
-  .btn:active, .btn.pressed {
-    border-color: var(--dark) var(--light) var(--light) var(--dark);
-    box-shadow: inset 1px 1px var(--gray), inset -1px -1px var(--hi);
-    padding-top: 2px; padding-left: 16px;
-  }
-  .btn.pressed { background: repeating-conic-gradient(#C0C0C0 0 25%, #E8E8E8 0 50%) 0 0 / 2px 2px; }
-  .btn svg.px { width: 16px; height: 16px; }
-
-  /* ================= cena vaporwave (tema vaporwave) ================= */
-  .scene { display: var(--scene); position: fixed; inset: 0; z-index: -1; overflow: hidden; background: linear-gradient(#05010D 0%, #0B0220 55%, #1A0433 70%, #05010D 100%); }
-  .stars {
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 23px 41px, #fff, transparent),
-      radial-gradient(1px 1px at 141px 97px, #ffffffb0, transparent),
-      radial-gradient(1px 1px at 77px 163px, #ffffff80, transparent),
-      radial-gradient(1.5px 1.5px at 190px 19px, #fff, transparent),
-      radial-gradient(1px 1px at 251px 213px, #ffffffa0, transparent),
-      radial-gradient(1px 1px at 311px 131px, #ffffff70, transparent);
-    background-size: 340px 260px;
-    animation: twinkle 6s steps(2) infinite;
-  }
-  @keyframes twinkle { 50% { opacity: .75; } }
-  .sun {
-    position: absolute; left: 58%; bottom: 36%; width: min(52vh, 480px); aspect-ratio: 1; transform: translate(-50%, 50%);
-    border-radius: 50%; background: linear-gradient(#FFE66E 0%, #FFB347 35%, #FF6A5C 62%, #FF2FB3 100%);
-    box-shadow: 0 0 80px 10px #ff2fb355, 0 0 160px 40px #ff6a5c22;
-  }
-  .sun::after { content: ''; position: absolute; left: 0; right: 0; top: 52%; bottom: 0; background: repeating-linear-gradient(to bottom, transparent 0 16px, #0B0220 16px 22px); }
-  .horizon { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; overflow: hidden; background: linear-gradient(#2A0640, #05010D); border-top: 2px solid #FF2FB3; box-shadow: 0 -4px 30px #FF2FB3aa; }
-  .grid {
-    position: absolute; left: -50%; width: 200%; top: 0; height: 200%;
-    background-image: linear-gradient(#FF2FB3 2px, transparent 2px), linear-gradient(90deg, #FF2FB3 2px, transparent 2px);
-    background-size: 64px 64px; transform: perspective(260px) rotateX(62deg); transform-origin: 50% 0; opacity: .7;
-    animation: drive 2.4s linear infinite;
-  }
-  @keyframes drive { to { background-position: 0 64px, 0 64px; } }
-  .fog { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, #FF2FB3, transparent); opacity: .5; }
-  .fog.a { width: 46vw; height: 22vh; left: 14vw; bottom: 28%; }
-  .fog.b { width: 40vw; height: 20vh; right: 0; bottom: 26%; background: radial-gradient(closest-side, #B83CFF, transparent); opacity: .45; }
-  .crt { display: var(--crt); position: fixed; inset: 0; pointer-events: none; z-index: 5000; background: repeating-linear-gradient(rgba(0,0,0,.13) 0 1px, transparent 1px 3px); }
-
-  /* ================= estrutura ================= */
-  .layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 32px; padding: 46px 32px 48px; max-width: 1760px; margin: 0 auto; }
-  .side { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; gap: 20px; }
-  .icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 4px; }
-  .icon {
-    display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 2px; min-height: 92px;
-    background: none; border: 0; color: var(--side-text); cursor: pointer; text-decoration: none;
-    font-family: var(--pixel); font-size: 14px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-    text-shadow: 1px 1px var(--side-shadow);
-  }
-  .icon svg { width: 52px; height: 52px; transition: transform .12s steps(2); }
-  .icon:hover svg { transform: translateY(-3px); }
-  .icon span { padding: 1px 4px; border: 1px dotted transparent; }
-  .icon:focus-visible { outline: none; }
-  .icon:focus-visible span, .icon:hover span { background: var(--sel); color: #fff; text-shadow: none; }
-  .search { display: flex; border: 3px solid var(--bar); box-shadow: 6px 6px 0 var(--shadow); background: var(--card); }
-  .search input { flex: 1; min-width: 0; border: 0; padding: 0 12px; height: 42px; background: transparent; color: var(--text); font: 600 15px var(--body); outline: none; }
-  .search input::placeholder { color: var(--muted); }
-  .search button { width: 44px; border: 0; border-left: 3px solid var(--bar); background: var(--card); color: var(--bar); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .search-msg { margin: -8px 0 0; color: var(--side-text); font-family: var(--pixel); font-size: 14px; text-shadow: 1px 1px var(--side-shadow); min-height: 1em; }
-
-  /* ecrã grande: ambiente de trabalho fixo, sem scroll na página */
-  @media (min-width: 861px) {
-    body { height: 100vh; height: 100dvh; overflow: hidden; }
-    .layout { height: calc(100vh - var(--taskbar)); height: calc(100dvh - var(--taskbar)); padding-bottom: 22px; }
-    .side { position: static; max-height: 100%; overflow: auto; scrollbar-width: none; }
-    .board { display: flex; gap: 30px; height: 100%; min-height: 0; }
-    .col { flex: 1 1 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 30px; padding: 0 10px 10px 0;
-           overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: var(--bar) transparent; }
-    .board.drag-active .col { overflow: visible; }
-    .col .card { margin: 0; flex: 0 1 auto; min-height: 130px; display: flex; flex-direction: column; }
-    .col .card.collapsed { min-height: 0; flex: none; }
-    .col .bar { flex: none; }
-    .col .inner { min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--bar) transparent; }
-    .col .term { height: auto; min-height: 140px; max-height: 300px; }
-  }
-
-  /* ================= cartões ================= */
-  .card {
-    position: relative; break-inside: avoid; margin: 0 0 34px; display: block;
-    background: var(--card); border: 3px solid var(--bar); box-shadow: 8px 8px 0 var(--shadow);
-    transition: box-shadow .1s;
-  }
-  .card.dragging { box-shadow: 14px 14px 0 var(--shadow); cursor: grabbing; pointer-events: none; opacity: .92; z-index: 2000; }
-  .card.snap { transition: transform .18s steps(4); }
-  .card.drop-target { outline: 4px dashed var(--sel); outline-offset: 6px; }
-  .card.drop-target .inner { opacity: .55; }
-  .card[hidden] { display: none; }
-  .card.flash { animation: flash .9s steps(2) 2; }
-  @keyframes flash { 50% { box-shadow: 8px 8px 0 var(--shadow), 0 0 0 6px var(--sel); } }
-  .bar {
-    height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 6px 0 10px;
-    background: var(--bar); color: #fff; cursor: grab; touch-action: none; user-select: none;
-  }
-  .bar .grip { width: 18px; height: 18px; flex: none; }
-  .bar .name { flex: 1; font-family: var(--pixel); font-size: 14px; letter-spacing: .05em; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .ctl { width: 24px; height: 22px; min-height: 0; padding: 0; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none; }
-  .ctl:active { padding: 1px 0 0 1px; border-color: var(--dark) var(--light) var(--light) var(--dark); box-shadow: inset 1px 1px var(--gray); }
-  .inner { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
-  .card.collapsed .inner { display: none; }
-  .card h2 {
-    margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.05;
-    color: var(--head); letter-spacing: -.01em; text-transform: uppercase; overflow-wrap: anywhere;
-  }
-  .card p { margin: 0; line-height: 1.6; }
-  .muted { color: var(--muted); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { padding: 3px 10px; background: var(--chip); border: 2px solid var(--bar); font-size: 13px; font-weight: 700; }
-  button.chip { font-family: inherit; color: var(--text); cursor: pointer; line-height: inherit; }
-  button.chip:hover { background: var(--card); box-shadow: 2px 2px 0 var(--shadow); }
-  button.chip[aria-pressed="true"] { background: var(--bar); color: #fff; }
-  mark { background: var(--head); color: var(--card); padding: 0 1px; }
-  .chip mark, .stat mark { background: var(--sel); color: #fff; }
-  .tagbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 6px 10px; border: 2px dashed var(--bar); background: var(--chip); font-size: 13px; font-weight: 700; }
-  .tagbar[hidden] { display: none; }
-  .tagbar .btn { min-height: 26px; padding: 0 10px; }
-  .tagbar .btn:active { padding: 2px 8px 0 12px; }
-  .projects details.tag-out { display: none; }
-  .more li.tag-out { display: none; }
-  .tag-none { font-size: 14px; color: var(--muted); }
-  .tag-none[hidden] { display: none; }
-
-  /* expandido */
-  .card.expanded {
-    position: fixed !important; z-index: 3000 !important; transform: none !important;
-    left: 50% !important; top: 50% !important; translate: -50% -50%; margin: 0;
-    width: min(880px, calc(100vw - 40px)); max-height: calc(100vh - var(--taskbar) - 40px); overflow: auto;
-  }
-  .backdrop { position: fixed; inset: 0 0 var(--taskbar) 0; z-index: 2900; background: rgba(10,0,30,.55); }
-  .backdrop[hidden] { display: none; }
-
-  /* welcome */
-  .welcome { display: flex; gap: 16px; align-items: flex-start; }
-  .welcome p { flex: 1; }
-  .welcome svg.px { width: 96px; height: 96px; flex: none; }
-  .welcome .blink rect.h { animation: blink 1.2s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: .2; } }
-  .links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; }
-  .links a { display: inline-flex; align-items: center; gap: 6px; }
-  .links svg.px { width: 16px; height: 16px; }
-  .avail { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 4px 10px; background: var(--chip); border: 2px solid var(--bar); font-weight: 700; font-size: 13px; }
-  .led { width: 10px; height: 10px; background: #00C853; box-shadow: inset -2px -2px #006B2C, inset 2px 2px #8CFFB7; }
-
-  /* microblog */
-  .post { border: 2px solid var(--bar); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; background: var(--card); }
-  .post .who { display: flex; align-items: center; gap: 12px; }
-  .post .av { width: 44px; height: 44px; flex: none; display: flex; align-items: center; justify-content: center; background: linear-gradient(#FF8AD8, #6A2CFF); color: #fff; font: 700 17px var(--pixel); border-radius: 50%; }
-  .post .who div { display: flex; flex-direction: column; font-size: 14px; }
-  .post time { color: var(--muted); font-size: 13px; }
-
-  /* temas */
-  .themes { display: flex; flex-wrap: wrap; gap: 14px; }
-  .theme {
-    display: flex; flex-direction: column; align-items: center; gap: 8px; width: 64px; padding: 0;
-    background: none; border: 0; cursor: pointer; font-family: var(--pixel); font-size: 13px; color: var(--text);
-  }
-  .theme .sw { width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--bar); background: var(--sw); box-shadow: 3px 3px 0 var(--shadow); }
-  .theme[aria-pressed="true"] .sw { outline: 3px solid var(--sel); outline-offset: 3px; }
-  .theme[aria-pressed="true"] .tn { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-  .theme:focus-visible { outline: none; }
-  .theme:focus-visible .sw { outline: 2px dashed var(--sel); outline-offset: 3px; }
-
-  /* projetos */
-  .projects { display: flex; flex-direction: column; gap: 8px; }
-  .projects details { border: 2px solid var(--bar); background: var(--card); }
-  .projects summary {
-    display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 12px; cursor: pointer; font-weight: 800; list-style: none;
-  }
-  .projects summary::-webkit-details-marker { display: none; }
-  .projects summary svg.px { width: 20px; height: 20px; flex: none; }
-  .projects summary .arrow { margin-left: auto; font-family: var(--pixel); color: var(--bar); }
-  .projects details[open] summary { background: var(--bar); color: #fff; }
-  .projects details[open] summary .arrow { color: #fff; transform: rotate(90deg); }
-  .projects .pbody { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
-  .projects .path { font-family: var(--term); font-size: 18px; color: var(--muted); }
-  .projects .pmeta { font-size: 13px; font-weight: 700; color: var(--muted); margin-top: -6px; }
-  .stats { display: flex; flex-wrap: wrap; gap: 6px; }
-  .stat { display: flex; flex-direction: column; padding: 4px 9px 5px; background: var(--chip); border: 2px solid var(--bar); box-shadow: 2px 2px 0 var(--shadow); min-width: 64px; }
-  .stat b { font-family: var(--display); font-weight: 400; font-size: 19px; line-height: 1.1; color: var(--head); }
-  [data-theme="gameboy"] .stat b { font-weight: 700; }
-  .stat span { font-size: 11.5px; font-weight: 700; color: var(--muted); }
-  .points { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
-  .points li { line-height: 1.5; }
-  .more { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .more li { display: flex; flex-direction: column; gap: 2px; padding-left: 12px; border-left: 3px solid var(--bar); font-size: 14px; line-height: 1.45; }
-  .more .mtech { font-family: var(--term); font-size: 17px; color: var(--muted); }
-  .climb { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border: 2px solid var(--bar); background: var(--chip); }
-  .climb-row { display: grid; grid-template-columns: 1fr auto 28px; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; }
-  .climb-row small { display: block; font-weight: 600; color: var(--muted); }
-  .blocks { display: flex; gap: 3px; }
-  .blocks i { width: 16px; height: 16px; border: 2px solid var(--bar); }
-  .blocks i.on { background: var(--bar); box-shadow: inset -3px -3px 0 var(--shadow); }
-  .climb-row b { font-family: var(--display); font-weight: 400; font-size: 22px; color: var(--head); text-align: right; }
-  .climb-note { font-size: 13px; font-weight: 700; color: var(--head); }
-  .edu-head { display: flex; flex-direction: column; gap: 2px; }
-  .edu-head b { font-size: 16px; }
-  .footer-note { margin-top: 4px; font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 2px; }
-
-  /* terminal */
-  .term { background: #000; color: #C0C0C0; font-family: var(--term); font-size: 20px; line-height: 1.15; padding: 10px 12px; height: 300px; overflow: auto; cursor: text; }
-  .card.expanded .term { height: 60vh; }
-  .term pre { margin: 0; font: inherit; white-space: pre-wrap; word-break: break-word; }
-  .term .y { color: #FFFF55; } .term .c { color: #00AAAA; } .term .m { color: #FF55FF; }
-  .term .line { display: flex; }
-  .term input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: #C0C0C0; font: inherit; padding: 0; }
-
-  /* stack */
-  .stack { display: flex; flex-direction: column; gap: 12px; }
-  .stack h3 { margin: 0 0 6px; font-family: var(--pixel); font-size: 15px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
-
-  /* percurso */
-  .timeline { margin: 0; padding: 0 0 0 4px; list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .timeline li { display: flex; gap: 10px; line-height: 1.5; font-size: 14.5px; }
-  .timeline li::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: 8px; background: var(--bar); }
-  .timeline b { color: var(--head); }
-  .timeline li.now { padding: 8px 10px; margin-left: -10px; background: var(--chip); border: 2px dashed var(--bar); }
-
-  /* cv */
-  .viewer { background: var(--gray); padding: 16px; display: flex; justify-content: center; }
-  .sheet { width: 100%; background: #fff; color: #1A1D23; padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 6px; font-family: var(--ui); font-size: 12px; box-shadow: 4px 4px 0 var(--dark); }
-  .sheet b { font-size: 18px; }
-  .sheet hr { border: 0; height: 1px; background: #bbb; margin: 4px 0; width: 100%; }
-  .sheet h4 { margin: 6px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--navy); }
-  .sheet span { color: #333; line-height: 1.45; }
-  .row { display: flex; flex-wrap: wrap; gap: 8px; }
-
-  /* contacto */
-  .contact-list { display: flex; flex-direction: column; }
-  .contact-list a { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 46px; border-top: 2px dotted var(--bar); text-decoration: none; }
-  .contact-list a:last-child { border-bottom: 2px dotted var(--bar); }
-  .contact-list small { color: var(--muted); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-
-  /* ================= gato ================= */
-  .cat {
-    --cat-o: #1A1022; --cat-b: #FAF7F0; --cat-s: #F28C28; --cat-e: #3E9BE0; --cat-p: #FF8AB4;
-    position: fixed; left: 0; top: 0; width: 48px; height: 36px; z-index: 2500; cursor: pointer;
-    will-change: transform; user-select: none; -webkit-tap-highlight-color: transparent;
-  }
-  [data-theme="gameboy"] .cat { --cat-o: #0F380F; --cat-b: #9BBC0F; --cat-s: #306230; --cat-e: #0F380F; --cat-p: #306230; }
-  .cat svg { width: 48px; height: 36px; display: block; image-rendering: pixelated; shape-rendering: crispEdges; }
-  .cat.left svg { transform: scaleX(-1); }
-  .cat .o { fill: var(--cat-o); } .cat .b { fill: var(--cat-b); } .cat .s { fill: var(--cat-s); } .cat .e { fill: var(--cat-e); } .cat .p { fill: var(--cat-p); }
-  .cat .zzz { position: absolute; left: 30px; top: -10px; font: 700 14px var(--pixel); color: var(--cat-o); pointer-events: none; opacity: 0; }
-  .cat.sleeping .zzz { animation: zzz 2.4s steps(6) infinite; }
-  .cat.left .zzz { left: 4px; }
-  @keyframes zzz { 0% { opacity: 0; transform: translate(0, 6px); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(8px, -16px); } }
-  .cat .meow {
-    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); white-space: nowrap; pointer-events: none;
-    padding: 2px 8px; background: var(--card); color: var(--text); border: 2px solid var(--bar); font: 700 13px var(--pixel);
-  }
-  .cat .meow[hidden] { display: none; }
-  .cat .nm {
-    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); pointer-events: none; opacity: 0; transition: opacity .1s;
-    padding: 1px 7px; background: var(--card); color: var(--text); border: 2px solid var(--bar); box-shadow: 3px 3px 0 var(--shadow); font: 700 13px var(--pixel); letter-spacing: .06em; white-space: nowrap;
-  }
-  .cat:hover .nm { opacity: 1; }
-  .cat.low .nm, .cat.low .meow { bottom: auto; top: 40px; }
-  .cat.meowing .nm { opacity: 0; }
-  .cat[hidden] { display: none; }
-  .cat.held { cursor: grabbing; z-index: 4200; }
-  .cat.held svg { animation: thrash .12s steps(2) infinite; }
-  @keyframes thrash { 0% { transform: translate(-2px, 0) rotate(-4deg); } 100% { transform: translate(2px, 1px) rotate(4deg); } }
-  .cat.held .nm { opacity: 0; }
-  .cat .grr { position: absolute; left: -6px; top: -14px; font: 700 15px var(--pixel); color: #E01818; pointer-events: none; opacity: 0; }
-  [data-theme="gameboy"] .cat .grr { color: #0F380F; }
-  .cat.held .grr { opacity: 1; animation: grr .3s steps(2) infinite; }
-  @keyframes grr { 50% { transform: translate(2px, -2px) scale(1.2); } }
-
-  /* ================= barra de tarefas ================= */
-  .taskbar {
-    position: fixed; left: 0; right: 0; bottom: 0; height: var(--taskbar); z-index: 4000;
-    display: flex; align-items: center; gap: 4px; padding: 3px 4px;
-    border-width: 1px 0 0 !important; font-family: var(--ui); font-size: 13px;
-  }
-  .start { padding: 0 10px; font-weight: 700; font-size: 14px; flex: none; }
-  .start svg.px { width: 18px; height: 18px; }
-  .tasks { flex: 1; min-width: 0; display: flex; gap: 3px; overflow-x: auto; scrollbar-width: none; }
-  .tasks .btn { flex: 0 0 auto; padding: 0 10px; }
-  .tray { flex: none; height: 28px; display: flex; align-items: center; gap: 8px; padding: 0 10px; color: #000; }
-  .lang-switch { display: flex; gap: 2px; }
-  .lang-btn { min-height: 22px; height: 22px; padding: 0 8px; font-weight: 700; }
-  .lang-btn:active, .lang-btn.pressed { padding: 1px 7px 0 9px; }
-  .lang-btn:not(.pressed) { font-weight: 400; }
-  .tray .avail2 { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
-
-  .startmenu { position: fixed; left: 2px; bottom: calc(var(--taskbar) - 2px); z-index: 4500; display: flex; padding: 2px; min-width: 250px; font-family: var(--ui); }
-  .startmenu[hidden] { display: none; }
-  .startmenu .sidebar { width: 30px; background: linear-gradient(#FF2FB3, #6A2CFF 60%, var(--navy)); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; }
-  .startmenu .sidebar b { writing-mode: vertical-rl; transform: rotate(180deg); color: #fff; font-family: var(--pixel); font-size: 20px; }
-  .startmenu .sidebar b i { font-style: normal; color: #FFD6F2; font-weight: 400; }
-  .startmenu ul { list-style: none; margin: 0; padding: 0; flex: 1; }
-  .startmenu li > button, .startmenu li > a {
-    width: 100%; display: flex; align-items: center; gap: 12px; min-height: 40px; padding: 4px 16px 4px 8px;
-    background: none; border: 0; text-align: left; cursor: pointer; color: #000; text-decoration: none; font-size: 14px; font-weight: 400;
-  }
-  .startmenu li > button:hover, .startmenu li > a:hover, .startmenu li > button:focus-visible, .startmenu li > a:focus-visible { background: var(--navy); color: #fff; outline: none; }
-  .startmenu svg.px { width: 26px; height: 26px; flex: none; }
-  .startmenu hr { margin: 3px 2px; border: 0; border-top: 1px solid var(--gray); border-bottom: 1px solid var(--light); }
-
-  /* ================= ecrãs pequenos ================= */
-  @media (max-width: 860px) {
-    .layout { grid-template-columns: 1fr; padding: 18px 16px 40px; gap: 22px; }
-    .side { position: static; }
-    .icons { grid-template-columns: repeat(4, 1fr); }
-    .icon { min-height: 80px; font-size: 12px; }
-    .icon svg { width: 40px; height: 40px; }
-    .col { display: contents; }
-    .bar { cursor: default; }
-    .tasks { display: none; }
-    .tray .avail2 span:last-child { display: none; }
-    .sun { left: 50%; }
-  }
-
-  /* ================= botão de modo + MODO SIMPLES (para recrutadores) ================= */
-  .modebar { position: fixed; top: 8px; right: 14px; z-index: 4500; display: flex; gap: 8px; align-items: center; }
-  .modebar .lang-switch { display: none; }
-  .btn.raised.modebtn { min-height: 34px; padding: 0 14px; background: var(--bar); color: #fff; font-weight: 700; font-size: 14px; letter-spacing: .02em; }
-  .btn.raised.modebtn:hover { filter: brightness(1.15); }
-  body.simple {
-    --bg: #F5F4EF; --dots: transparent; --card: #FFFFFF; --text: #1B1F1B; --muted: #4F5A4F; --bar: #0F380F; --shadow: transparent;
-    --head: #0F380F; --link: #0A5C1A; --chip: #E7EFDC; --sel: #0F380F; --side-text: #0F380F;
-    --display: 'Nunito', system-ui, sans-serif; --body: 'Nunito', system-ui, sans-serif; --pixel: 'Nunito', system-ui, sans-serif; --ui: 'Nunito', system-ui, sans-serif;
-    --face: #FFFFFF; --light: #FFFFFF; --hi: #EEEEEE; --gray: #BBBBBB; --dark: #888888;
-    height: auto; overflow: auto; padding-bottom: 0; font-size: 16px; line-height: 1.55; background-image: none;
-  }
-  body.simple .scene, body.simple .gbwall, body.simple .crt, body.simple .taskbar, body.simple .startmenu,
-  body.simple #backdrop, body.simple .cat, body.simple .side, body.simple .bar, body.simple #w-simple { display: none !important; }
-  body.simple .modebar .lang-switch { display: flex; }
-  body.simple .layout { display: block; max-width: 820px; height: auto; margin: 0 auto; padding: 76px 18px 60px; }
-  body.simple .board { display: block; height: auto; }
-  body.simple .col { display: flex; flex-direction: column; gap: 20px; overflow: visible; padding: 0; height: auto; }
-  body.simple .col .card { flex: none; min-height: 0; margin: 0; display: block; background: #fff; border: 1px solid #D8D6CC; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-  body.simple .card[hidden] { display: none; }
-  body.simple .col .inner { overflow: visible; }
-  body.simple .card.collapsed .inner { display: block; }
-  body.simple .card h2 { font-family: var(--display); font-weight: 800; color: var(--head); text-transform: none; letter-spacing: -.01em; }
-  body.simple .card h2::before { content: none; }
-  body.simple .projects .path { display: none; }
-  body.simple .card.flash { animation: none; }
-  @media (max-width: 860px) { .layout { padding-top: 60px; } body.simple .layout { padding-top: 64px; } }
-  @media print { .modebar { display: none; } }
-  body.idle *, body.idle *::before, body.idle *::after { animation-play-state: paused !important; }
-  @media (prefers-reduced-motion: reduce) { .grid, .stars, .welcome .blink rect.h, .card.flash { animation: none; } html { scroll-behavior: auto; } }
-</style>
+<link rel="stylesheet" href="css/themes.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/scene.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/cat.css">
+<link rel="stylesheet" href="css/taskbar.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/simple.css">
 </head>
 <body data-theme="gameboy">
 
@@ -458,7 +36,8 @@
 <canvas class="gbwall" id="gbwall" aria-hidden="true"></canvas>
 
 <!--
-  TEXTOS: tudo o que aparece no site está no objeto I18N, no início do <script>.
+  TEXTOS: tudo o que aparece no site está em js/i18n/en.js e js/i18n/pt.js (projetos em js/data/projects.js).
+  Depois de mudar textos ou projetos, corre `node tools/prerender.mjs` para o inglês ficar também no HTML.
   data-t="chave"   → troca o texto
   data-th="chave"  → troca o HTML (para texto com <b>, etc.)
   data-ta="atributo:chave,atributo:chave" → troca atributos (aria-label, placeholder, href…)
@@ -466,20 +45,20 @@
 <div class="layout">
   <!-- ================= LATERAL ================= -->
   <aside class="side">
-    <nav class="icons" data-ta="aria-label:nav.label">
-      <a class="icon" href="#about"><svg class="px" data-px="note"></svg><span data-t="nav.about"></span></a>
-      <a class="icon" href="#projects"><svg class="px" data-px="folder"></svg><span data-t="nav.projects"></span></a>
-      <a class="icon" href="#terminal"><svg class="px" data-px="monitor"></svg><span data-t="nav.prompt"></span></a>
-      <a class="icon" href="#path"><svg class="px" data-px="map"></svg><span data-t="nav.path"></span></a>
-      <a class="icon" href="#stack"><svg class="px" data-px="chip"></svg><span data-t="nav.stack"></span></a>
+    <nav class="icons" data-ta="aria-label:nav.label" aria-label="Shortcuts">
+      <a class="icon" href="#about"><svg class="px" data-px="note"></svg><span data-t="nav.about">About</span></a>
+      <a class="icon" href="#projects"><svg class="px" data-px="folder"></svg><span data-t="nav.projects">Projects</span></a>
+      <a class="icon" href="#terminal"><svg class="px" data-px="monitor"></svg><span data-t="nav.prompt">Prompt</span></a>
+      <a class="icon" href="#path"><svg class="px" data-px="map"></svg><span data-t="nav.path">Journey</span></a>
+      <a class="icon" href="#stack"><svg class="px" data-px="chip"></svg><span data-t="nav.stack">Stack</span></a>
       <a class="icon" href="#cv"><svg class="px" data-px="cv"></svg><span>CV</span></a>
-      <a class="icon" href="#contact"><svg class="px" data-px="mail"></svg><span data-t="nav.contact"></span></a>
+      <a class="icon" href="#contact"><svg class="px" data-px="mail"></svg><span data-t="nav.contact">Contact</span></a>
       <a class="icon" href="https://github.com/kakurokan" target="_blank" rel="noopener"><svg class="px" data-px="disk"></svg><span>GitHub</span></a>
     </nav>
     <form class="search" role="search" id="search-form">
-      <label for="search" class="sr" data-t="search.label"></label>
-      <input id="search" type="search" data-ta="placeholder:search.placeholder" autocomplete="off">
-      <button type="submit" data-ta="aria-label:search.button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg></button>
+      <label for="search" class="sr" data-t="search.label">Search the site</label>
+      <input id="search" type="search" data-ta="placeholder:search.placeholder" autocomplete="off" placeholder="Search…">
+      <button type="submit" data-ta="aria-label:search.button" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg></button>
     </form>
     <p class="search-msg" id="search-msg" aria-live="polite"></p>
   </aside>
@@ -489,108 +68,192 @@
 
     <article class="card" id="welcome" aria-labelledby="h-welcome">
       <div class="inner">
-        <h2 id="h-welcome" data-t="welcome.title"></h2>
+        <h2 id="h-welcome" data-t="welcome.title">#Welcome</h2>
         <div class="welcome">
-          <p data-th="welcome.text"></p>
+          <p data-th="welcome.text">I'm <b>Léo Souza</b>, a software engineer (Java, Python) finishing my Informatics Engineering degree at the University of the Algarve. Measuring, then finding out why, is how I like to work.</p>
           <svg class="px blink" data-px="love"></svg>
         </div>
-        <span class="avail"><span class="led" aria-hidden="true"></span><span data-t="avail.long"></span></span>
+        <span class="avail"><span class="led" aria-hidden="true"></span><span data-t="avail.long">Available from July 2027</span></span>
         <div class="links">
-          <a href="?simple" id="w-simple"><svg class="px" data-px="love"></svg><span data-t="mode.simple"></span></a>
+          <a href="?simple" id="w-simple"><svg class="px" data-px="love"></svg><span data-t="mode.simple">Recruiter? Simple version</span></a>
           <a href="#cv"><svg class="px" data-px="cv"></svg>CV</a>
           <a href="https://github.com/kakurokan" target="_blank" rel="noopener"><svg class="px" data-px="disk"></svg>github/kakurokan</a>
           <a href="https://www.linkedin.com/in/leo-kakali" target="_blank" rel="noopener"><svg class="px" data-px="note"></svg>LinkedIn</a>
-          <a href="mailto:leokakali7@gmail.com"><svg class="px" data-px="mail"></svg><span data-t="welcome.contact"></span></a>
+          <a href="mailto:leokakali7@gmail.com"><svg class="px" data-px="mail"></svg><span data-t="welcome.contact">contact</span></a>
         </div>
       </div>
     </article>
 
     <article class="card" id="now" aria-labelledby="h-now">
       <div class="inner">
-        <h2 id="h-now" data-t="now.title"></h2>
+        <h2 id="h-now" data-t="now.title">#Now</h2>
         <!-- Vai atualizando este post (texto em now.text, nas duas línguas) -->
         <div class="post">
           <div class="who">
             <span class="av" aria-hidden="true">LS</span>
-            <div><b>léo @kakurokan</b><time class="local-date" datetime="2026-10-31"></time></div>
+            <div><b>léo @kakurokan</b><time class="local-date" datetime="2026-10-31">31 Oct 2026</time></div>
           </div>
-          <p data-t="now.text"></p>
+          <p data-t="now.text">Backend team for ENEI 2027, the national informatics students’ conference coming to Faro. The ticketing platform goes live on November 2!</p>
         </div>
       </div>
     </article>
 
     <article class="card" id="themes" aria-labelledby="h-themes">
       <div class="inner">
-        <h2 id="h-themes" data-t="themes.title"></h2>
-        <p data-t="themes.text"></p>
+        <h2 id="h-themes" data-t="themes.title">#Themes</h2>
+        <p data-t="themes.text">Pick a theme to change the look of the site. Your choice is saved.</p>
         <div class="themes" id="theme-list">
-          <button class="theme" data-set="gameboy" data-ta="aria-label:themes.gameboy.aria"><span class="sw" style="--sw: linear-gradient(135deg, #9BBC0F 0 25%, #8BAC0F 25% 50%, #306230 50% 75%, #0F380F 75%)"></span><span class="tn">gb</span></button>
-          <button class="theme" data-set="vapor" data-ta="aria-label:themes.vapor.aria"><span class="sw" style="--sw: linear-gradient(#FFE66E, #FF2FB3 55%, #2A0640 56%)"></span><span class="tn">vapor</span></button>
-          <button class="theme" data-set="rosa" data-ta="aria-label:themes.rosa.aria"><span class="sw" style="--sw: linear-gradient(135deg, #FFC6EC 50%, #5B21FF 50%)"></span><span class="tn" data-t="themes.rosa"></span></button>
-          <button class="theme" data-set="menta" data-ta="aria-label:themes.menta.aria"><span class="sw" style="--sw: linear-gradient(135deg, #C7F5E6 50%, #0B7A68 50%)"></span><span class="tn" data-t="themes.menta"></span></button>
-          <button class="theme" data-set="noite" data-ta="aria-label:themes.noite.aria"><span class="sw" style="--sw: linear-gradient(135deg, #0E0B1F 50%, #FF2FB3 50%)"></span><span class="tn" data-t="themes.noite"></span></button>
+          <button class="theme" data-set="gameboy" data-ta="aria-label:themes.gameboy.aria" aria-label="Game Boy theme"><span class="sw" style="--sw: linear-gradient(135deg, #9BBC0F 0 25%, #8BAC0F 25% 50%, #306230 50% 75%, #0F380F 75%)"></span><span class="tn">gb</span></button>
+          <button class="theme" data-set="vapor" data-ta="aria-label:themes.vapor.aria" aria-label="Vaporwave theme"><span class="sw" style="--sw: linear-gradient(#FFE66E, #FF2FB3 55%, #2A0640 56%)"></span><span class="tn">vapor</span></button>
+          <button class="theme" data-set="rosa" data-ta="aria-label:themes.rosa.aria" aria-label="Pink theme"><span class="sw" style="--sw: linear-gradient(135deg, #FFC6EC 50%, #5B21FF 50%)"></span><span class="tn" data-t="themes.rosa">pink</span></button>
+          <button class="theme" data-set="menta" data-ta="aria-label:themes.menta.aria" aria-label="Mint theme"><span class="sw" style="--sw: linear-gradient(135deg, #C7F5E6 50%, #0B7A68 50%)"></span><span class="tn" data-t="themes.menta">mint</span></button>
+          <button class="theme" data-set="noite" data-ta="aria-label:themes.noite.aria" aria-label="Night theme"><span class="sw" style="--sw: linear-gradient(135deg, #0E0B1F 50%, #FF2FB3 50%)"></span><span class="tn" data-t="themes.noite">night</span></button>
         </div>
       </div>
     </article>
 
     <article class="card" id="about" aria-labelledby="h-about">
       <div class="inner">
-        <h2 id="h-about" data-t="about.title"></h2>
-        <p data-t="about.p1"></p>
-        <p data-t="about.p2"></p>
+        <h2 id="h-about" data-t="about.title">#About me</h2>
+        <p data-t="about.p1">Informatics Engineering student at UAlg: 17/20 overall, 20/20 in Algorithms &amp; Data Structures and in Object-Oriented Programming, 18/20 in Software Engineering. Graduating in June 2027 and looking for a junior backend role from July 2027.</p>
+        <p data-t="about.p2">Java is where I'm strongest, and right now I ship Python (FastAPI) in production on ENEI 2027. I like test-first code, CI that catches things before deploy, and benchmarks that explain where the time goes. Competitive programming taught me to hunt for the edge case before it bites.</p>
       </div>
     </article>
 
     <article class="card" id="projects" aria-labelledby="h-projects">
       <div class="inner">
-        <h2 id="h-projects" data-t="projects.title"></h2>
+        <h2 id="h-projects" data-t="projects.title">#Projects</h2>
         <div class="tagbar" id="tagbar" hidden>
           <span id="tagbar-text"></span>
-          <button class="btn raised" id="tag-clear" data-t="tags.clear"></button>
+          <button class="btn raised" id="tag-clear" data-t="tags.clear">Show all</button>
         </div>
-        <div class="projects" id="project-list"></div>
+        <div class="projects" id="project-list"><!--prerender:projects-->
+    <details open>
+      <summary><svg class="px" data-px="folder"></svg>ENEI 2027 Platform<span class="arrow" aria-hidden="true">&gt;</span></summary>
+      <div class="pbody">
+        <span class="path">C:\Projects\enei-2027</span>
+        <span class="pmeta">Volunteer backend developer · Jun 2026 – present · hybrid</span>
+        <p>Backend of the website and ticketing API for ENEI, the National Gathering of Informatics Students, coming to Faro. Domain-driven FastAPI, SQLAlchemy 2 and PostgreSQL.</p>
+        <div class="stats"><span class="stat"><b>12</b><span>PRs merged</span></span><span class="stat"><b>13</b><span>PRs reviewed</span></span><span class="stat"><b>500+</b><span>test suite</span></span><span class="stat"><b>4</b><span>migrations</span></span></div>
+        <ul class="points"><li>Built the authentication and account flows: JWT auth middleware, password recovery, remember-me, terms acceptance and an admin-promotion CLI.</li><li>Designed the HMAC-signed, PII-free ticket QR payload, so a ticket can be verified without exposing personal data.</li><li>Wrote 25+ of the 500+ tests. Every change passes GitHub Actions CI (lint, tests, smoke test) before deploy.</li><li>Worked on an 8-service Docker Compose stack with Prometheus monitoring; my 4 Alembic migrations are CI-checked as reversible and drift-free.</li></ul>
+        <div class="chips"><button type="button" class="chip" data-tag="Python">Python</button><button type="button" class="chip" data-tag="FastAPI">FastAPI</button><button type="button" class="chip" data-tag="SQLAlchemy 2">SQLAlchemy 2</button><button type="button" class="chip" data-tag="PostgreSQL">PostgreSQL</button><button type="button" class="chip" data-tag="DDD">DDD</button><button type="button" class="chip" data-tag="Alembic">Alembic</button><button type="button" class="chip" data-tag="Docker Compose">Docker Compose</button><button type="button" class="chip" data-tag="Prometheus">Prometheus</button><button type="button" class="chip" data-tag="CI/CD">CI/CD</button></div>
+        <div class="row">
+          <a class="btn raised" href="https://github.com/Dep-tech-coenei-faro-27/event-site" target="_blank" rel="noopener">View repository…</a>
+          <a class="btn raised" href="https://www.eneifaro.pt/" target="_blank" rel="noopener">Website</a>
+        </div>
+      </div>
+    </details>
+    <details>
+      <summary><svg class="px" data-px="folder"></svg>FintList<span class="arrow" aria-hidden="true">&gt;</span></summary>
+      <div class="pbody">
+        <span class="path">C:\Projects\fintlist</span>
+        <span class="pmeta">High-performance int list · co-developed with a classmate</span>
+        <p>A doubly linked list for primitive int stored in three parallel arrays instead of node objects, which cuts allocations and garbage-collector pressure.</p>
+        <div class="stats"><span class="stat"><b>~8×</b><span>faster addAt/removeAt</span></span><span class="stat"><b>~10M</b><span>elements</span></span><span class="stat"><b>1.63</b><span>doubling ratio (vs 2.10)</span></span></div>
+        <ul class="points"><li>Reuses free slots, caches the last access and starts each traversal from the head, the tail or the last accessed node, whichever is closer.</li><li>About 8× faster addAt/removeAt than the course's linked list at ~10M elements. Both are O(n): the gain comes from smaller constant factors, not from a complexity change.</li><li>Benchmarked with Monte Carlo random positions and doubling-ratio tests (mean ratio for addAt 1.63 vs 2.10).</li><li>Its iterative deepCopy handled lists far larger than the course list's recursive copy, which overflowed the stack.</li></ul>
+        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button><button type="button" class="chip" data-tag="Benchmarks">Benchmarks</button></div>
+        <div class="row">
+          <a class="btn raised" href="https://github.com/kakurokan/FintList" target="_blank" rel="noopener">View repository…</a>
+          
+        </div>
+      </div>
+    </details>
+    <details>
+      <summary><svg class="px" data-px="folder"></svg>Maritime Navigation Simulator<span class="arrow" aria-hidden="true">&gt;</span></summary>
+      <div class="pbody">
+        <span class="path">C:\Projects\maritime-navigation</span>
+        <span class="pmeta">Route planning simulator · 3-person team · Apr – Jun 2026</span>
+        <p>A discrete-time maritime traffic simulator with a Swing GUI, built test-first.</p>
+        
+        <ul class="points"><li>Dijkstra route planning on a graph that contains no obstacle-crossing edges.</li><li>Design patterns: Strategy (pluggable routing algorithms), State (ship life cycle), Mediator (a control tower that resolves collisions), Iterator (on-time ship departures), Command (GUI actions).</li><li>Collision avoidance: ship areas are circles, priority goes by trip code, and the yielding ship waits and then resumes its route.</li><li>The GUI reads read-only simulation snapshots, so the interface stays decoupled from the navigation logic.</li></ul>
+        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="Swing">Swing</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button><button type="button" class="chip" data-tag="Design patterns">Design patterns</button></div>
+        <div class="row">
+          <a class="btn raised" href="https://github.com/kakurokan/Maritime_Navigation" target="_blank" rel="noopener">View repository…</a>
+          
+        </div>
+      </div>
+    </details>
+    <details>
+      <summary><svg class="px" data-px="folder"></svg>Hash Table &amp; Tree Library<span class="arrow" aria-hidden="true">&gt;</span></summary>
+      <div class="pbody">
+        <span class="path">C:\Projects\hashing-trees</span>
+        <span class="pmeta">Co-built with a classmate</span>
+        <p>Two non-linear data structures in Java 17, measured under their worst-case loads.</p>
+        <div class="stats"><span class="stat"><b>1.31</b><span>max/min depth ratio</span></span><span class="stat"><b>1.0</b><span>comparisons per hit</span></span><span class="stat"><b>0.0</b><span>comparisons per miss</span></span></div>
+        <ul class="points"><li>A weight-balanced tree whose searches rotate frequently used keys toward the root. After 100,000 sorted insertions (a plain BST's worst case), the max/min depth ratio stayed at 1.31.</li><li>A multi-level hash table with double hashing and a Bloom-filter-style marker per bucket. Across 10 million keys, lookups averaged 1.0 key comparisons on hits and 0.0 on misses.</li></ul>
+        <div class="chips"><button type="button" class="chip" data-tag="Java 17">Java 17</button><button type="button" class="chip" data-tag="Maven">Maven</button><button type="button" class="chip" data-tag="JUnit 5">JUnit 5</button><button type="button" class="chip" data-tag="GitHub Actions">GitHub Actions</button></div>
+        <div class="row">
+          <a class="btn raised" href="https://github.com/kakurokan/non-linear_and_hashing_data_structures" target="_blank" rel="noopener">View repository…</a>
+          
+        </div>
+      </div>
+    </details>
+    <details>
+      <summary><svg class="px" data-px="folder"></svg>BookSwipe<span class="arrow" aria-hidden="true">&gt;</span></summary>
+      <div class="pbody">
+        <span class="path">C:\Projects\bookswipe</span>
+        
+        <p>Tinder-style app for books: swipe on the ones you like and get recommendations. I'm building the backend in Java with Spring Boot; the React/TypeScript frontend is my teammate's.</p>
+        
+        
+        <div class="chips"><button type="button" class="chip" data-tag="Java">Java</button><button type="button" class="chip" data-tag="Spring Boot">Spring Boot</button><button type="button" class="chip" data-tag="REST">REST</button></div>
+        <div class="row">
+          <a class="btn raised" href="https://github.com/kakurokan/BookSwipe" target="_blank" rel="noopener">View repository…</a>
+          
+        </div>
+      </div>
+    </details><!--/prerender:projects--></div>
         <p class="tag-none" id="tag-none" hidden></p>
       </div>
     </article>
 
     <article class="card" id="more" aria-labelledby="h-more">
       <div class="inner">
-        <h2 id="h-more" data-t="more.title"></h2>
-        <ul class="more" id="more-list"></ul>
+        <h2 id="h-more" data-t="more.title">#More projects</h2>
+        <ul class="more" id="more-list"><!--prerender:more-->
+    <li><a href="https://github.com/kakurokan/DNSClient" target="_blank" rel="noopener">DNS Client from Scratch</a>
+      <span class="mtech" data-tech="Python · UDP sockets · Wireshark">Python · UDP sockets · Wireshark</span>
+      <span>Builds DNS query packets byte by byte.</span></li>
+    <li><a href="https://github.com/kakurokan/PuzzleAI-Collection" target="_blank" rel="noopener">PuzzleAI Collection</a>
+      <span class="mtech" data-tech="Java · Best-First search · JUnit 5">Java · Best-First search · JUnit 5</span>
+      <span>Ball Sort solver.</span></li>
+    <li><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">SWERC Team Notebook</a>
+      <span class="mtech" data-tech="C++">C++</span>
+      <span>The team's reference notebook of graph, DP, segment-tree, string and number-theory algorithms.</span></li><!--/prerender:more--></ul>
       </div>
     </article>
 
     <article class="card" id="contests" aria-labelledby="h-contests">
       <div class="inner">
-        <h2 id="h-contests" data-t="contests.title"></h2>
-        <p data-t="contests.text"></p>
+        <h2 id="h-contests" data-t="contests.title">#Contests</h2>
+        <p data-t="contests.text">Member of UAlg's ICPC team (C++/Java): graph, dynamic-programming and data-structure problems under time and memory limits.</p>
         <!-- progressão 0 → 4 na MIUP -->
-        <div class="climb" role="img" data-ta="aria-label:contests.aria">
+        <div class="climb" role="img" data-ta="aria-label:contests.aria" aria-label="MIUP problems solved: 0 in 2025, 4 in 2026">
           <div class="climb-row"><span>MIUP 2025<small>Aveiro</small></span><span class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>0</b></div>
           <div class="climb-row"><span>MIUP 2026<small>Évora</small></span><span class="blocks" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><b>4</b></div>
-          <span class="climb-note" data-t="contests.note"></span>
+          <span class="climb-note" data-t="contests.note">0 → 4 problems after a year of training · 13th of 20 teams</span>
         </div>
         <ul class="timeline">
-          <li><span data-th="contests.swerc"></span></li>
-          <li><span data-th="contests.notebook"></span></li>
+          <li><span data-th="contests.swerc"><b>SWERC 2025 (Lisbon):</b> represented UAlg at the ICPC Southwestern Europe regional.</span></li>
+          <li><span data-th="contests.notebook"><b><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">Team notebook</a>:</b> I maintain our C++ reference of graph, DP, segment-tree, string and number-theory algorithms.</span></li>
         </ul>
       </div>
     </article>
 
     <article class="card" id="education" aria-labelledby="h-education">
       <div class="inner">
-        <h2 id="h-education" data-t="education.title"></h2>
-        <div class="edu-head"><b data-t="education.degree"></b><span class="muted">Universidade do Algarve · <span data-t="education.dates"></span></span></div>
+        <h2 id="h-education" data-t="education.title">#Education</h2>
+        <div class="edu-head"><b data-t="education.degree">BSc Informatics Engineering</b><span class="muted">Universidade do Algarve · <span data-t="education.dates">Sep 2024 – Jun 2027</span></span></div>
         <div class="stats">
-          <span class="stat"><b>17/20</b><span data-t="education.overall"></span></span>
-          <span class="stat"><b>20/20</b><span data-t="education.ads"></span></span>
-          <span class="stat"><b>20/20</b><span data-t="education.oop"></span></span>
-          <span class="stat"><b>18/20</b><span data-t="education.se"></span></span>
+          <span class="stat"><b>17/20</b><span data-t="education.overall">overall grade</span></span>
+          <span class="stat"><b>20/20</b><span data-t="education.ads">Algorithms &amp; Data Structures</span></span>
+          <span class="stat"><b>20/20</b><span data-t="education.oop">Object-Oriented Programming</span></span>
+          <span class="stat"><b>18/20</b><span data-t="education.se">Software Engineering</span></span>
         </div>
         <ul class="timeline">
-          <li><span data-th="education.scholarship"></span></li>
-          <li><span data-th="education.trust"></span></li>
-          <li><span data-th="education.grant"></span></li>
+          <li><span data-th="education.scholarship"><b>SOUAlg2.0</b> Academic Merit & Success Scholarship (top 1st-year cohort).</span></li>
+          <li><span data-th="education.trust"><b>GT TRUST-Lab</b> research member: functional programming (OCaml) and arbitrary-precision arithmetic.</span></li>
+          <li><span data-th="education.grant"><b>Research grant, from Jan 2027:</b> awarded by the department director for my grades and competition involvement. Mathematical computation in OCaml, starting with prime numbers.</span></li>
         </ul>
       </div>
     </article>
@@ -600,7 +263,7 @@
         <h2 id="h-terminal">#Prompt</h2>
         <div class="term sunken" id="term">
           <pre id="term-out"></pre>
-          <label class="line"><span>C:\LEO&gt;</span><input id="term-in" autocomplete="off" autocapitalize="off" spellcheck="false" data-ta="aria-label:term.input"></label>
+          <label class="line"><span>C:\LEO&gt;</span><input id="term-in" autocomplete="off" autocapitalize="off" spellcheck="false" data-ta="aria-label:term.input" aria-label="Command"></label>
         </div>
       </div>
     </article>
@@ -609,27 +272,27 @@
       <div class="inner">
         <h2 id="h-stack">#Stack</h2>
         <div class="stack">
-          <div><h3 data-t="stack.languages"></h3><div class="chips"><span class="chip">Java</span><span class="chip">C++</span><span class="chip">Python</span><span class="chip">C</span><span class="chip">SQL</span><span class="chip">OCaml</span><span class="chip">TypeScript/JavaScript</span></div></div>
-          <div><h3 data-t="stack.backend"></h3><div class="chips"><span class="chip">REST APIs</span><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">PostgreSQL</span><span class="chip">JWT</span><span class="chip">HMAC signing</span><span class="chip">Spring Boot</span><span class="chip">Java Swing</span></div></div>
-          <div><h3 data-t="stack.infra"></h3><div class="chips"><span class="chip">Docker</span><span class="chip">Docker Compose</span><span class="chip">Linux</span><span class="chip">Prometheus</span><span class="chip">nginx</span><span class="chip">GitHub Actions CI/CD</span><span class="chip">Alembic</span></div></div>
-          <div><h3 data-t="stack.practices"></h3><div class="chips"><span class="chip">TDD</span><span class="chip">JUnit 5</span><span class="chip">pytest</span><span class="chip">Code review</span><span class="chip">Git</span><span class="chip">Maven</span><span class="chip">Agile/Scrum</span><span class="chip">Domain-Driven Design</span><span class="chip">OOP</span><span class="chip">Design patterns</span><span class="chip" data-t="stack.ai"></span></div></div>
-          <div><h3 data-t="stack.fundamentals"></h3><div class="chips"><span class="chip" data-t="stack.algo"></span><span class="chip">Benchmarking</span><span class="chip">Cache locality</span><span class="chip">DNS</span><span class="chip">UDP sockets</span><span class="chip">Wireshark</span></div></div>
-          <div><h3 data-t="stack.spoken"></h3><div class="chips"><span class="chip" data-t="stack.pt"></span><span class="chip" data-t="stack.en"></span><span class="chip" data-t="stack.es"></span></div></div>
-          <div><h3 data-t="stack.certs"></h3><div class="chips certs"><span class="chip">Beginner's TypeScript (Total TypeScript, 2026)</span><span class="chip">Linux Unhatched</span><span class="chip">Spring Boot for Beginners</span><span class="chip">Java (Basic)</span></div></div>
+          <div><h3 data-t="stack.languages">Languages</h3><div class="chips"><span class="chip">Java</span><span class="chip">C++</span><span class="chip">Python</span><span class="chip">C</span><span class="chip">SQL</span><span class="chip">OCaml</span><span class="chip">TypeScript/JavaScript</span></div></div>
+          <div><h3 data-t="stack.backend">Backend &amp; data</h3><div class="chips"><span class="chip">REST APIs</span><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">PostgreSQL</span><span class="chip">JWT</span><span class="chip">HMAC signing</span><span class="chip">Spring Boot</span><span class="chip">Java Swing</span></div></div>
+          <div><h3 data-t="stack.infra">Infra &amp; CI</h3><div class="chips"><span class="chip">Docker</span><span class="chip">Docker Compose</span><span class="chip">Linux</span><span class="chip">Prometheus</span><span class="chip">nginx</span><span class="chip">GitHub Actions CI/CD</span><span class="chip">Alembic</span></div></div>
+          <div><h3 data-t="stack.practices">Practices</h3><div class="chips"><span class="chip">TDD</span><span class="chip">JUnit 5</span><span class="chip">pytest</span><span class="chip">Code review</span><span class="chip">Git</span><span class="chip">Maven</span><span class="chip">Agile/Scrum</span><span class="chip">Domain-Driven Design</span><span class="chip">OOP</span><span class="chip">Design patterns</span><span class="chip" data-t="stack.ai">AI-assisted dev (Claude Code)</span></div></div>
+          <div><h3 data-t="stack.fundamentals">Fundamentals</h3><div class="chips"><span class="chip" data-t="stack.algo">Algorithms &amp; complexity</span><span class="chip">Benchmarking</span><span class="chip">Cache locality</span><span class="chip">DNS</span><span class="chip">UDP sockets</span><span class="chip">Wireshark</span></div></div>
+          <div><h3 data-t="stack.spoken">Spoken</h3><div class="chips"><span class="chip" data-t="stack.pt">Portuguese (native)</span><span class="chip" data-t="stack.en">English (professional)</span><span class="chip" data-t="stack.es">Spanish (basic)</span></div></div>
+          <div><h3 data-t="stack.certs">Certifications</h3><div class="chips certs"><span class="chip">Beginner's TypeScript (Total TypeScript, 2026)</span><span class="chip">Linux Unhatched</span><span class="chip">Spring Boot for Beginners</span><span class="chip">Java (Basic)</span></div></div>
         </div>
       </div>
     </article>
 
     <article class="card" id="path" aria-labelledby="h-path">
       <div class="inner">
-        <h2 id="h-path" data-t="path.title"></h2>
+        <h2 id="h-path" data-t="path.title">#Journey</h2>
         <ul class="timeline">
-          <li><span data-th="path.1"></span></li>
-          <li><span data-th="path.2"></span></li>
-          <li><span data-th="path.3"></span></li>
-          <li><span data-th="path.4"></span></li>
-          <li><span data-th="path.5"></span></li>
-          <li class="now"><span data-th="path.6"></span></li>
+          <li><span data-th="path.1"><b>Sep 2024:</b> started the BSc in Informatics Engineering at UAlg. SOUAlg2.0 Academic Merit & Success Scholarship.</span></li>
+          <li><span data-th="path.2"><b>2024–26:</b> summers as a server in Albufeira (Luna Diamante, La Nostra Pizza), serving guests in English, Portuguese and Spanish.</span></li>
+          <li><span data-th="path.3"><b>Oct 2025:</b> joined UAlg’s ICPC team. SWERC 2025 in Lisbon; MIUP 2026 in Évora, 13th of 20 teams with 4 problems solved (up from 0 in 2025).</span></li>
+          <li><span data-th="path.4"><b>Jun 2026 – now:</b> backend developer on the ENEI 2027 platform (FastAPI, PostgreSQL). Member of GT TRUST-Lab (OCaml).</span></li>
+          <li><span data-th="path.5"><b>Jan 2027:</b> research grant from the department director: mathematical computation in OCaml, starting with prime numbers.</span></li>
+          <li class="now"><span data-th="path.6"><b>Jul 2027:</b> graduating and available for my first job as a backend developer.</span></li>
         </ul>
       </div>
     </article>
@@ -642,38 +305,38 @@
             <b>Léo Souza</b>
             <span>Software Engineer · Java, Python · Faro, Portugal</span>
             <hr>
-            <h4 data-t="cv.education"></h4><span data-t="cv.educationText"></span>
-            <h4 data-t="cv.experience"></h4><span data-t="cv.experienceText"></span>
-            <h4 data-t="cv.projects"></h4><span data-t="cv.projectsText"></span>
-            <h4 data-t="cv.skills"></h4><span>Java, Python, FastAPI, Spring Boot, PostgreSQL, Docker, GitHub Actions</span>
+            <h4 data-t="cv.education">Education</h4><span data-t="cv.educationText">BSc Informatics Engineering, UAlg — 17/20 (Jun 2027)</span>
+            <h4 data-t="cv.experience">Experience</h4><span data-t="cv.experienceText">Volunteer backend developer, ENEI 2027 — FastAPI, PostgreSQL, CI/CD</span>
+            <h4 data-t="cv.projects">Projects</h4><span data-t="cv.projectsText">FintList · Maritime Navigation Simulator · Hash Table &amp; Tree Library</span>
+            <h4 data-t="cv.skills">Skills</h4><span>Java, Python, FastAPI, Spring Boot, PostgreSQL, Docker, GitHub Actions</span>
           </div>
         </div>
         <!-- Põe cv-en.pdf e cv-pt.pdf na mesma pasta que este ficheiro (o botão escolhe conforme a língua) -->
         <div class="row">
-          <a class="btn raised" data-ta="href:cv.file" download><svg class="px" data-px="cv"></svg><span data-t="cv.download"></span></a>
-          <a class="btn raised" data-ta="href:cv.file" target="_blank" rel="noopener" data-t="cv.open"></a>
+          <a class="btn raised" data-ta="href:cv.file" download href="cv-en.pdf"><svg class="px" data-px="cv"></svg><span data-t="cv.download">Download</span></a>
+          <a class="btn raised" data-ta="href:cv.file" target="_blank" rel="noopener" data-t="cv.open" href="cv-en.pdf">Open</a>
         </div>
       </div>
     </article>
 
     <article class="card" id="contact" aria-labelledby="h-contact">
       <div class="inner">
-        <h2 id="h-contact" data-t="contact.title"></h2>
-        <p data-t="contact.text"></p>
+        <h2 id="h-contact" data-t="contact.title">#Hire me</h2>
+        <p data-t="contact.text">Looking for a junior backend role (Java or Python) from July 2027. If you hire juniors, tell me what a junior's first project looks like, and I'll tell you how I'd approach it.</p>
         <div class="contact-list">
           <a href="mailto:leokakali7@gmail.com">Email <small>leokakali7@gmail.com</small></a>
           <a href="https://www.linkedin.com/in/leo-kakali" target="_blank" rel="noopener">LinkedIn <small>linkedin.com/in/leo-kakali</small></a>
           <a href="https://github.com/kakurokan" target="_blank" rel="noopener">GitHub <small>github.com/kakurokan</small></a>
         </div>
-        <div class="footer-note"><span data-t="contact.based"></span><span>© 2026 Léo Souza</span>
+        <div class="footer-note"><span data-t="contact.based">Based in Faro, Portugal · Available from July 2027</span><span>© 2026 Léo Souza</span>
         </div>
       </div>
     </article>
 
     <article class="card" id="drag" aria-labelledby="h-drag">
       <div class="inner">
-        <h2 id="h-drag" data-t="drag.title"></h2>
-        <p data-th="drag.text"></p>
+        <h2 id="h-drag" data-t="drag.title">#Drag</h2>
+        <p data-th="drag.text">Grab a card by its bar and drop it on another one to swap places. The order is saved. <span class="muted">(On a computer.)</span></p>
       </div>
     </article>
   </main>
@@ -682,31 +345,31 @@
 <div class="backdrop" id="backdrop" hidden></div>
 
 <!-- ================= MENU INICIAR ================= -->
-<div class="startmenu raised" id="startmenu" role="menu" data-ta="aria-label:start.menu" hidden>
+<div class="startmenu raised" id="startmenu" role="menu" data-ta="aria-label:start.menu" hidden aria-label="Start menu">
   <div class="sidebar" aria-hidden="true"><b>Léo<i>Souza</i></b></div>
   <ul>
-    <li><a role="menuitem" href="#about"><svg class="px" data-px="note"></svg><span data-t="start.about"></span></a></li>
-    <li><a role="menuitem" href="#projects"><svg class="px" data-px="folder"></svg><span data-t="start.projects"></span></a></li>
-    <li><a role="menuitem" href="#terminal"><svg class="px" data-px="monitor"></svg><span data-t="start.prompt"></span></a></li>
+    <li><a role="menuitem" href="#about"><svg class="px" data-px="note"></svg><span data-t="start.about">About me</span></a></li>
+    <li><a role="menuitem" href="#projects"><svg class="px" data-px="folder"></svg><span data-t="start.projects">Projects</span></a></li>
+    <li><a role="menuitem" href="#terminal"><svg class="px" data-px="monitor"></svg><span data-t="start.prompt">Command prompt</span></a></li>
     <li><a role="menuitem" href="#cv"><svg class="px" data-px="cv"></svg>CV.pdf</a></li>
-    <li><a role="menuitem" href="#contact"><svg class="px" data-px="mail"></svg><span data-t="start.contact"></span></a></li>
+    <li><a role="menuitem" href="#contact"><svg class="px" data-px="mail"></svg><span data-t="start.contact">Hire me…</span></a></li>
     <li><hr></li>
-    <li><button role="menuitem" id="next-theme"><svg class="px" data-px="sun"></svg><span data-t="start.theme"></span></button></li>
-    <li><button role="menuitem" id="menu-lang"><svg class="px" data-px="note"></svg><span data-t="start.lang"></span></button></li>
-    <li><button role="menuitem" id="reset"><svg class="px" data-px="power"></svg><span data-t="start.reset"></span></button></li>
+    <li><button role="menuitem" id="next-theme"><svg class="px" data-px="sun"></svg><span data-t="start.theme">Change theme</span></button></li>
+    <li><button role="menuitem" id="menu-lang"><svg class="px" data-px="note"></svg><span data-t="start.lang">Português</span></button></li>
+    <li><button role="menuitem" id="reset"><svg class="px" data-px="power"></svg><span data-t="start.reset">Reset desktop</span></button></li>
   </ul>
 </div>
 
 <!-- ================= BARRA DE TAREFAS ================= -->
 <footer class="taskbar raised">
-  <button class="btn raised start" id="start" aria-haspopup="menu" aria-expanded="false" aria-controls="startmenu"><svg class="px" data-px="sun"></svg><span data-t="start.button"></span></button>
-  <div class="tasks" id="tasks" data-ta="aria-label:tasks.label"></div>
+  <button class="btn raised start" id="start" aria-haspopup="menu" aria-expanded="false" aria-controls="startmenu"><svg class="px" data-px="sun"></svg><span data-t="start.button">Start</span></button>
+  <div class="tasks" id="tasks" data-ta="aria-label:tasks.label" aria-label="Cards"></div>
   <div class="tray sunken">
     <div class="lang-switch" role="group" aria-label="Language / Língua">
       <button class="btn raised lang-btn" data-lang="en" lang="en" aria-label="English">EN</button>
       <button class="btn raised lang-btn" data-lang="pt" lang="pt" aria-label="Português">PT</button>
     </div>
-    <span class="avail2" data-ta="title:avail.long"><span class="led" aria-hidden="true"></span><span data-t="avail.short"></span></span>
+    <span class="avail2" data-ta="title:avail.long" title="Available from July 2027"><span class="led" aria-hidden="true"></span><span data-t="avail.short">Available Jul 2027</span></span>
     <time id="clock"></time>
   </div>
 </footer>
@@ -722,1188 +385,6 @@
 <div class="cat" id="cat" aria-hidden="true" hidden><svg viewBox="0 0 16 12"></svg><span class="zzz">z</span><span class="grr" aria-hidden="true">#!</span><span class="nm">koji</span><span class="meow" hidden></span></div>
 <div class="crt" aria-hidden="true"></div>
 
-<script>
-/* ================== TEXTOS (EN / PT) — edita aqui ================== */
-const I18N = {
-  en: {
-    'lang.code': 'EN', 'lang.switch': 'Mudar para português',
-    'meta.description': 'Léo Souza — software engineer (Java, Python), backend developer on ENEI 2027. Informatics Engineering at the University of the Algarve, 17/20. Available from July 2027.',
-    'nav.label': 'Shortcuts', 'nav.about': 'About', 'nav.projects': 'Projects', 'nav.prompt': 'Prompt', 'nav.path': 'Journey', 'nav.stack': 'Stack', 'nav.contact': 'Contact',
-    'search.label': 'Search the site', 'search.placeholder': 'Search…', 'search.button': 'Search',
-    'search.found': n => `${n} card(s) found`, 'search.none': 'Nothing found :(',
-    'avail.long': 'Available from July 2027', 'avail.short': 'Available Jul 2027', 'role': 'Software engineer · Java & Python',
-    'card.welcome': 'Welcome', 'card.now': 'Now', 'card.themes': 'Themes', 'card.about': 'About', 'card.projects': 'Projects', 'card.terminal': 'Prompt',
-    'card.stack': 'Stack', 'card.path': 'Journey', 'card.more': 'More', 'card.contests': 'Contests', 'card.education': 'Education', 'card.cv': 'CV', 'card.contact': 'Contact', 'card.drag': 'Drag',
-    'ctl.min': 'Minimize', 'ctl.restore': 'Restore', 'ctl.max': 'Expand', 'ctl.close': 'Close',
-    'welcome.title': '#Welcome',
-    'welcome.text': "I'm <b>Léo Souza</b>, a software engineer (Java, Python) finishing my Informatics Engineering degree at the University of the Algarve. Measuring, then finding out why, is how I like to work.",
-    'welcome.contact': 'contact',
-    'now.title': '#Now',
-    'now.text': 'Backend team for ENEI 2027, the national informatics students’ conference coming to Faro. The ticketing platform goes live on November 2!',
-    'themes.title': '#Themes', 'themes.text': 'Pick a theme to change the look of the site. Your choice is saved.',
-    'themes.rosa': 'pink', 'themes.menta': 'mint', 'themes.noite': 'night',
-    'themes.gameboy.aria': 'Game Boy theme', 'themes.vapor.aria': 'Vaporwave theme', 'themes.rosa.aria': 'Pink theme', 'themes.menta.aria': 'Mint theme', 'themes.noite.aria': 'Night theme',
-    'about.title': '#About me',
-    'about.p1': 'Informatics Engineering student at UAlg: 17/20 overall, 20/20 in Algorithms & Data Structures and in Object-Oriented Programming, 18/20 in Software Engineering. Graduating in June 2027 and looking for a junior backend role from July 2027.',
-    'about.p2': "Java is where I'm strongest, and right now I ship Python (FastAPI) in production on ENEI 2027. I like test-first code, CI that catches things before deploy, and benchmarks that explain where the time goes. Competitive programming taught me to hunt for the edge case before it bites.",
-    'projects.title': '#Projects', 'projects.repo': 'View repository…', 'projects.website': 'Website', 'projects.dir': 'Projects',
-    'more.title': '#More projects',
-    'tags.clear': 'Show all', 'tags.filter': (tag, n, m) => `${n} project(s) with ${tag}` + (m ? ` · +${m} in More projects` : ''), 'tags.none': tag => `No main project uses ${tag} yet, but it's in my stack!`, 'tags.hint': 'Click a tag to see the projects that use it.',
-    'cat.angry': 'hss!', 'cat.huff': 'hmph.',
-    'contests.title': '#Contests',
-    'contests.text': "Member of UAlg's ICPC team (C++/Java): graph, dynamic-programming and data-structure problems under time and memory limits.",
-    'contests.aria': 'MIUP problems solved: 0 in 2025, 4 in 2026',
-    'contests.note': '0 → 4 problems after a year of training · 13th of 20 teams',
-    'contests.swerc': '<b>SWERC 2025 (Lisbon):</b> represented UAlg at the ICPC Southwestern Europe regional.',
-    'contests.notebook': '<b><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">Team notebook</a>:</b> I maintain our C++ reference of graph, DP, segment-tree, string and number-theory algorithms.',
-    'education.title': '#Education', 'education.degree': 'BSc Informatics Engineering', 'education.dates': 'Sep 2024 – Jun 2027',
-    'education.overall': 'overall grade', 'education.ads': 'Algorithms & Data Structures', 'education.oop': 'Object-Oriented Programming', 'education.se': 'Software Engineering',
-    'education.scholarship': '<b>SOUAlg2.0</b> Academic Merit & Success Scholarship (top 1st-year cohort).',
-    'education.trust': '<b>GT TRUST-Lab</b> research member: functional programming (OCaml) and arbitrary-precision arithmetic.',
-    'education.grant': '<b>Research grant, from Jan 2027:</b> awarded by the department director for my grades and competition involvement. Mathematical computation in OCaml, starting with prime numbers.',
-    'stack.fundamentals': 'Fundamentals', 'stack.algo': 'Algorithms & complexity',
-
-    'term.input': 'Command',
-    'stack.languages': 'Languages', 'stack.backend': 'Backend & data', 'stack.infra': 'Infra & CI', 'stack.practices': 'Practices', 'stack.spoken': 'Spoken', 'stack.certs': 'Certifications',
-    'stack.pt': 'Portuguese (native)', 'stack.en': 'English (professional)', 'stack.es': 'Spanish (basic)', 'stack.ai': 'AI-assisted dev (Claude Code)',
-    'path.title': '#Journey',
-    'path.1': '<b>Sep 2024:</b> started the BSc in Informatics Engineering at UAlg. SOUAlg2.0 Academic Merit & Success Scholarship.',
-    'path.2': '<b>2024–26:</b> summers as a server in Albufeira (Luna Diamante, La Nostra Pizza), serving guests in English, Portuguese and Spanish.',
-    'path.3': '<b>Oct 2025:</b> joined UAlg’s ICPC team. SWERC 2025 in Lisbon; MIUP 2026 in Évora, 13th of 20 teams with 4 problems solved (up from 0 in 2025).',
-    'path.4': '<b>Jun 2026 – now:</b> backend developer on the ENEI 2027 platform (FastAPI, PostgreSQL). Member of GT TRUST-Lab (OCaml).',
-    'path.5': '<b>Jan 2027:</b> research grant from the department director: mathematical computation in OCaml, starting with prime numbers.',
-    'path.6': '<b>Jul 2027:</b> graduating and available for my first job as a backend developer.',
-    'cv.education': 'Education', 'cv.educationText': 'BSc Informatics Engineering, UAlg — 17/20 (Jun 2027)',
-    'cv.experience': 'Experience', 'cv.experienceText': 'Volunteer backend developer, ENEI 2027 — FastAPI, PostgreSQL, CI/CD',
-    'cv.projects': 'Projects', 'cv.projectsText': 'FintList · Maritime Navigation Simulator · Hash Table & Tree Library',
-    'cv.skills': 'Skills', 'cv.download': 'Download', 'cv.open': 'Open', 'cv.file': 'cv-en.pdf',
-    'contact.based': 'Based in Faro, Portugal · Available from July 2027', 'contact.title': '#Hire me', 'contact.text': "Looking for a junior backend role (Java or Python) from July 2027. If you hire juniors, tell me what a junior's first project looks like, and I'll tell you how I'd approach it.",
-    'drag.title': '#Drag',
-    'drag.text': 'Grab a card by its bar and drop it on another one to swap places. The order is saved. <span class="muted">(On a computer.)</span>',
-    'mode.simple': 'Recruiter? Simple version', 'mode.retro': 'Retro version',
-    'start.menu': 'Start menu', 'start.button': 'Start', 'start.about': 'About me', 'start.projects': 'Projects', 'start.prompt': 'Command prompt',
-    'start.contact': 'Hire me…', 'start.theme': 'Change theme', 'start.lang': 'Português', 'start.reset': 'Reset desktop',
-    'tasks.label': 'Cards'
-  },
-  pt: {
-    'lang.code': 'PT', 'lang.switch': 'Switch to English',
-    'meta.description': 'Léo Souza — engenheiro de software (Java, Python), backend do ENEI 2027. Engenharia Informática na Universidade do Algarve, 17/20. Disponível a partir de julho de 2027.',
-    'nav.label': 'Atalhos', 'nav.about': 'Sobre', 'nav.projects': 'Projetos', 'nav.prompt': 'Prompt', 'nav.path': 'Percurso', 'nav.stack': 'Stack', 'nav.contact': 'Contacto',
-    'search.label': 'Pesquisar no site', 'search.placeholder': 'Pesquisar…', 'search.button': 'Pesquisar',
-    'search.found': n => `${n} cartão(ões) encontrado(s)`, 'search.none': 'Nada encontrado :(',
-    'avail.long': 'Disponível a partir de julho de 2027', 'avail.short': 'Disponível jul 2027', 'role': 'Engenheiro de software · Java e Python',
-    'card.welcome': 'Bem-vindo', 'card.now': 'Agora', 'card.themes': 'Temas', 'card.about': 'Sobre', 'card.projects': 'Projetos', 'card.terminal': 'Prompt',
-    'card.stack': 'Stack', 'card.path': 'Percurso', 'card.more': 'Mais', 'card.contests': 'Competições', 'card.education': 'Formação', 'card.cv': 'CV', 'card.contact': 'Contacto', 'card.drag': 'Arrasta',
-    'ctl.min': 'Minimizar', 'ctl.restore': 'Restaurar', 'ctl.max': 'Expandir', 'ctl.close': 'Fechar',
-    'welcome.title': '#Bem-vindo',
-    'welcome.text': 'Sou o <b>Léo Souza</b>, engenheiro de software (Java, Python) a terminar a licenciatura em Engenharia Informática na Universidade do Algarve. Medir e depois perceber porquê é a minha forma de trabalhar.',
-    'welcome.contact': 'contacto',
-    'now.title': '#Agora',
-    'now.text': 'Na equipa de backend do ENEI 2027, o encontro nacional de estudantes de informática que vem a Faro. A plataforma de bilhetes vai para o ar a 2 de novembro!',
-    'themes.title': '#Temas', 'themes.text': 'Escolhe um tema para mudar o visual do site. A escolha fica guardada.',
-    'themes.rosa': 'rosa', 'themes.menta': 'menta', 'themes.noite': 'noite',
-    'themes.gameboy.aria': 'Tema Game Boy', 'themes.vapor.aria': 'Tema vaporwave', 'themes.rosa.aria': 'Tema rosa', 'themes.menta.aria': 'Tema menta', 'themes.noite.aria': 'Tema noite',
-    'about.title': '#Sobre mim',
-    'about.p1': 'Estudante de Engenharia Informática na UAlg: média 17/20, 20/20 em Algoritmos e Estruturas de Dados e em Programação Orientada a Objetos, 18/20 em Engenharia de Software. Termino em junho de 2027 e procuro uma vaga júnior de backend a partir de julho de 2027.',
-    'about.p2': 'É em Java que sou mais forte, e neste momento ponho Python (FastAPI) em produção no ENEI 2027. Gosto de código escrito com testes primeiro, de CI que apanha os problemas antes do deploy e de benchmarks que explicam para onde vai o tempo. A programação competitiva ensinou-me a procurar o caso-limite antes que ele me apanhe.',
-    'projects.title': '#Projetos', 'projects.repo': 'Ver repositório…', 'projects.website': 'Site', 'projects.dir': 'Projetos',
-    'more.title': '#Mais projetos',
-    'tags.clear': 'Mostrar todos', 'tags.filter': (tag, n, m) => `${n} projeto(s) com ${tag}` + (m ? ` · +${m} em Mais projetos` : ''), 'tags.none': tag => `Ainda nenhum projeto principal usa ${tag}, mas está na minha stack!`, 'tags.hint': 'Clica numa tag para ver os projetos que a usam.',
-    'cat.angry': 'hss!', 'cat.huff': 'hmpf.',
-    'contests.title': '#Competições',
-    'contests.text': 'Membro da equipa ICPC da UAlg (C++/Java): problemas de grafos, programação dinâmica e estruturas de dados com limites de tempo e memória.',
-    'contests.aria': 'Problemas resolvidos na MIUP: 0 em 2025, 4 em 2026',
-    'contests.note': '0 → 4 problemas depois de um ano de treino · 13.º de 20 equipas',
-    'contests.swerc': '<b>SWERC 2025 (Lisboa):</b> representei a UAlg na regional ICPC do Sudoeste da Europa.',
-    'contests.notebook': '<b><a href="https://github.com/kakurokan/SwercNotebookUALG" target="_blank" rel="noopener">Caderno da equipa</a>:</b> mantenho a nossa referência C++ de grafos, DP, segment trees, strings e teoria dos números.',
-    'education.title': '#Formação', 'education.degree': 'Licenciatura em Engenharia Informática', 'education.dates': 'set 2024 – jun 2027',
-    'education.overall': 'média', 'education.ads': 'Algoritmos e Estruturas de Dados', 'education.oop': 'Programação Orientada a Objetos', 'education.se': 'Engenharia de Software',
-    'education.scholarship': '<b>SOUAlg2.0</b>: Bolsa de Mérito e Sucesso Académico (melhores alunos do 1.º ano).',
-    'education.trust': '<b>GT TRUST-Lab</b>: membro de investigação em programação funcional (OCaml) e aritmética de precisão arbitrária.',
-    'education.grant': '<b>Bolsa de investigação, a partir de jan 2027:</b> atribuída pelo diretor do departamento pelas notas e pelo envolvimento em competições. Computação matemática em OCaml, a começar pelos números primos.',
-    'stack.fundamentals': 'Fundamentos', 'stack.algo': 'Algoritmos e complexidade',
-
-    'term.input': 'Comando',
-    'stack.languages': 'Linguagens', 'stack.backend': 'Backend e dados', 'stack.infra': 'Infra e CI', 'stack.practices': 'Práticas', 'stack.spoken': 'Línguas', 'stack.certs': 'Certificações',
-    'stack.pt': 'Português (nativo)', 'stack.en': 'Inglês (profissional)', 'stack.es': 'Espanhol (básico)', 'stack.ai': 'Dev assistido por IA (Claude Code)',
-    'path.title': '#Percurso',
-    'path.1': '<b>set 2024:</b> início da licenciatura em Engenharia Informática na UAlg. Bolsa de Mérito Académico SOUAlg2.0.',
-    'path.2': '<b>2024–26:</b> verões a servir à mesa em Albufeira (Luna Diamante, La Nostra Pizza), a atender clientes em inglês, português e espanhol.',
-    'path.3': '<b>out 2025:</b> entrada na equipa ICPC da UAlg. SWERC 2025 em Lisboa; MIUP 2026 em Évora, 13.º de 20 equipas com 4 problemas resolvidos (contra 0 em 2025).',
-    'path.4': '<b>jun 2026 – agora:</b> backend developer na plataforma do ENEI 2027 (FastAPI, PostgreSQL). Membro do GT TRUST-Lab (OCaml).',
-    'path.5': '<b>jan 2027:</b> bolsa de investigação atribuída pelo diretor do departamento: computação matemática em OCaml, a começar pelos números primos.',
-    'path.6': '<b>jul 2027:</b> fim da licenciatura e disponível para o primeiro emprego como backend developer.',
-    'cv.education': 'Formação', 'cv.educationText': 'Lic. Engenharia Informática, UAlg — média 17/20 (jun 2027)',
-    'cv.experience': 'Experiência', 'cv.experienceText': 'Backend developer voluntário, ENEI 2027 — FastAPI, PostgreSQL, CI/CD',
-    'cv.projects': 'Projetos', 'cv.projectsText': 'FintList · Simulador de Navegação Marítima · Hash Tables e Árvores',
-    'cv.skills': 'Competências', 'cv.download': 'Descarregar', 'cv.open': 'Abrir',
-    'cv.file': 'cv-en.pdf',   // TODO: quando tiveres o CV em português, põe cv-pt.pdf na pasta e muda aqui
-    'contact.based': 'Em Faro, Portugal · Disponível a partir de julho de 2027', 'contact.title': '#Contrata-me', 'contact.text': 'À procura de uma vaga júnior de backend (Java ou Python) a partir de julho de 2027. Se contratas juniores, conta-me como é o primeiro projeto de um júnior, e eu digo-te como o abordaria.',
-    'drag.title': '#Arrasta',
-    'drag.text': 'Agarra um cartão pela barra e larga-o em cima de outro para trocarem de lugar. A ordem fica guardada. <span class="muted">(Num computador.)</span>',
-    'mode.simple': 'Recrutador? Versão simples', 'mode.retro': 'Versão retro',
-    'start.menu': 'Menu Iniciar', 'start.button': 'Iniciar', 'start.about': 'Sobre mim', 'start.projects': 'Projetos', 'start.prompt': 'Prompt de comando',
-    'start.contact': 'Contrata-me…', 'start.theme': 'Mudar de tema', 'start.lang': 'English', 'start.reset': 'Repor ambiente',
-    'tasks.label': 'Cartões'
-  }
-};
-
-const PROJECTS = [
-  { slug: 'enei-2027', name: { en: 'ENEI 2027 Platform', pt: 'Plataforma ENEI 2027' },
-    meta: { en: 'Volunteer backend developer · Jun 2026 – present · hybrid', pt: 'Backend developer voluntário · jun 2026 – presente · híbrido' },
-    desc: { en: 'Backend of the website and ticketing API for ENEI, the National Gathering of Informatics Students, coming to Faro. Domain-driven FastAPI, SQLAlchemy 2 and PostgreSQL.',
-            pt: 'Backend do site e da API de bilhetes do ENEI, o Encontro Nacional de Estudantes de Informática, que vem a Faro. FastAPI com Domain-Driven Design, SQLAlchemy 2 e PostgreSQL.' },
-    stats: [ ['12', { en: 'PRs merged', pt: 'PRs aceites' }], ['13', { en: 'PRs reviewed', pt: 'PRs revistos' }],
-             ['500+', { en: 'test suite', pt: 'testes na suite' }], ['4', { en: 'migrations', pt: 'migrações' }] ],
-    points: [
-      { en: 'Built the authentication and account flows: JWT auth middleware, password recovery, remember-me, terms acceptance and an admin-promotion CLI.',
-        pt: 'Fiz a autenticação e as contas: middleware JWT, recuperação de password, remember-me, aceitação de termos e uma CLI para promover administradores.' },
-      { en: 'Designed the HMAC-signed, PII-free ticket QR payload, so a ticket can be verified without exposing personal data.',
-        pt: 'Desenhei o QR dos bilhetes assinado com HMAC e sem dados pessoais, para validar um bilhete sem expor quem o comprou.' },
-      { en: 'Wrote 25+ of the 500+ tests. Every change passes GitHub Actions CI (lint, tests, smoke test) before deploy.',
-        pt: 'Escrevi mais de 25 dos mais de 500 testes. Cada alteração passa no CI do GitHub Actions (lint, testes, smoke test) antes do deploy.' },
-      { en: 'Worked on an 8-service Docker Compose stack with Prometheus monitoring; my 4 Alembic migrations are CI-checked as reversible and drift-free.',
-        pt: 'Trabalho numa stack Docker Compose de 8 serviços monitorizada com Prometheus; as minhas 4 migrações Alembic são validadas em CI como reversíveis e sem drift.' }
-    ],
-    tags: ['Python', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'DDD', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
-    links: [ ['website', 'https://www.eneifaro.pt/'] ],
-    repo: 'https://github.com/Dep-tech-coenei-faro-27/event-site' },
-  { slug: 'fintlist', name: 'FintList',
-    meta: { en: 'High-performance int list · co-developed with a classmate', pt: 'Lista de int de alto desempenho · feita com um colega' },
-    desc: { en: 'A doubly linked list for primitive int stored in three parallel arrays instead of node objects, which cuts allocations and garbage-collector pressure.',
-            pt: 'Uma lista duplamente ligada para int primitivos guardada em três arrays paralelos em vez de objetos nó, o que corta alocações e pressão no garbage collector.' },
-    stats: [ ['~8×', { en: 'faster addAt/removeAt', pt: 'mais rápida em addAt/removeAt' }], ['~10M', { en: 'elements', pt: 'elementos' }],
-             ['1.63', { en: 'doubling ratio (vs 2.10)', pt: 'doubling ratio (vs 2,10)' }] ],
-    points: [
-      { en: 'Reuses free slots, caches the last access and starts each traversal from the head, the tail or the last accessed node, whichever is closer.',
-        pt: 'Reutiliza posições livres, guarda o último acesso e começa cada percurso pela cabeça, pela cauda ou pelo último nó acedido, o que estiver mais perto.' },
-      { en: "About 8× faster addAt/removeAt than the course's linked list at ~10M elements. Both are O(n): the gain comes from smaller constant factors, not from a complexity change.",
-        pt: 'Cerca de 8× mais rápida em addAt/removeAt do que a lista ligada da cadeira com ~10M elementos. As duas são O(n): o ganho vem de constantes menores, não de mudar a complexidade.' },
-      { en: 'Benchmarked with Monte Carlo random positions and doubling-ratio tests (mean ratio for addAt 1.63 vs 2.10).',
-        pt: 'Medida com posições aleatórias Monte Carlo e testes de doubling ratio (razão média em addAt de 1,63 contra 2,10).' },
-      { en: "Its iterative deepCopy handled lists far larger than the course list's recursive copy, which overflowed the stack.",
-        pt: 'O deepCopy iterativo aguentou listas muito maiores do que a cópia recursiva da lista da cadeira, que rebentava a stack.' }
-    ],
-    tags: ['Java', 'Maven', 'JUnit 5', 'GitHub Actions', { en: 'Benchmarks', pt: 'Benchmarks' }],
-    repo: 'https://github.com/kakurokan/FintList' },
-  { slug: 'maritime-navigation', name: { en: 'Maritime Navigation Simulator', pt: 'Simulador de Navegação Marítima' },
-    meta: { en: 'Route planning simulator · 3-person team · Apr – Jun 2026', pt: 'Simulador com planeamento de rotas · equipa de 3 · abr – jun 2026' },
-    desc: { en: 'A discrete-time maritime traffic simulator with a Swing GUI, built test-first.',
-            pt: 'Um simulador de tráfego marítimo em tempo discreto com interface Swing, feito com testes primeiro.' },
-    points: [
-      { en: 'Dijkstra route planning on a graph that contains no obstacle-crossing edges.',
-        pt: 'Rotas planeadas com Dijkstra num grafo sem arestas que atravessem obstáculos.' },
-      { en: 'Design patterns: Strategy (pluggable routing algorithms), State (ship life cycle), Mediator (a control tower that resolves collisions), Iterator (on-time ship departures), Command (GUI actions).',
-        pt: 'Padrões: Strategy (algoritmos de rota intercambiáveis), State (ciclo de vida do navio), Mediator (uma torre de controlo que resolve colisões), Iterator (partidas a horas), Command (ações da interface).' },
-      { en: 'Collision avoidance: ship areas are circles, priority goes by trip code, and the yielding ship waits and then resumes its route.',
-        pt: 'Evitar colisões: as áreas dos navios são círculos, a prioridade vai pelo código da viagem e o navio que cede espera e depois retoma a rota.' },
-      { en: 'The GUI reads read-only simulation snapshots, so the interface stays decoupled from the navigation logic.',
-        pt: 'A interface lê snapshots só de leitura da simulação, por isso fica desacoplada da lógica de navegação.' }
-    ],
-    tags: ['Java', 'Swing', 'JUnit 5', 'Maven', 'GitHub Actions', 'Design patterns'],
-    repo: 'https://github.com/kakurokan/Maritime_Navigation' },
-  { slug: 'hashing-trees', name: { en: 'Hash Table & Tree Library', pt: 'Biblioteca de Hash Tables e Árvores' },
-    meta: { en: 'Co-built with a classmate', pt: 'Feita com um colega' },
-    desc: { en: 'Two non-linear data structures in Java 17, measured under their worst-case loads.',
-            pt: 'Duas estruturas de dados não lineares em Java 17, medidas nos seus piores casos.' },
-    stats: [ ['1.31', { en: 'max/min depth ratio', pt: 'razão de profundidade máx/mín' }], ['1.0', { en: 'comparisons per hit', pt: 'comparações por acerto' }],
-             ['0.0', { en: 'comparisons per miss', pt: 'comparações por falha' }] ],
-    points: [
-      { en: "A weight-balanced tree whose searches rotate frequently used keys toward the root. After 100,000 sorted insertions (a plain BST's worst case), the max/min depth ratio stayed at 1.31.",
-        pt: 'Uma árvore equilibrada por peso em que as pesquisas rodam as chaves mais usadas para a raiz. Depois de 100 000 inserções ordenadas (o pior caso de uma BST simples), a razão entre profundidade máxima e mínima ficou em 1,31.' },
-      { en: 'A multi-level hash table with double hashing and a Bloom-filter-style marker per bucket. Across 10 million keys, lookups averaged 1.0 key comparisons on hits and 0.0 on misses.',
-        pt: 'Uma hash table multinível com double hashing e um marcador estilo Bloom filter por bucket. Com 10 milhões de chaves, as pesquisas fizeram em média 1,0 comparações nos acertos e 0,0 nas falhas.' }
-    ],
-    tags: ['Java 17', 'Maven', 'JUnit 5', 'GitHub Actions'],
-    repo: 'https://github.com/kakurokan/non-linear_and_hashing_data_structures' },
-  { slug: 'bookswipe', name: 'BookSwipe',
-    desc: { en: "Tinder-style app for books: swipe on the ones you like and get recommendations. I'm building the backend in Java with Spring Boot; the React/TypeScript frontend is my teammate's.",
-            pt: 'App ao estilo Tinder para livros: deslizas nos que gostas e recebes recomendações. Estou a fazer o backend em Java com Spring Boot; o frontend em React e TypeScript é do meu colega de equipa.' },
-    tags: ['Java', 'Spring Boot', 'REST'],
-    repo: 'https://github.com/kakurokan/BookSwipe' }
-];
-
-// lista compacta do cartão "More projects"
-const MORE = [
-  { name: 'DNS Client from Scratch', url: 'https://github.com/kakurokan/DNSClient', tech: 'Python · UDP sockets · Wireshark',
-    desc: { en: 'Builds DNS query packets byte by byte.', pt: 'Constrói os pacotes de consulta DNS byte a byte.' } },
-  { name: 'PuzzleAI Collection', url: 'https://github.com/kakurokan/PuzzleAI-Collection', tech: 'Java · Best-First search · JUnit 5',
-    desc: { en: 'Ball Sort solver.', pt: 'Solver de Ball Sort.' } },
-  { name: 'SWERC Team Notebook', url: 'https://github.com/kakurokan/SwercNotebookUALG', tech: 'C++',
-    desc: { en: "The team's reference notebook of graph, DP, segment-tree, string and number-theory algorithms.",
-            pt: 'O caderno de referência da equipa, com algoritmos de grafos, DP, segment trees, strings e teoria dos números.' } }
-];
-
-/* ================== LÍNGUA ================== */
-const LANGS = ['en', 'pt'];
-let lang = 'en';
-const t = key => { const v = I18N[lang][key] ?? I18N.en[key] ?? key; return v; };
-const tr = v => (v && typeof v === 'object' ? (v[lang] ?? v.en) : v);   // texto simples ou { en, pt }
-
-
-/* ================== ÍCONES EM PIXEL ART ================== */
-const PAL = { K:'#000', W:'#fff', G:'#C0C0C0', D:'#808080', Y:'#F8E070', O:'#C8A030', B:'#2050C0', L:'#33FF66', N:'#101010',
-              P:'#F0E0A0', R:'#E01818', T:'#8B5A2B', E:'#2E9E2E', C:'#7FD4FF', M:'#FF2FB3', S:'#FFB347', U:'#FFE66E', V:'#6A2CFF', H:'#FF2FB3' };
-const ICONS = {
-  folder: ['................','................','..KKKKK.........','.KYYYYYK........','KYYYYYYYKKKKKKK.','KYYYYYYYYYYYYYYK','KYUUUUUUUUUUUUYK','KYYYYYYYYYYYYYYK','KYYYYYYYYYYYYYYK','KYYYYYYYYYYYYYYK','KYYYYYYYYYYYYYYK','KYYYYYYYYYYYYYYK','KOOOOOOOOOOOOOOK','KKKKKKKKKKKKKKKK','................','................'],
-  note:   ['..KKKKKKKKKKKK..','..KWWWWWWWWWWK..','..KWBBBBBBBBWK..','..KWWWWWWWWWWK..','..KWBBBBBBWWWK..','..KWWWWWWWWWWK..','..KWBBBBBBBBWK..','..KWWWWWWWWWWK..','..KWBBBBBWWWWK..','..KWWWWWWWWWWK..','..KWBBBBBBBBWK..','..KWWWWWWWWWWK..','..KWWWWWWWWWWK..','..KKKKKKKKKKKK..','................','................'],
-  monitor:['................','.KKKKKKKKKKKKKK.','.KGGGGGGGGGGGGK.','.KGNNNNNNNNNNGK.','.KGNLNNNNNNNNGK.','.KGNNLNNNNNNNGK.','.KGNLNNLLLNNNGK.','.KGNNNNNNNNNNGK.','.KGNNNNNNNNNNGK.','.KGGGGGGGGGGGGK.','.KKKKKKKKKKKKKK.','......KDDK......','....KKKKKKKK....','....KGGGGGGK....','....KKKKKKKK....','................'],
-  love:   ['................','.KKKKKKKKKKKKKK.','.KGGGGGGGGGGGGK.','.KGNNNNNNNNNNGK.','.KGNNHHNNHHNNGK.','.KGNHHHHHHHHNGK.','.KGNNHHHHHHNNGK.','.KGNNNHHHHNNNGK.','.KGNNNNHHNNNNGK.','.KGGGGGGGGGGGGK.','.KKKKKKKKKKKKKK.','......KDDK......','....KKKKKKKK....','....KGGGGGGK....','....KKKKKKKK....','................'],
-  map:    ['................','.KKKKKKKKKKKKKK.','.KPPPPPPPPPPPPK.','.KPRRPPPPPPPPPK.','.KPRRTPTPPPPPPK.','.KPPPPPPPTPPPPK.','.KPPPPPPPPTPPPK.','.KPPPPPPPTPPPPK.','.KPPPPPPTPPPPPK.','.KPPPPTPPPPEEPK.','.KPPPPPPPPPEEPK.','.KPPPPPPPPPPPPK.','.KKKKKKKKKKKKKK.','................','................','................'],
-  mail:   ['................','................','................','.KKKKKKKKKKKKKK.','.KWKWWWWWWWWKWK.','.KWWKWWWWWWKWWK.','.KWWWKWWWWKWWWK.','.KWWWWKWWKWWWWK.','.KWWWWWKKWWWWWK.','.KWWWWWWWWWWWWK.','.KWWWWWWWWWWWWK.','.KKKKKKKKKKKKKK.','................','................','................','................'],
-  cv:     ['..KKKKKKKKK.....','..KWWWWWWWKK....','..KWWWWWWWKWK...','..KWWWWWWWKKKK..','..KWWWWWWWWWWK..','..KWBBBBBBBWWK..','..KWWWWWWWWWWK..','..KWBBBBBWWWWK..','..KWWWWWWWWWWK..','KKKKKKKKKKWWWK..','KRRRRRRRRKWWWK..','KRWRWRWRRKWWWK..','KRRRRRRRRKWWWK..','KKKKKKKKKKKKKK..','................','................'],
-  disk:   ['................','.KKKKKKKKKKKKK..','.KBBGGGGGGGBBK..','.KBBGGGGKGGBBK..','.KBBGGGGKGGBBK..','.KBBGGGGGGGBBK..','.KBBBBBBBBBBBK..','.KBWWWWWWWWWBK..','.KBWDDDDDDDWBK..','.KBWWWWWWWWWBK..','.KBWDDDDDWWWBK..','.KBWWWWWWWWWBK..','.KKKKKKKKKKKKK..','................','................','................'],
-  chip:   ['................','...K.K.K.K.K....','..KKKKKKKKKKK...','.KKNNNNNNNNNKK..','..KNVVVVVVVNK...','.KKNVNNNNNVNKK..','..KNVNMMMNVNK...','.KKNVNMMMNVNKK..','..KNVNMMMNVNK...','.KKNVNNNNNVNKK..','..KNVVVVVVVNK...','.KKNNNNNNNNNKK..','..KKKKKKKKKKK...','...K.K.K.K.K....','................','................'],
-  power:  ['................','.......KK.......','...KK..KK..KK...','..KRK..KK..KRK..','.KRK...KK...KRK.','.KRK...KK...KRK.','KRK....KK....KRK','KRK....KK....KRK','KRK..........KRK','KRK..........KRK','.KRK........KRK.','.KRRK......KRRK.','..KRRKKKKKKRRK..','...KKRRRRRRKK...','.....KKKKKK.....','................'],
-  sun:    ['................','.....UUUUUU.....','...UUUUUUUUUU...','..UUUUUUUUUUUU..','.SSSSSSSSSSSSSS.','.SSSSSSSSSSSSSS.','................','MMMMMMMMMMMMMMMM','MMMMMMMMMMMMMMMM','................','.MMMMMMMMMMMMMM.','.MMMMMMMMMMMMMM.','................','..VVVVVVVVVVVV..','...VVVVVVVVVV...','................'],
-  grip:   ['................','.......WW.......','......WWWW......','.....WWWWWW.....','.......WW.......','...W...WW...W...','..WW...WW...WW..','.WWWWWWWWWWWWWW.','.WWWWWWWWWWWWWW.','..WW...WW...WW..','...W...WW...W...','.......WW.......','.....WWWWWW.....','......WWWW......','.......WW.......','................']
-};
-// paleta Game Boy: cada cor é trocada por um dos 4 verdes, conforme a luminosidade
-const GB = ['#0F380F', '#306230', '#8BAC0F', '#9BBC0F'];
-const lum = hex => { const n = parseInt(hex.replace('#', '').padEnd(6, hex.slice(-1)), 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
-const GB_PAL = Object.fromEntries(Object.entries(PAL).map(([k, v]) => {
-  const full = v.length === 4 ? '#' + [...v.slice(1)].map(c => c + c).join('') : v;
-  return [k, GB[Math.min(3, Math.floor(lum(full) * 4))]];
-}));
-const ICON_COLOR = PAL;
-let activePal = PAL;
-const iconCache = new Map();
-function pixelSvg(name) {
-  const pal = activePal;
-  const key = name + '|' + (pal === ICON_COLOR ? 'c' : 'g');
-  if (iconCache.has(key)) return iconCache.get(key);
-  const rows = ICONS[name]; if (!rows) return '';
-  let r = '';
-  rows.forEach((row, y) => {
-    let x = 0;
-    while (x < 16) {
-      const c = row[x];
-      if (c === '.') { x++; continue; }
-      let w = 1; while (x + w < 16 && row[x + w] === c) w++;
-      r += `<rect x="${x}" y="${y}" width="${w}" height="1" fill="${pal[c]}"${c === 'H' ? ' class="h"' : ''}/>`;
-      x += w;
-    }
-  });
-  iconCache.set(key, r);
-  return r;
-}
-function hydrateIcons(root = document) {
-  root.querySelectorAll('svg[data-px]').forEach(s => {
-    s.setAttribute('viewBox', '0 0 16 16');
-    s.setAttribute('aria-hidden', 'true');
-    s.innerHTML = pixelSvg(s.dataset.px);
-  });
-}
-
-/* ================== CARTÕES: barra, arrastar, minimizar, expandir, fechar ================== */
-const cards = [...document.querySelectorAll('.card')];
-const backdrop = document.getElementById('backdrop');
-const tasks = document.getElementById('tasks');
-// modo simples: uma coluna, sem desktop retro, para quem só quer ler o essencial
-const SIMPLE_ORDER = ['welcome', 'projects', 'more', 'stack', 'education', 'contests', 'about', 'path', 'cv', 'contact'];
-let simple = false;
-const isSmall = () => simple || matchMedia('(max-width: 860px)').matches;
-let zTop = 10;
-
-const CTL = {
-  min: '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><rect x="1" y="7" width="7" height="2"/></svg>',
-  max: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#000" aria-hidden="true"><rect x=".5" y=".5" width="9" height="9"/><path d="M0 1.5h10" stroke-width="2"/></svg>',
-  close: '<svg width="9" height="8" viewBox="0 0 8 7" aria-hidden="true"><path d="M0 0h2l2 2 2-2h2L5 3.5 8 7H6L4 5 2 7H0l3-3.5z"/></svg>'
-};
-cards.forEach(card => {
-  const bar = document.createElement('div');
-  bar.className = 'bar';
-  bar.innerHTML = `<svg class="px grip" data-px="grip"></svg><span class="name"></span>
-    <button class="ctl raised" data-act="min">${CTL.min}</button>
-    <button class="ctl raised" data-act="max">${CTL.max}</button>
-    <button class="ctl raised" data-act="close">${CTL.close}</button>`;
-  card.prepend(bar);
-
-  bar.addEventListener('click', e => {
-    const b = e.target.closest('[data-act]'); if (!b) return;
-    const act = b.dataset.act;
-    if (act === 'min') { if (card.classList.contains('expanded')) collapseExpanded(); card.classList.toggle('collapsed'); updateBar(card); }
-    if (act === 'max') toggleExpand(card);
-    if (act === 'close') { collapseExpanded(); closed.add(card.id); refresh(); }
-  });
-  // arrastar: larga um cartão em cima de outro e trocam de lugar; fora de um cartão, volta ao sítio
-  bar.addEventListener('pointerdown', e => {
-    if (isSmall() || card.classList.contains('expanded') || e.target.closest('button') || e.button !== 0) return;
-    e.preventDefault();
-    const sx = e.clientX, sy = e.clientY;
-    let target = null, moved = false, ticking = false, px = 0, py = 0;
-    bar.setPointerCapture(e.pointerId);
-    const move = ev => {
-      const dx = ev.clientX - sx, dy = ev.clientY - sy;
-      if (!moved && Math.hypot(dx, dy) < 5) return;
-      moved = true;
-      card.classList.remove('snap');
-      card.classList.add('dragging');
-      document.getElementById('board').classList.add('drag-active');
-      card.style.transform = `translate(${dx}px, ${dy}px)`;
-      px = ev.clientX; py = ev.clientY;
-      if (!ticking) { ticking = true; requestAnimationFrame(hit); }
-    };
-    const hit = () => {
-      ticking = false;
-      const under = document.elementFromPoint(px, py);
-      const t = under && under.closest('.card');
-      const next = t && t !== card ? t : null;
-      if (next !== target) {
-        target && target.classList.remove('drop-target');
-        target = next;
-        target && target.classList.add('drop-target');
-      }
-    };
-    let done = false;
-    const up = () => {
-      if (done) return; done = true;
-      bar.removeEventListener('lostpointercapture', up);
-      bar.removeEventListener('pointermove', move);
-      bar.removeEventListener('pointerup', up);
-      bar.removeEventListener('pointercancel', up);
-      card.classList.remove('dragging');
-      document.getElementById('board').classList.remove('drag-active');
-      if (target) {
-        target.classList.remove('drop-target');
-        card.style.transform = '';
-        swapCards(card, target);
-      } else if (moved) {
-        card.classList.add('snap');
-        card.style.transform = '';
-      }
-    };
-    bar.addEventListener('pointermove', move);
-    bar.addEventListener('pointerup', up);
-    bar.addEventListener('pointercancel', up);
-    bar.addEventListener('lostpointercapture', up);
-  });
-});
-
-// nome e botões da barra de cada cartão, na língua atual
-function updateBar(card) {
-  const label = t('card.' + card.id);
-  card.querySelector('.bar .name').textContent = label.toLowerCase() + '.exe';
-  card.querySelector('[data-act="min"]').setAttribute('aria-label', `${t(card.classList.contains('collapsed') ? 'ctl.restore' : 'ctl.min')} ${label}`);
-  card.querySelector('[data-act="max"]').setAttribute('aria-label', `${t('ctl.max')} ${label}`);
-  card.querySelector('[data-act="close"]').setAttribute('aria-label', `${t('ctl.close')} ${label}`);
-}
-
-function swapCards(a, b) {
-  // troca na ordem guardada e volta a distribuir: sobrevive a redimensionar e recarregar
-  const i = cards.indexOf(a), j = cards.indexOf(b);
-  [cards[i], cards[j]] = [cards[j], cards[i]];
-  layout();
-  saveOrder();
-  renderTasks();
-  [a, b].forEach(c => { c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash'); });
-}
-function saveOrder() {
-  try { localStorage.setItem('cardOrder', JSON.stringify(cards.map(c => c.id))); } catch (e) {}
-}
-function restoreOrder() {
-  let ids = null;
-  try { ids = JSON.parse(localStorage.getItem('cardOrder')); } catch (e) {}
-  if (!Array.isArray(ids)) return;
-  const byKey = Object.fromEntries(cards.map(c => [c.id, c]));
-  const ordered = ids.map(id => byKey[id]).filter(Boolean);
-  cards.forEach(c => { if (!ordered.includes(c)) ordered.push(c); });
-  cards.splice(0, cards.length, ...ordered);
-}
-// ordem inicial: os cartões são distribuídos pelas colunas da esquerda para a direita, linha a linha
-const DEFAULT_ORDER = ['welcome', 'projects', 'contests', 'stack', 'education', 'terminal', 'contact', 'about', 'now', 'path', 'more', 'cv', 'themes', 'drag'];
-// cartões que começam fechados (ficam na barra de tarefas, nos ícones e no menu para reabrir)
-const DEFAULT_CLOSED = ['about', 'now', 'path', 'more', 'cv', 'themes', 'drag'];
-const closed = new Set(DEFAULT_CLOSED);
-cards.sort((a, b) => (DEFAULT_ORDER.indexOf(a.id) + 1 || 99) - (DEFAULT_ORDER.indexOf(b.id) + 1 || 99));
-const ORIGINAL = [...cards];
-function toggleExpand(card) {
-  const on = !card.classList.contains('expanded');
-  collapseExpanded();
-  if (on) { card.classList.remove('collapsed'); card.classList.add('expanded'); backdrop.hidden = false; card.querySelector('.ctl[data-act="max"]').focus(); }
-}
-function collapseExpanded() {
-  cards.forEach(c => c.classList.remove('expanded'));
-  backdrop.hidden = true;
-}
-backdrop.addEventListener('click', collapseExpanded);
-
-function renderTasks() {
-  tasks.innerHTML = '';
-  cards.forEach(card => {
-    const b = document.createElement('button');
-    const open = !closed.has(card.id);
-    b.className = 'btn raised' + (open ? ' pressed' : '');
-    b.textContent = t('card.' + card.id);
-    b.setAttribute('aria-pressed', open);
-    b.addEventListener('click', () => goTo(card));
-    tasks.appendChild(b);
-  });
-}
-function goTo(card) {
-  card.classList.remove('collapsed'); updateBar(card);
-  if (closed.has(card.id) || card.hidden) {
-    closed.delete(card.id);
-    refresh();
-    if (card.hidden) { searchIn.value = ''; refresh(); }   // a pesquisa estava a escondê-lo
-  }
-  if (isSmall()) card.scrollIntoView({ block: 'start' });
-  card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
-  renderTasks();
-}
-// links internos (#about, #cv…) reabrem e destacam o cartão
-document.addEventListener('click', e => {
-  const a = e.target.closest('a[href^="#"]'); if (!a) return;
-  const card = document.getElementById(a.getAttribute('href').slice(1));
-  if (card && card.classList.contains('card')) { e.preventDefault(); toggleStart(false); goTo(card); history.replaceState(null, '', '#' + card.id); }
-});
-
-/* ================== PESQUISA ================== */
-const norm = s => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-const searchIn = document.getElementById('search');
-const searchMsg = document.getElementById('search-msg');
-// visibilidade: sem pesquisa mostra os cartões abertos; com pesquisa mostra os que têm o texto, mesmo fechados
-function refresh() {
-  const q = simple ? '' : norm(searchIn.value.trim());
-  let n = 0;
-  cards.forEach(c => {
-    const show = simple ? SIMPLE_ORDER.includes(c.id) : (q ? norm(c.textContent).includes(q) : !closed.has(c.id));
-    c.hidden = !show;
-    if (show) n++;
-  });
-  highlight(q);
-  searchMsg.textContent = q ? (n ? t('search.found')(n) : t('search.none')) : '';
-  renderTasks();
-  layout();
-}
-const filter = refresh;
-
-// destaca o texto encontrado dentro dos cartões e abre os projetos que o têm
-let savedOpen = null;
-function unmark() {
-  document.querySelectorAll('.board mark').forEach(m => { const t = document.createTextNode(m.textContent); m.replaceWith(t); t.parentNode.normalize(); });
-}
-function highlight(q) {
-  unmark();
-  const details = [...projectList.querySelectorAll('details')];
-  if (!q) {
-    if (savedOpen) { details.forEach((d, i) => { d.open = savedOpen[i] ?? d.open; }); savedOpen = null; }
-    return;
-  }
-  if (!savedOpen) savedOpen = details.map(d => d.open);
-  details.forEach(d => { d.open = norm(d.textContent).includes(q); });
-  const walker = document.createTreeWalker(document.getElementById('board'), NodeFilter.SHOW_TEXT, {
-    acceptNode: n => (n.parentElement.closest('.bar, svg, script, style, .card[hidden], input') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT)
-  });
-  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
-  nodes.forEach(node => {
-    const text = node.nodeValue;
-    // texto normalizado + mapa de volta para as posições originais (para ignorar acentos)
-    let flat = '', map = [];
-    for (let i = 0; i < text.length; i++) { const c = norm(text[i]); for (const ch of c) { flat += ch; map.push(i); } }
-    let from = 0, idx, parts = [], last = 0;
-    while ((idx = flat.indexOf(q, from)) !== -1) {
-      const a = map[idx], b = map[idx + q.length - 1] + 1;
-      parts.push([a, b]); from = idx + q.length;
-    }
-    if (!parts.length) return;
-    const frag = document.createDocumentFragment();
-    parts.forEach(([a, b]) => {
-      frag.append(text.slice(last, a));
-      const m = document.createElement('mark'); m.textContent = text.slice(a, b); frag.append(m);
-      last = b;
-    });
-    frag.append(text.slice(last));
-    node.replaceWith(frag);
-  });
-}
-searchIn.addEventListener('input', filter);
-document.getElementById('search-form').addEventListener('submit', e => {
-  e.preventDefault(); filter();
-  const first = cards.find(c => !c.hidden);
-  if (first && searchIn.value.trim() && isSmall()) first.scrollIntoView({ block: 'start' });
-});
-
-/* ================== WALLPAPER GAME BOY (pixel art desenhada em canvas) ================== */
-const wall = (() => {
-  const canvas = document.getElementById('gbwall');
-  const ctx = canvas.getContext('2d');
-  const SHADE = ['#0F380F', '#306230', '#8BAC0F', '#9BBC0F'];           // 0 = mais escuro … 3 = mais claro
-  const RGB = SHADE.map(h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)));
-  const BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]];
-  const dith = (x, y, t) => t * 16 > BAYER[y & 3][x & 3];               // dithering ordenado, como nos jogos
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W = 0, H = 0, bg = null, timer = null, frame = 0, clouds = [], cat = 0;
-
-  const CLOUD = ['....3333......', '..33333333.33.', '.3333333333333', '33333333333333', '.222222222222.'];
-  const CAT = [
-    ['........0.0', '0.......000', '.0.00000030', '..000000000', '..00000000.', '..0.0..0.0.'],
-    ['........0.0', '0.......000', '.0.00000030', '..000000000', '..00000000.', '...00...00.']
-  ];
-
-  function build() {
-    const S = innerWidth < 760 ? 3 : 4;                                   // tamanho de cada pixel no ecrã
-    W = Math.ceil(innerWidth / S); H = Math.ceil(innerHeight / S);
-    canvas.width = W; canvas.height = H;
-    const img = ctx.createImageData(W, H), px = new Uint8Array(W * H);
-    const horizon = Math.floor(H * 0.64);
-
-    // céu: verde médio no topo, mais claro perto do horizonte
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) px[y * W + x] = dith(x, y, Math.min(1, y / horizon) ** 1.4) ? 3 : 2;
-
-    // sol às riscas
-    const sx = W * 0.7, sy = H * 0.3, r = Math.max(10, Math.min(W, H) * 0.11);
-    for (let y = Math.floor(sy - r - 6); y < sy + r + 6; y++) for (let x = Math.floor(sx - r - 6); x < sx + r + 6; x++) {
-      if (x < 0 || y < 0 || x >= W || y >= H) continue;
-      const d = Math.hypot(x - sx, y - sy);
-      if (d <= r) {
-        const stripe = y - sy > r * 0.1 && Math.floor((y - sy) / 3) % 2 === 1;   // riscas na metade de baixo
-        px[y * W + x] = stripe ? 2 : 3;
-      } else if (d <= r + 5 && dith(x, y, 0.5 - (d - r) / 10)) px[y * W + x] = 3;   // brilho à volta
-    }
-
-    // montanhas ao longe (com neve no cimo)
-    const ridge = x => horizon - 6 - H * 0.08 * (1 + Math.sin(x * 0.021 + 1.3)) - H * 0.04 * Math.sin(x * 0.057 + 0.4) - 3 * Math.sin(x * 0.19);
-    const peak = horizon - 6 - H * 0.2;
-    for (let x = 0; x < W; x++) {
-      const top = Math.floor(ridge(x));
-      for (let y = Math.max(0, top); y < H; y++) {
-        const snow = top < peak + H * 0.07 && y - top < 3 + (x % 3 === 0 ? 1 : 0);
-        px[y * W + x] = snow ? 3 : (y - top < 2 && dith(x, y, 0.5) ? 2 : 1);
-      }
-    }
-
-    // colinas perto, com pinheiros
-    const hill = x => horizon + 4 - H * 0.035 * (1 + Math.sin(x * 0.033 + 2.1)) - 4 * Math.sin(x * 0.09);
-    for (let x = 0; x < W; x++) {
-      const top = Math.floor(hill(x));
-      for (let y = Math.max(0, top); y < H; y++) px[y * W + x] = 0;
-    }
-    for (let tx = 4; tx < W; tx += 7 + (tx * 7919) % 6) {
-      const base = Math.floor(hill(tx)) + 1, h = 6 + (tx * 31) % 5;
-      for (let i = 0; i < h; i++) {
-        const half = Math.floor(i / 2) % 3 + Math.floor(i / 4);
-        for (let dx = -half; dx <= half; dx++) {
-          const x = tx + dx, y = base - h + i;
-          if (x >= 0 && x < W && y >= 0) px[y * W + x] = 0;
-        }
-      }
-    }
-
-    // chão
-    const ground = H - 12;
-    for (let y = ground; y < H; y++) for (let x = 0; x < W; x++) {
-      px[y * W + x] = y === ground ? 0 : (dith(x, y, 0.18) ? 0 : 1);
-    }
-    for (let x = 0; x < W; x += 3 + (x % 4)) if (ground - 1 >= 0) px[(ground - 1) * W + x] = 1;   // tufos de relva
-
-    for (let i = 0; i < px.length; i++) { const c = RGB[px[i]]; img.data.set([c[0], c[1], c[2], 255], i * 4); }
-    bg = img;
-
-    clouds = Array.from({ length: Math.max(4, Math.round(W / 90)) }, (_, i) => ({
-      x: (i * 97 + 13) % W, y: 6 + (i * 37) % Math.max(10, Math.floor(H * 0.32)), v: 0.25 + (i % 3) * 0.15
-    }));
-    cat = W * 0.2;
-  }
-
-  function sprite(rows, ox, oy) {
-    rows.forEach((row, y) => [...row].forEach((ch, x) => {
-      if (ch === '.') return;
-      ctx.fillStyle = SHADE[+ch];
-      ctx.fillRect(Math.round(ox) + x, Math.round(oy) + y, 1, 1);
-    }));
-  }
-  function draw() {
-    if (!bg) return;
-    ctx.putImageData(bg, 0, 0);
-    clouds.forEach(c => sprite(CLOUD, c.x, c.y));
-    sprite(CAT[frame % 2], cat, H - 9);
-  }
-  function step() {
-    frame++;
-    clouds.forEach(c => { c.x -= c.v; if (c.x < -16) c.x = W + 4; });
-    cat += 1; if (cat > W + 12) cat = -12;
-    draw();
-  }
-
-  function set(on) {
-    clearInterval(timer); timer = null;
-    if (!on) return;
-    build(); draw();
-    if (!reduce) timer = setInterval(step, 140);
-  }
-  let rt;
-  window.addEventListener('resize', () => {
-    if (document.body.dataset.theme !== 'gameboy') return;
-    clearTimeout(rt); rt = setTimeout(() => { build(); draw(); }, 150);
-  });
-  document.addEventListener('visibilitychange', () => document.body.classList.toggle('idle', document.hidden));
-  document.addEventListener('visibilitychange', () => set(document.body.dataset.theme === 'gameboy' && !document.hidden && !simple));
-  return { set };
-})();
-
-/* ================== TEMAS ================== */
-const THEMES = ['gameboy', 'vapor', 'rosa', 'menta', 'noite'];
-const THEME_ALIAS = { gb: 'gameboy', pink: 'rosa', mint: 'menta', night: 'noite', vaporwave: 'vapor' };
-function setTheme(theme) {
-  document.body.dataset.theme = theme;
-  const gb = theme === 'gameboy';
-  if (gb !== (activePal === GB_PAL)) { activePal = gb ? GB_PAL : PAL; hydrateIcons(); }
-  wall.set(gb && !simple);
-  document.querySelectorAll('.theme').forEach(b => b.setAttribute('aria-pressed', b.dataset.set === theme));
-  try { localStorage.setItem('theme', theme); } catch (e) {}
-}
-document.getElementById('theme-list').addEventListener('click', e => { const b = e.target.closest('[data-set]'); if (b) setTheme(b.dataset.set); });
-
-/* ================== MENU INICIAR ================== */
-const startBtn = document.getElementById('start');
-const startMenu = document.getElementById('startmenu');
-function toggleStart(open) {
-  open = open ?? startMenu.hidden;
-  startMenu.hidden = !open;
-  startBtn.classList.toggle('pressed', open);
-  startBtn.setAttribute('aria-expanded', open);
-  if (open) startMenu.querySelector('a, button').focus();
-}
-startBtn.addEventListener('click', () => toggleStart());
-document.getElementById('next-theme').addEventListener('click', () => {
-  setTheme(THEMES[(THEMES.indexOf(document.body.dataset.theme) + 1) % THEMES.length]); toggleStart(false);
-});
-document.getElementById('menu-lang').addEventListener('click', () => { setLang(lang === 'en' ? 'pt' : 'en'); toggleStart(false); });
-document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-document.getElementById('reset').addEventListener('click', () => {
-  collapseExpanded();
-  cards.splice(0, cards.length, ...ORIGINAL);
-  try { localStorage.removeItem('cardOrder'); } catch (e) {}
-  closed.clear(); DEFAULT_CLOSED.forEach(id => closed.add(id));
-  cards.forEach(c => { c.classList.remove('collapsed'); c.style.transform = ''; updateBar(c); });
-  searchIn.value = ''; filter(); renderTasks(); toggleStart(false); window.scrollTo(0, 0);
-});
-document.addEventListener('pointerdown', e => { if (!startMenu.hidden && !e.target.closest('#startmenu, #start')) toggleStart(false); });
-document.addEventListener('keydown', e => {
-  if (e.key !== 'Escape') return;
-  if (!startMenu.hidden) { toggleStart(false); startBtn.focus(); }
-  else collapseExpanded();
-});
-
-/* ================== RELÓGIO ================== */
-const clockEl = document.getElementById('clock');
-const locale = () => (lang === 'pt' ? 'pt-PT' : 'en-GB');
-function tick() {
-  const n = new Date();
-  clockEl.textContent = String(n.getHours()).padStart(2, '0') + ':' + String(n.getMinutes()).padStart(2, '0');
-  clockEl.title = n.toLocaleDateString(locale(), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-}
-setInterval(tick, 10000);
-
-/* ================== PROJETOS ================== */
-const projectList = document.getElementById('project-list');
-function renderProjects() {
-  const open = [...projectList.querySelectorAll('details')].map(d => d.open);
-  projectList.innerHTML = PROJECTS.map((p, i) => `
-    <details${(open.length ? open[i] : i === 0) ? ' open' : ''}>
-      <summary><svg class="px" data-px="folder"></svg>${tr(p.name)}<span class="arrow" aria-hidden="true">&gt;</span></summary>
-      <div class="pbody">
-        <span class="path">C:\\${t('projects.dir')}\\${p.slug}</span>
-        ${p.meta ? `<span class="pmeta">${tr(p.meta)}</span>` : ''}
-        <p>${tr(p.desc)}</p>
-        ${p.stats ? `<div class="stats">${p.stats.map(([n, l]) => `<span class="stat"><b>${n}</b><span>${tr(l)}</span></span>`).join('')}</div>` : ''}
-        ${p.points ? `<ul class="points">${p.points.map(x => `<li>${tr(x)}</li>`).join('')}</ul>` : ''}
-        <div class="chips">${p.tags.map(x => `<button type="button" class="chip" data-tag="${tr(x)}">${tr(x)}</button>`).join('')}</div>
-        <div class="row">
-          ${p.repo ? `<a class="btn raised" href="${p.repo}" target="_blank" rel="noopener">${t('projects.repo')}</a>` : ''}
-          ${(p.links || []).map(([k, u]) => `<a class="btn raised" href="${u}" target="_blank" rel="noopener">${t('projects.' + k)}</a>`).join('')}
-        </div>
-      </div>
-    </details>`).join('');
-  hydrateIcons(projectList);
-  document.getElementById('more-list').innerHTML = MORE.map(m => `
-    <li><a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>
-      <span class="mtech" data-tech="${m.tech}">${m.tech}</span>
-      <span>${tr(m.desc)}</span></li>`).join('');
-  applyTag();
-}
-
-/* ================== FILTRO POR TECNOLOGIA ================== */
-let activeTag = null, moreHits = 0;
-const projectsCard = document.getElementById('projects');
-// "Java" apanha "Java" e "Java 17", mas não "JavaScript"
-const TAG_ALIAS = { 'domain-driven design': 'ddd', 'java swing': 'swing', 'benchmarking': 'benchmarks', 'rest apis': 'rest', 'github actions ci/cd': 'github actions', 'udp sockets': 'udp sockets' };
-const tagKey = x => { const k = norm(x); return TAG_ALIAS[k] || k; };
-const tagHit = (list, tag) => list.some(x => { const a = tagKey(x), b = tagKey(tag); return a === b || a.startsWith(b + ' ') || a.startsWith(b + '/'); });
-function applyTag() {
-  const bar = document.getElementById('tagbar'), none = document.getElementById('tag-none');
-  let n = 0;
-  projectList.querySelectorAll('details').forEach((d, i) => {
-    const hit = !activeTag || tagHit(PROJECTS[i].tags.map(tr), activeTag);
-    d.classList.toggle('tag-out', !hit);
-    if (activeTag && hit) { d.open = true; n++; }
-  });
-  moreHits = 0;
-  document.querySelectorAll('#more-list li').forEach((li, i) => {
-    const hit = !activeTag || tagHit(MORE[i].tech.split(' · '), activeTag);
-    li.classList.toggle('tag-out', !hit);
-    if (activeTag && hit) moreHits++;
-  });
-  document.querySelectorAll('button.chip[data-tag]').forEach(b => b.setAttribute('aria-pressed', !!activeTag && norm(b.dataset.tag) === norm(activeTag)));
-  bar.hidden = !activeTag;
-  if (activeTag) document.getElementById('tagbar-text').textContent = t('tags.filter')(activeTag, n, moreHits);
-  none.hidden = !activeTag || n > 0;
-  if (activeTag && !n) none.textContent = t('tags.none')(activeTag);
-}
-function setTag(tag) {
-  activeTag = tag && (!activeTag || norm(activeTag) !== norm(tag)) ? tag : null;
-  applyTag();
-  if (activeTag) {
-    goTo(projectsCard);
-    if (moreHits) goTo(document.getElementById('more'));
-  }
-}
-document.addEventListener('click', e => {
-  const b = e.target.closest('button.chip[data-tag]');
-  if (b) setTag(b.dataset.tag);
-});
-document.getElementById('tag-clear').addEventListener('click', () => setTag(null));
-// as tags do cartão #Stack também filtram (as que são tecnologias)
-document.querySelectorAll('#stack .chips:not(.certs) .chip:not([data-t])').forEach(sp => {
-  const b = document.createElement('button');
-  b.type = 'button'; b.className = 'chip'; b.dataset.tag = sp.textContent.trim(); b.textContent = sp.textContent;
-  sp.replaceWith(b);
-});
-
-/* ================== PROMPT DE COMANDO ================== */
-const termOut = document.getElementById('term-out');
-const termIn = document.getElementById('term-in');
-const termBox = document.getElementById('term');
-const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-const say = s => termOut.insertAdjacentHTML('beforeend', s + '\n');
-const GOTO = { about: 'about', sobre: 'about', projects: 'projects', projetos: 'projects', path: 'path', journey: 'path', percurso: 'path',
-               contact: 'contact', contacto: 'contact', cv: 'cv', more: 'more', mais: 'more', contests: 'contests', competicoes: 'contests', education: 'education', formacao: 'education', stack: 'stack', themes: 'themes', temas: 'themes', now: 'now', agora: 'now' };
-const TERM = {
-  en: {
-    help: `Available commands:
-  <span class="y">DIR</span>              list files            (or ls)
-  <span class="y">TYPE</span> file        show a file           (or cat)
-  <span class="y">START</span> card       go to about, projects, journey, stack, cv, contact
-  <span class="y">THEME</span> name       gameboy | vapor | pink | mint | night
-  <span class="y">LANG</span> en|pt       change language
-  <span class="y">WHOAMI</span>           who am I
-  <span class="y">GITHUB</span>           open my GitHub
-  <span class="y">CLS</span>              clear the screen      (or clear)`,
-    dir: ` Volume in drive C is LEO
- Directory of C:\\LEO
-
-STACK    YML           412  31-10-26
-COMPET~1 LOG            58  31-10-26
-CV       PDF        48,213  31-10-26
-<span class="c">PROJECTS     &lt;DIR&gt;             31-10-26</span>
-        3 File(s)      48,683 bytes`,
-    stack: `languages:
-  - Java        <span class="c"># strongest</span>
-  - Python      <span class="c"># in production on ENEI 2027</span>
-  - C++, C, SQL, OCaml, TypeScript
-backend:   [FastAPI, Spring Boot, SQLAlchemy, PostgreSQL, JWT]
-infra:     [Docker Compose, GitHub Actions, Alembic, Prometheus, nginx]
-practices: [TDD, JUnit 5, pytest, code review, benchmarking]`,
-    comp: `SWERC 2025 (Lisbon) ...... represented UAlg
-MIUP 2025 (Aveiro) ....... 0 problems
-MIUP 2026 (Évora) ........ 4 problems, 13th of 20 teams`,
-    syntax: 'The syntax of the command is incorrect.',
-    notFound: 'The system cannot find the file specified.',
-    opening: x => `Opening ${x}…`,
-    startUsage: 'Usage: START about | projects | journey | stack | cv | contact',
-    themeUsage: 'Usage: THEME gameboy | vapor | pink | mint | night',
-    themeSet: x => `Theme: ${x}`,
-    langUsage: 'Usage: LANG en | pt',
-    unknown: c => `'${c}' is not recognized as an internal or external command. Type HELP.`,
-    ver: '<span class="m">LéoOS</span> [Version 2027.07] — available from July 2027',
-    sudo: 'Nice try. :)',
-    banner: '<span class="m">LéoOS</span> [Version 2027.07]\n(C) Léo Souza. Algarve, Portugal.\n',
-    hint: '<span class="c">Type HELP to see the commands.</span>\n'
-  },
-  pt: {
-    help: `Comandos disponíveis:
-  <span class="y">DIR</span>              lista ficheiros       (ou ls)
-  <span class="y">TYPE</span> ficheiro    mostra um ficheiro    (ou cat)
-  <span class="y">START</span> cartão     vai para sobre, projetos, percurso, stack, cv, contacto
-  <span class="y">THEME</span> nome       gameboy | vapor | rosa | menta | noite
-  <span class="y">LANG</span> en|pt       muda a língua
-  <span class="y">WHOAMI</span>           quem sou eu
-  <span class="y">GITHUB</span>           abre o meu GitHub
-  <span class="y">CLS</span>              limpa o ecrã          (ou clear)`,
-    dir: ` O volume na unidade C é LEO
- Diretório de C:\\LEO
-
-STACK    YML           412  31-10-26
-COMPET~1 LOG            58  31-10-26
-CV       PDF        48.213  31-10-26
-<span class="c">PROJETOS     &lt;DIR&gt;             31-10-26</span>
-        3 ficheiro(s)      48.683 bytes`,
-    stack: `linguagens:
-  - Java        <span class="c"># a mais forte</span>
-  - Python      <span class="c"># em produção no ENEI 2027</span>
-  - C++, C, SQL, OCaml, TypeScript
-backend:   [FastAPI, Spring Boot, SQLAlchemy, PostgreSQL, JWT]
-infra:     [Docker Compose, GitHub Actions, Alembic, Prometheus, nginx]
-práticas:  [TDD, JUnit 5, pytest, code review, benchmarking]`,
-    comp: `SWERC 2025 (Lisboa) ...... pela UAlg
-MIUP 2025 (Aveiro) ....... 0 problemas
-MIUP 2026 (Évora) ........ 4 problemas, 13.º de 20 equipas`,
-    syntax: 'Sintaxe do comando incorreta.',
-    notFound: 'O sistema não consegue encontrar o ficheiro especificado.',
-    opening: x => `A abrir ${x}…`,
-    startUsage: 'Usa: START sobre | projetos | percurso | stack | cv | contacto',
-    themeUsage: 'Usa: THEME gameboy | vapor | rosa | menta | noite',
-    themeSet: x => `Tema: ${x}`,
-    langUsage: 'Usa: LANG en | pt',
-    unknown: c => `'${c}' não é reconhecido como comando. Escreve HELP.`,
-    ver: '<span class="m">LéoOS</span> [Versão 2027.07] — disponível a partir de julho de 2027',
-    sudo: 'Boa tentativa. :)',
-    banner: '<span class="m">LéoOS</span> [Versão 2027.07]\n(C) Léo Souza. Algarve, Portugal.\n',
-    hint: '<span class="c">Escreve HELP para veres os comandos.</span>\n'
-  }
-};
-const T = () => TERM[lang];
-const CMDS = {
-  HELP: () => T().help,
-  DIR: () => T().dir,
-  TYPE: arg => {
-    const f = (arg || '').toUpperCase();
-    if (!f) return T().syntax;
-    if (f === 'STACK.YML') return T().stack;
-    if (['COMPET~1.LOG', 'COMPETICOES.LOG', 'COMPETITIONS.LOG'].includes(f)) return T().comp;
-    if (f === 'CV.PDF') { goTo(document.getElementById('cv')); return T().opening('CV.pdf'); }
-    return T().notFound;
-  },
-  START: arg => {
-    const id = GOTO[(arg || '').toLowerCase()];
-    if (!id) return T().startUsage;
-    goTo(document.getElementById(id)); return '';
-  },
-  THEME: arg => {
-    const a = (arg || '').toLowerCase(), th = THEME_ALIAS[a] || a;
-    if (!THEMES.includes(th)) return T().themeUsage;
-    setTheme(th); return T().themeSet(a);
-  },
-  LANG: arg => {
-    const l = (arg || '').toLowerCase();
-    if (!LANGS.includes(l)) return T().langUsage;
-    setLang(l); return null;
-  },
-  WHOAMI: () => 'leo\\souza — software engineer · java, python · faro',
-  GITHUB: () => { window.open('https://github.com/kakurokan', '_blank', 'noopener'); return T().opening('github.com/kakurokan'); },
-  VER: () => T().ver,
-  CLS: () => { termOut.innerHTML = ''; return null; },
-  SUDO: () => T().sudo
-};
-Object.assign(CMDS, { LS: CMDS.DIR, CAT: CMDS.TYPE, OPEN: CMDS.START, CLEAR: CMDS.CLS, '?': CMDS.HELP });
-function run(line) {
-  const [cmd, ...rest] = line.trim().split(/\s+/);
-  say('C:\\LEO&gt;' + esc(line));
-  if (!cmd) return;
-  const fn = CMDS[cmd.toUpperCase()];
-  const out = fn ? fn(rest.join(' ')) : T().unknown(esc(cmd));
-  if (out !== null && out !== '') say(out + '\n');
-  termBox.scrollTop = 1e9;
-}
-function bootTerminal() {
-  termOut.innerHTML = '';
-  say(T().banner);
-  run('type stack.yml');
-  say(T().hint);
-  termBox.scrollTop = 0;
-}
-const hist = []; let hIdx = 0;
-termIn.addEventListener('keydown', e => {
-  if (e.key === 'Enter') { const v = termIn.value; termIn.value = ''; if (v.trim()) hist.push(v); hIdx = hist.length; run(v); }
-  else if (e.key === 'ArrowUp' && hIdx > 0) { termIn.value = hist[--hIdx]; e.preventDefault(); }
-  else if (e.key === 'ArrowDown') { hIdx = Math.min(hist.length, hIdx + 1); termIn.value = hist[hIdx] || ''; e.preventDefault(); }
-});
-termBox.addEventListener('click', () => { if (!getSelection().toString()) termIn.focus({ preventScroll: true }); });
-
-/* ================== APLICAR A LÍNGUA ================== */
-function setLang(l, { save = true } = {}) {
-  lang = LANGS.includes(l) ? l : 'en';
-  document.documentElement.lang = lang === 'pt' ? 'pt' : 'en';
-  document.querySelector('meta[name="description"]').content = t('meta.description');
-  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
-  document.querySelectorAll('[data-th]').forEach(el => { el.innerHTML = t(el.dataset.th); });
-  document.querySelectorAll('[data-ta]').forEach(el => el.dataset.ta.split(',').forEach(pair => {
-    const [attr, key] = pair.split(':'); el.setAttribute(attr, t(key));
-  }));
-  document.querySelectorAll('time.local-date').forEach(el => {
-    el.textContent = new Date(el.getAttribute('datetime') + 'T12:00').toLocaleDateString(locale(), { day: 'numeric', month: 'short', year: 'numeric' });
-  });
-  document.querySelectorAll('.lang-btn').forEach(b => { const on = b.dataset.lang === lang; b.classList.toggle('pressed', on); b.setAttribute('aria-pressed', on); });
-  cards.forEach(updateBar);
-  renderProjects();
-  renderTasks();
-  bootTerminal();
-  tick();
-  if (searchIn.value) filter();
-  if (typeof updateMode === 'function' && typeof modeBtn !== 'undefined') { updateMode(); trimTitles(); }
-  if (save) try { localStorage.setItem('lang', lang); } catch (e) {}
-}
-
-
-/* ================== LAYOUT: cartões em colunas lado a lado ================== */
-const board = document.getElementById('board');
-const COL_MIN = 270, GAP = 30;
-function layout() {
-  const n = isSmall() ? 1 : Math.max(1, Math.floor((board.clientWidth + GAP) / (COL_MIN + GAP)));
-  const cols = Array.from({ length: n }, () => { const d = document.createElement('div'); d.className = 'col'; return d; });
-  board.replaceChildren(...cols);
-  // posição fixa por índice: cartão i vai para a coluna i % n, por isso uma troca mantém-se ao redimensionar
-  let i = 0;
-  const rank = c => SIMPLE_ORDER.indexOf(c.id);
-  const list = simple ? [...cards].sort((a, b) => rank(a) - rank(b)) : cards;
-  list.forEach(card => { (card.hidden ? cols[n - 1] : cols[i++ % n]).appendChild(card); });
-}
-let resizeT;
-window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(layout, 120); });
-document.getElementById('reset').addEventListener('click', layout);
-
-
-/* ================== GATO: anda pelos cartões, salta entre eles e às vezes dorme ================== */
-const cat = (() => {
-  const el = document.getElementById('cat');
-  const svg = el.querySelector('svg');
-  const meowEl = el.querySelector('.meow');
-  const W = 48, H = 36, PX = 3;
-  // O = contorno, B = pelo branco, S = riscas laranja, E = olho, P = nariz/orelha
-  const F = {
-    walk1: ['...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OS......OBBPBO','..OBOOOOOOOBBBO.','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','..OBSBBSBBSBBO..','..OBOOOOOOOOBO..','..OBO....OBO....','..OO.....OO.....'],
-    walk2: ['...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OS......OBBPBO','..OBOOOOOOOBBBO.','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','..OBSBBSBBSBBO..','..OBOOOOOOOOBO..','...OBO..OBO.....','....OO...OO.....'],
-    sit:   ['...........O..O.','..........OBOOBO','..........OBSSBO','..........OBEBEO','..........OBBPBO','........OOOBBBO.','.......OBSBBSBO.','......OBBSBBSBO.','......OBBSBBSBO.','O.....OBBSBBSBO.','OS....OBBOBBBBO.','.OOOOOOOOOOOOOO.'],
-    sleep: ['................','................','................','................','................','........O..O....','...OOOOOOBOOBO..','..OBSBBSBBSBBBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
-    sleep2:['................','................','................','................','................','................','...OOOOOO.O..O..','..OBSBBSBOBOOBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
-    angry: ['...OOO....OOO...','....OBOOOOBO....','....OOBBBBOO....','....OEOBBOEO....','....OBBPPBBO....','.....OBBBBO.....','..OOOBSBBSBOOO..','.OBBOBSBBSBOBBO.','.OO.OBSBBSBO.OO.','....OBBBBBBO....','...OBBOOOOBBO.SO','...OO......OO.OS'],
-    jump:  ['................','...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OBOOOOOOOBBPBO','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','.OBOOOOOOOOOBO..','OBO.........OBO.','OO...........OO.','................']
-  };
-  const CLS = { O: 'o', B: 'b', S: 's', E: 'e', P: 'p' };
-  const SVG = {};
-  for (const [k, rows] of Object.entries(F)) {
-    let r = '';
-    rows.forEach((row, y) => { let x = 0; while (x < 16) { const c = row[x]; if (c === '.') { x++; continue; } let w = 1; while (x + w < 16 && row[x + w] === c) w++; r += `<rect class="${CLS[c]}" x="${x}" y="${y}" width="${w}" height="1"/>`; x += w; } });
-    SVG[k] = r;
-  }
-  let frameName = '';
-  const show = name => { if (name !== frameName) { svg.innerHTML = SVG[name]; frameName = name; } };
-
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  const FLOOR = { floor: true };
-  let plat = null, x = 0, y = 0, dir = 1, state = 'sit', timer = 1.5, anim = 0;
-  let jump = null, vy = 0, last = 0, running = false;
-
-  // plataformas = topo de cada cartão visível (dentro da área visível da sua coluna) + a barra de tarefas
-  function rectOf(p) {
-    if (p === FLOOR) { const tb = document.querySelector('.taskbar').getBoundingClientRect(); return { left: 0, right: innerWidth, top: tb.top }; }
-    if (!p.isConnected || p.hidden || p.classList.contains('expanded')) return null;
-    const r = p.getBoundingClientRect();
-    if (!r.width) return null;
-    const col = p.parentElement && p.parentElement.classList.contains('col') ? p.parentElement.getBoundingClientRect() : null;
-    if (col && (r.top < col.top - 2 || r.top > col.bottom - 50)) return null;
-    if (r.top < 20 || r.top > innerHeight - 60) return null;
-    return { left: r.left, right: r.right, top: r.top };
-  }
-  function platforms() {
-    return cards.map(c => ({ el: c, r: rectOf(c) })).filter(p => p.r);
-  }
-  function clampX(r) { x = Math.max(r.left, Math.min(r.right - W, x)); }
-
-  function startJump(target) {
-    const tr = rectOf(target); if (!tr) return false;
-    const tx = rnd(tr.left + 4, Math.max(tr.left + 5, tr.right - W - 4));
-    dir = tx >= x ? 1 : -1;
-    const dist = Math.hypot(tx - x, tr.top - y);
-    // altura do salto: mais alto para subir, mas sem sair pelo topo do ecrã
-    const h = Math.max(12, Math.min(50 + Math.max(0, y - tr.top) * 0.6, Math.min(y, tr.top) - H - 4));
-    jump = { target, sx: x, sy: y, tx, t: 0, dur: Math.min(1.1, 0.45 + dist / 900), h };
-    state = 'jump'; show('jump');
-    return true;
-  }
-  function jumpSomewhere() {
-    const opts = platforms().filter(p => p.el !== plat && Math.abs(p.r.top - y) < 520 && Math.abs((p.r.left + p.r.right) / 2 - x) < 720);
-    if (!opts.length) return false;
-    opts.sort((a, b) => Math.hypot(a.r.left - x, a.r.top - y) - Math.hypot(b.r.left - x, b.r.top - y));
-    const pick = opts[Math.floor(Math.random() * Math.min(4, opts.length))];
-    return startJump(pick.el);
-  }
-  function decide() {
-    const r = Math.random();
-    if (r < 0.14) { state = 'sleep'; timer = rnd(7, 16); }
-    else if (r < 0.38) { state = 'sit'; timer = rnd(1.5, 4); }
-    else if (r < 0.62 && jumpSomewhere()) {}
-    else { state = 'walk'; timer = rnd(2, 6); if (Math.random() < 0.4) dir = -dir; }
-  }
-  function land(target) {
-    plat = target; jump = null; state = 'sit'; timer = rnd(0.6, 1.6); vy = 0;
-    if (huff) {   // acabou de ser largado: resmunga e afasta-se
-      huff = false; timer = 1.2;
-      setTimeout(() => { if (state === 'sit') { say(t('cat.huff'), 1400); } }, 150);
-    }
-  }
-  function fallTarget() {
-    // cartão mais perto por baixo do gato, senão a barra de tarefas
-    const below = platforms().filter(p => p.r.top >= y - 2 && x + W / 2 > p.r.left && x + W / 2 < p.r.right).sort((a, b) => a.r.top - b.r.top);
-    return below.length ? below[0].el : FLOOR;
-  }
-
-  function step(dt) {
-    anim += dt;
-    if (state === 'held') return;
-    if (state === 'jump') {
-      const tr = rectOf(jump.target);
-      if (!tr) { state = 'fall'; jump = null; return; }
-      jump.t = Math.min(1, jump.t + dt / jump.dur);
-      const t = jump.t;
-      x = jump.sx + (jump.tx - jump.sx) * t;
-      y = jump.sy + (tr.top - jump.sy) * t - jump.h * 4 * t * (1 - t);
-      if (t >= 1) { y = tr.top; land(jump.target); }
-      return;
-    }
-    if (state === 'fall') {
-      show('jump');
-      vy += 1600 * dt; y += vy * dt;
-      const tgt = fallTarget(), tr = rectOf(tgt);
-      if (tr && y >= tr.top) { y = tr.top; land(tgt); }
-      if (y > innerHeight) { y = rectOf(FLOOR).top; land(FLOOR); }
-      return;
-    }
-    const r = rectOf(plat);
-    if (!r) { state = 'fall'; vy = 0; return; }
-    y = r.top;
-    timer -= dt;
-    if (state === 'walk') {
-      x += dir * 42 * dt;
-      show(Math.floor(anim * 6) % 2 ? 'walk1' : 'walk2');
-      if (x <= r.left || x >= r.right - W) {
-        clampX(r);
-        if (Math.random() < 0.5 && jumpSomewhere()) return;
-        dir = -dir;
-      }
-      if (timer <= 0) decide();
-    } else if (state === 'sit') {
-      clampX(r); show('sit');
-      if (timer <= 0) decide();
-    } else if (state === 'sleep') {
-      clampX(r); show(Math.floor(anim / 1.2) % 2 ? 'sleep' : 'sleep2');
-      if (timer <= 0) { state = 'sit'; timer = rnd(1, 2.5); }
-    }
-  }
-  function render() {
-    el.classList.toggle('left', dir < 0 && state !== 'held');
-    el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y - H + 1)}px)`;
-    el.classList.toggle('sleeping', state === 'sleep');
-    el.classList.toggle('low', y - H < 34);   // perto do topo: nome e miau aparecem por baixo
-  }
-  function loop(ts) {
-    if (!running) return;
-    const dt = Math.min(0.05, (ts - (last || ts)) / 1000); last = ts;
-    step(dt); render();
-    requestAnimationFrame(loop);
-  }
-
-  let meowT;
-  function say(text, ms = 1300) {
-    meowEl.textContent = text;
-    meowEl.hidden = false; el.classList.add('meowing'); clearTimeout(meowT);
-    meowT = setTimeout(() => { meowEl.hidden = true; el.classList.remove('meowing'); }, ms);
-  }
-  function meow() {
-    say(lang === 'pt' ? 'miau!' : 'meow!');
-    if (reduce) return;
-    if (state === 'sleep') { state = 'sit'; timer = rnd(1, 2); }
-    else if (state !== 'jump' && state !== 'fall') jumpSomewhere();
-  }
-
-  // arrastar o gato: fica irritado enquanto está no ar e, ao largar, cai no cartão de baixo
-  let grab = null, huff = false;
-  el.addEventListener('pointerdown', e => {
-    if (e.button !== 0) return;
-    e.preventDefault();
-    el.setPointerCapture(e.pointerId);
-    grab = { sx: e.clientX, sy: e.clientY, moved: false };
-  });
-  el.addEventListener('pointermove', e => {
-    if (!grab) return;
-    if (!grab.moved && Math.hypot(e.clientX - grab.sx, e.clientY - grab.sy) < 5) return;
-    if (!grab.moved) { grab.moved = true; state = 'held'; jump = null; plat = null; el.classList.add('held'); show('angry'); say(t('cat.angry'), 60000); }
-    // seguro pelo cachaço: o rato fica no topo da cabeça
-    x = Math.max(0, Math.min(innerWidth - W, e.clientX - W / 2));
-    y = Math.max(H, Math.min(innerHeight - 4, e.clientY + H - 6));
-    if (!running) render();
-  });
-  function release() {
-    if (!grab) return;
-    const wasDrag = grab.moved; grab = null;
-    if (!wasDrag) { meow(); return; }
-    el.classList.remove('held');
-    meowEl.hidden = true; el.classList.remove('meowing');
-    huff = true; vy = 0; state = 'fall';
-    if (!running) {   // movimento reduzido: aterra logo
-      const tgt = fallTarget(), tr = rectOf(tgt); y = tr ? tr.top : y; plat = tgt; state = 'sleep'; show('sleep'); render();
-    }
-  }
-  el.addEventListener('pointerup', release);
-  el.addEventListener('pointercancel', release);
-
-  function start() {
-    if (isSmall()) { el.hidden = true; running = false; return; }
-    el.hidden = false;
-    if (!plat || !rectOf(plat)) {
-      plat = document.getElementById('welcome');
-      const r = rectOf(plat) || (plat = FLOOR, rectOf(FLOOR));
-      x = r.left + 24; y = r.top;
-    }
-    if (reduce) { state = 'sleep'; show('sleep'); render(); running = false; return; }
-    if (!running) { running = true; last = 0; requestAnimationFrame(loop); }
-  }
-  window.addEventListener('resize', () => { clearTimeout(cat._rt); cat._rt = setTimeout(start, 200); });
-  return { start };
-})();
-
-/* ================== MODO SIMPLES ================== */
-const modeBtn = document.getElementById('modebtn');
-function trimTitles() { if (simple) document.querySelectorAll('.card h2').forEach(h => { h.textContent = h.textContent.replace(/^#\s*/, ''); }); }
-function updateMode() { modeBtn.textContent = (simple ? '← ' : '★ ') + t(simple ? 'mode.retro' : 'mode.simple'); }
-function setSimple(on, { save = true } = {}) {
-  simple = on;
-  document.body.classList.toggle('simple', on);
-  if (on) { collapseExpanded(); toggleStart(false); }
-  wall.set(document.body.dataset.theme === 'gameboy' && !on);
-  if (!on) setLang(lang, { save: false });
-  updateMode(); trimTitles();
-  refresh();
-  cat.start();
-  window.scrollTo(0, 0);
-  if (save) {
-    try { localStorage.setItem('mode', on ? 'simple' : 'retro'); } catch (e) {}
-    try { const u = new URL(location.href); if (on) u.searchParams.set('simple', '1'); else u.searchParams.delete('simple'); history.replaceState(null, '', u); } catch (e) {}
-  }
-}
-modeBtn.addEventListener('click', () => setSimple(!simple));
-document.getElementById('w-simple').addEventListener('click', e => { e.preventDefault(); setSimple(true); });
-
-/* ================== ARRANQUE ================== */
-// por defeito: inglês + tema Game Boy. Um link com ?lang=pt abre logo em português.
-let savedTheme = null, savedLang = null;
-try { savedTheme = localStorage.getItem('theme'); savedLang = localStorage.getItem('lang'); } catch (e) {}
-const urlLang = new URLSearchParams(location.search).get('lang');
-restoreOrder();
-setTheme(THEMES.includes(savedTheme) ? savedTheme : 'gameboy');
-setLang(LANGS.includes(urlLang) ? urlLang : (LANGS.includes(savedLang) ? savedLang : 'en'), { save: !urlLang });
-hydrateIcons();
-const urlSimple = new URLSearchParams(location.search).get('simple');
-let savedMode = null; try { savedMode = localStorage.getItem('mode'); } catch (e) {}
-if (urlSimple !== null ? urlSimple !== '0' : savedMode === 'simple') { simple = true; document.body.classList.add('simple'); }
-updateMode(); trimTitles();
-refresh();
-document.fonts && document.fonts.ready.then(() => { layout(); cat.start(); });
-setTimeout(() => cat.start(), 300);
-const startCard = document.getElementById(location.hash.slice(1));
-if (startCard && startCard.classList.contains('card')) setTimeout(() => goTo(startCard), 50);
-</script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

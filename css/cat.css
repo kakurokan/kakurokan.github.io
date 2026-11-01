@@ -1,0 +1,35 @@
+/* ================= gato ================= */
+.cat {
+  --cat-o: #1A1022; --cat-b: #FAF7F0; --cat-s: #F28C28; --cat-e: #3E9BE0; --cat-p: #FF8AB4;
+  position: fixed; left: 0; top: 0; width: 48px; height: 36px; z-index: 2500; cursor: pointer;
+  will-change: transform; user-select: none; -webkit-tap-highlight-color: transparent;
+}
+[data-theme="gameboy"] .cat { --cat-o: #0F380F; --cat-b: #9BBC0F; --cat-s: #306230; --cat-e: #0F380F; --cat-p: #306230; }
+.cat svg { width: 48px; height: 36px; display: block; image-rendering: pixelated; shape-rendering: crispEdges; }
+.cat.left svg { transform: scaleX(-1); }
+.cat .o { fill: var(--cat-o); } .cat .b { fill: var(--cat-b); } .cat .s { fill: var(--cat-s); } .cat .e { fill: var(--cat-e); } .cat .p { fill: var(--cat-p); }
+.cat .zzz { position: absolute; left: 30px; top: -10px; font: 700 14px var(--pixel); color: var(--cat-o); pointer-events: none; opacity: 0; }
+.cat.sleeping .zzz { animation: zzz 2.4s steps(6) infinite; }
+.cat.left .zzz { left: 4px; }
+@keyframes zzz { 0% { opacity: 0; transform: translate(0, 6px); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(8px, -16px); } }
+.cat .meow {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); white-space: nowrap; pointer-events: none;
+  padding: 2px 8px; background: var(--card); color: var(--text); border: 2px solid var(--bar); font: 700 13px var(--pixel);
+}
+.cat .meow[hidden] { display: none; }
+.cat .nm {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); pointer-events: none; opacity: 0; transition: opacity .1s;
+  padding: 1px 7px; background: var(--card); color: var(--text); border: 2px solid var(--bar); box-shadow: 3px 3px 0 var(--shadow); font: 700 13px var(--pixel); letter-spacing: .06em; white-space: nowrap;
+}
+.cat:hover .nm { opacity: 1; }
+.cat.low .nm, .cat.low .meow { bottom: auto; top: 40px; }
+.cat.meowing .nm { opacity: 0; }
+.cat[hidden] { display: none; }
+.cat.held { cursor: grabbing; z-index: 4200; }
+.cat.held svg { animation: thrash .12s steps(2) infinite; }
+@keyframes thrash { 0% { transform: translate(-2px, 0) rotate(-4deg); } 100% { transform: translate(2px, 1px) rotate(4deg); } }
+.cat.held .nm { opacity: 0; }
+.cat .grr { position: absolute; left: -6px; top: -14px; font: 700 15px var(--pixel); color: #E01818; pointer-events: none; opacity: 0; }
+[data-theme="gameboy"] .cat .grr { color: #0F380F; }
+.cat.held .grr { opacity: 1; animation: grr .3s steps(2) infinite; }
+@keyframes grr { 50% { transform: translate(2px, -2px) scale(1.2); } }
