@@ -76,7 +76,7 @@ export const PROJECTS = [
 
 // lista compacta do cartão "More projects"
 export const MORE = [
-  { name: 'DNS Client from Scratch', url: 'https://github.com/kakurokan/DNSClient', tech: 'Python · TDD · UDP sockets · Wireshark',
+  { name: 'DNS Client from Scratch', url: 'https://github.com/kakurokan/DNSClient', tech: 'Python · UDP sockets · Wireshark',
     desc: { en: 'Builds DNS query packets byte by byte.', pt: 'Constrói os pacotes de consulta DNS byte a byte.' } },
   { name: 'PuzzleAI Collection', url: 'https://github.com/kakurokan/PuzzleAI-Collection', tech: 'Java · TDD · Best-First search · JUnit 5',
     desc: { en: 'Ball Sort solver.', pt: 'Solver de Ball Sort.' } },
