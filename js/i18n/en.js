@@ -53,6 +53,7 @@ export default {
   'cv.skills': 'Skills', 'cv.download': 'Download', 'cv.open': 'Open', 'cv.file': 'cv-en.pdf',
   'contact.copy': 'Copy email', 'contact.copied': 'Copied!', 'contact.copyFail': 'Could not copy',
   'card.activity': 'Activity', 'activity.title': '#Activity', 'activity.text': 'Latest commits from my public repositories, straight from the GitHub API.', 'activity.all': 'All activity on GitHub',
+  'activity.graph': n => `${n} contributions in the last 6 months`,
   'contact.based': 'Based in Faro, Portugal · Available from July 2027', 'contact.title': '#Hire me', 'contact.text': "Looking for a junior backend role (Java or Python) from July 2027. If you hire juniors, tell me what a junior's first project looks like, and I'll tell you how I'd approach it.",
   'drag.title': '#Drag',
   'drag.text': 'Grab a card by its bar and drop it on another one to swap places. The order is saved. <span class="muted">(On a computer.)</span>',

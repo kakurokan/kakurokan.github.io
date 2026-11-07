@@ -1,19 +1,40 @@
-// Cartão "Activity": últimos commits dos repositórios públicos, vindos da API pública do GitHub (sem token).
-// Fica escondido até haver dados; se a API falhar (rede, limite de pedidos) o cartão simplesmente não aparece.
+// Cartão "Activity": gráfico de contribuições e últimos commits, vindos de APIs públicas (sem token).
+// Fica escondido até haver dados; se tudo falhar (rede, limites) o cartão simplesmente não aparece,
+// e cada parte esconde-se sozinha se o seu pedido falhar.
 import { state, unavailable, on, emit } from '../state.js';
 import { t, locale } from '../i18n/index.js';
 import { store } from '../store.js';
 
 const USER = 'kakurokan';
-const API = `https://api.github.com/search/commits?q=author:${USER}&sort=author-date&order=desc&per_page=30`;
-const TTL = 30 * 60 * 1000;   // a API sem token deixa 10 pesquisas por minuto: um pedido a cada meia hora chega e sobra
-const SHOWN = 6;
+const COMMITS = `https://api.github.com/search/commits?q=author:${USER}&sort=author-date&order=desc&per_page=30`;   // 10 pesquisas/min sem token
+const CONTRIBS = `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`;                                 // serviço comunitário (CORS aberto)
+const TTL = 30 * 60 * 1000;
+const SHOWN = 6, WEEKS = 27;   // 27 semanas cabem no cartão com quadrados legíveis
 const list = document.getElementById('activity-list');
+const graph = document.getElementById('activity-graph');
+const cap = document.getElementById('activity-cap');
 
-let items = [], started = false;
+let commits = [], days = [], started = false;
 
-function read() { try { return JSON.parse(store.get('activity')); } catch (e) { return null; } }
-const valid = c => c && Array.isArray(c.items) && c.items.length && typeof c.at === 'number';
+// pede o JSON, guarda-o no localStorage e, se o pedido falhar, serve a última cópia (mesmo velha)
+async function cachedJson(key, url, pick, headers) {
+  let cached = null;
+  try { cached = JSON.parse(store.get(key)); } catch (e) {}
+  const ok = cached && typeof cached.at === 'number' && Array.isArray(cached.data) && cached.data.length;
+  if (ok && Date.now() - cached.at < TTL) return cached.data;
+  try {
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 8000);
+    const res = await fetch(url, { signal: ctl.signal, headers });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error(res.status);
+    const data = pick(await res.json());
+    if (!data.length) throw new Error('empty');
+    store.set(key, JSON.stringify({ at: Date.now(), data }));
+    return data;
+  } catch (e) {
+    return ok ? cached.data : null;
+  }
+}
 
 function ago(iso) {
   const s = (new Date(iso) - Date.now()) / 1000, rtf = new Intl.RelativeTimeFormat(locale(), { numeric: 'auto' });
@@ -21,9 +42,9 @@ function ago(iso) {
   return rtf.format(0, 'second');
 }
 
-function render() {
-  if (!items.length) return;
-  list.replaceChildren(...items.map(it => {
+function renderCommits() {
+  if (!commits.length) return;
+  list.replaceChildren(...commits.map(it => {
     const a = document.createElement('a'), msg = document.createElement('span'), meta = document.createElement('small');
     a.href = it.url; a.target = '_blank'; a.rel = 'noopener';
     msg.className = 'msg'; msg.textContent = it.msg;
@@ -33,8 +54,25 @@ function render() {
   }));
 }
 
-function show(data) {
-  items = data;
+function renderGraph() {
+  if (!days.length) return;
+  const total = days.reduce((n, d) => n + d[1], 0), label = t('activity.graph')(total);
+  const cells = days.map(([date, count, level], i) => {
+    const c = document.createElement('i');
+    c.dataset.l = level;
+    c.title = `${date}: ${count}`;
+    if (!i) c.style.gridRowStart = new Date(date + 'T00:00:00').getDay() + 1;   // a primeira semana pode começar a meio
+    return c;
+  });
+  graph.replaceChildren(...cells);
+  graph.setAttribute('aria-label', label);
+  cap.textContent = label;
+  graph.hidden = cap.hidden = false;
+}
+
+function render() { renderCommits(); renderGraph(); }
+
+function reveal() {
   render();
   unavailable.delete('activity');
   emit('content');
@@ -42,23 +80,15 @@ function show(data) {
 }
 
 async function load() {
-  const cached = read();
-  if (valid(cached) && Date.now() - cached.at < TTL) return show(cached.items);
-  try {
-    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 8000);
-    const res = await fetch(API, { signal: ctl.signal, headers: { Accept: 'application/vnd.github+json' } });
-    clearTimeout(timer);
-    if (!res.ok) throw new Error(res.status);
-    const json = await res.json();
-    const fresh = json.items.filter(i => !/^Merge /.test(i.commit.message)).slice(0, SHOWN).map(i => ({
+  const [c, g] = await Promise.all([
+    cachedJson('activity', COMMITS, j => j.items.filter(i => !/^Merge /.test(i.commit.message)).slice(0, SHOWN).map(i => ({
       msg: i.commit.message.split('\n')[0], repo: i.repository.name, date: i.commit.author.date, url: i.html_url
-    }));
-    if (!fresh.length) throw new Error('empty');
-    store.set('activity', JSON.stringify({ at: Date.now(), items: fresh }));
-    show(fresh);
-  } catch (e) {
-    if (valid(cached)) show(cached.items);   // sem rede ou limite atingido: serve a última versão guardada
-  }
+    })), { Accept: 'application/vnd.github+json' }),
+    cachedJson('contribs', CONTRIBS, j => j.contributions.slice(-WEEKS * 7).map(d => [d.date, d.count, d.level]))
+  ]);
+  if (c) commits = c;
+  if (g) days = g;
+  if (c || g) reveal();
 }
 
 // só pede os dados quando o desktop retro está à vista, e só uma vez

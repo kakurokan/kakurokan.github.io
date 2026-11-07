@@ -54,6 +54,7 @@ export default {
   'cv.file': 'cv-en.pdf',   // TODO: quando tiveres o CV em português, põe cv-pt.pdf na pasta e muda aqui
   'contact.copy': 'Copiar email', 'contact.copied': 'Copiado!', 'contact.copyFail': 'Não consegui copiar',
   'card.activity': 'Atividade', 'activity.title': '#Atividade', 'activity.text': 'Últimos commits dos meus repositórios públicos, direto da API do GitHub.', 'activity.all': 'Toda a atividade no GitHub',
+  'activity.graph': n => `${n} contribuições nos últimos 6 meses`,
   'contact.based': 'Em Faro, Portugal · Disponível a partir de julho de 2027', 'contact.title': '#Contrata-me', 'contact.text': 'À procura de uma vaga júnior de backend (Java ou Python) a partir de julho de 2027. Se contratas juniores, conta-me como é o primeiro projeto de um júnior, e eu digo-te como o abordaria.',
   'drag.title': '#Arrasta',
   'drag.text': 'Agarra um cartão pela barra e larga-o em cima de outro para trocarem de lugar. A ordem fica guardada. <span class="muted">(Num computador.)</span>',

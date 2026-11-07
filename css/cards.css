@@ -158,3 +158,10 @@ mark { background: var(--head); color: var(--card); padding: 0 1px; }
 .activity a:last-child { border-bottom: 2px dotted var(--bar); }
 .activity .msg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
 .activity small { color: var(--muted); font-weight: 600; }
+.graph-cap { margin: 8px 0 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.graph { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; grid-template-rows: repeat(7, auto); gap: 2px; margin-bottom: 8px; }
+.graph i { display: block; aspect-ratio: 1; background: var(--bar); opacity: .12; }
+.graph i[data-l="1"] { opacity: .3; }
+.graph i[data-l="2"] { opacity: .5; }
+.graph i[data-l="3"] { opacity: .75; }
+.graph i[data-l="4"] { opacity: 1; }
