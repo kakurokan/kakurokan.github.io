@@ -11,6 +11,7 @@ import { initTags } from './ui/tags.js';
 import { initTaskbar } from './ui/taskbar.js';
 import { initTerminal } from './ui/terminal.js';
 import { initClock } from './ui/clock.js';
+import { initContact } from './ui/contact.js';
 import { initSearch } from './ui/search.js';
 import { initMode, applyInitialMode } from './ui/mode.js';
 import { initThemes, setTheme, THEMES } from './ui/themes.js';
@@ -23,7 +24,7 @@ async function init() {
   const savedTheme = store.get('theme'), savedLang = store.get('lang');
   const lang = LANGS.includes(urlLang) ? urlLang : (LANGS.includes(savedLang) ? savedLang : 'en');
 
-  initLayout(); initCards(); initTags(); initTaskbar(); initTerminal(); initClock(); initSearch(); initMode();
+  initLayout(); initCards(); initTags(); initTaskbar(); initTerminal(); initClock(); initContact(); initSearch(); initMode();
   initThemes(); initStartMenu(); initLang();
   const startCat = initFx();
 

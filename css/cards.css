@@ -152,3 +152,4 @@ mark { background: var(--head); color: var(--card); padding: 0 1px; }
 .contact-list a { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 46px; border-top: 2px dotted var(--bar); text-decoration: none; }
 .contact-list a:last-child { border-bottom: 2px dotted var(--bar); }
 .contact-list small { color: var(--muted); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.copy-row { margin: 12px 0 0; }
