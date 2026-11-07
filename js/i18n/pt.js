@@ -13,7 +13,7 @@ export default {
   'welcome.text': 'Sou o <b>Léo Souza</b>, engenheiro de software (Java, Python) a terminar a licenciatura em Engenharia Informática na Universidade do Algarve. Medir e depois perceber porquê é a minha forma de trabalhar.',
   'welcome.contact': 'contacto',
   'now.title': '#Agora',
-  'now.text': 'Na equipa de backend do ENEI 2027, o encontro nacional de estudantes de informática que vem a Faro. A plataforma de bilhetes vai para o ar a 2 de novembro!',
+  'now.text': 'Na equipa de backend do ENEI 2027, o encontro nacional de estudantes de informática que vem a Faro. A plataforma de bilhetes foi para o ar a 2 de novembro!',
   'themes.title': '#Temas', 'themes.text': 'Escolhe um tema para mudar o visual do site. A escolha fica guardada.',
   'themes.rosa': 'rosa', 'themes.menta': 'menta', 'themes.noite': 'noite',
   'themes.gameboy.aria': 'Tema Game Boy', 'themes.vapor.aria': 'Tema vaporwave', 'themes.rosa.aria': 'Tema rosa', 'themes.menta.aria': 'Tema menta', 'themes.noite.aria': 'Tema noite',
