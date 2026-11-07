@@ -1,5 +1,5 @@
 // Pesquisa: mostra os cartões que têm o texto (mesmo fechados), destaca-o e abre os projetos que o têm.
-import { state, cards, closed, SIMPLE_ORDER, isSmall, on } from '../state.js';
+import { state, cards, closed, unavailable, SIMPLE_ORDER, isSmall, on } from '../state.js';
 import { t } from '../i18n/index.js';
 import { norm, debounce } from '../util.js';
 import { layout } from './layout.js';
@@ -23,7 +23,7 @@ export function refresh() {
   const q = state.simple ? '' : norm(searchIn.value.trim());
   let n = 0;
   cards.forEach(c => {
-    const show = state.simple ? SIMPLE_ORDER.includes(c.id) : (q ? textOf(c).includes(q) : !closed.has(c.id));
+    const show = !unavailable.has(c.id) && (state.simple ? SIMPLE_ORDER.includes(c.id) : (q ? textOf(c).includes(q) : !closed.has(c.id)));
     c.hidden = !show;
     if (show) n++;
   });

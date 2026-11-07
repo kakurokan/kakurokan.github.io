@@ -5,12 +5,14 @@ export const state = { lang: 'en', theme: 'gameboy', simple: false, activeTag: n
 export const cards = [...document.querySelectorAll('.card')];   // a ordem aqui é a ordem dos cartões no ecrã
 
 // ordem inicial: os cartões são distribuídos pelas colunas da esquerda para a direita, linha a linha
-export const DEFAULT_ORDER = ['welcome', 'projects', 'contests', 'stack', 'education', 'terminal', 'contact', 'about', 'now', 'path', 'more', 'cv', 'themes', 'drag'];
+export const DEFAULT_ORDER = ['welcome', 'projects', 'contests', 'stack', 'education', 'terminal', 'contact', 'activity', 'about', 'now', 'path', 'more', 'cv', 'themes', 'drag'];
 // cartões que começam fechados (ficam na barra de tarefas, nos ícones e no menu para reabrir)
 export const DEFAULT_CLOSED = ['about', 'now', 'path', 'more', 'cv', 'themes', 'drag'];
 // modo simples: uma coluna, sem desktop retro, para quem só quer ler o essencial
 export const SIMPLE_ORDER = ['welcome', 'projects', 'more', 'stack', 'education', 'contests', 'about', 'path', 'cv', 'contact'];
 export const closed = new Set(DEFAULT_CLOSED);
+// cartões sem conteúdo (ainda ou por falha da rede): ficam escondidos, também na barra de tarefas
+export const unavailable = new Set(['activity']);
 
 export const isSmall = () => state.simple || matchMedia('(max-width: 860px)').matches;
 

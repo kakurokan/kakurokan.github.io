@@ -153,3 +153,8 @@ mark { background: var(--head); color: var(--card); padding: 0 1px; }
 .contact-list a:last-child { border-bottom: 2px dotted var(--bar); }
 .contact-list small { color: var(--muted); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .copy-row { margin: 12px 0 0; }
+.activity { display: flex; flex-direction: column; margin-top: 4px; }
+.activity a { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-top: 2px dotted var(--bar); text-decoration: none; min-width: 0; }
+.activity a:last-child { border-bottom: 2px dotted var(--bar); }
+.activity .msg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+.activity small { color: var(--muted); font-weight: 600; }
