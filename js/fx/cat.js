@@ -14,6 +14,7 @@ const F = {
   walk2: ['...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OS......OBBPBO','..OBOOOOOOOBBBO.','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','..OBSBBSBBSBBO..','..OBOOOOOOOOBO..','...OBO..OBO.....','....OO...OO.....'],
   sit:   ['...........O..O.','..........OBOOBO','..........OBSSBO','..........OBEBEO','..........OBBPBO','........OOOBBBO.','.......OBSBBSBO.','......OBBSBBSBO.','......OBBSBBSBO.','O.....OBBSBBSBO.','OS....OBBOBBBBO.','.OOOOOOOOOOOOOO.'],
   sitUp: ['...........O..O.','..........OBOOBO','..........OBEBEO','..........OBBBBO','..........OBBPBO','........OOOBBBO.','.......OBSBBSBO.','......OBBSBBSBO.','......OBBSBBSBO.','O.....OBBSBBSBO.','OS....OBBOBBBBO.','.OOOOOOOOOOOOOO.'],   // olhos para cima
+  crouch: ['................','................','...........O..O.','..........OBOOBO','..........OBSSBO','O.........OBEBEO','OS........OBBPBO','.OOOOOOOOOOBBBO.','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','..OBSBBSBBSBBO..','..OOOOOOOOOOOO..'],   // agachado: antes de saltar e ao aterrar
   sleep: ['................','................','................','................','................','........O..O....','...OOOOOOBOOBO..','..OBSBBSBBSBBBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
   sleep2:['................','................','................','................','................','................','...OOOOOO.O..O..','..OBSBBSBOBOOBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
   angry: ['...OOO....OOO...','....OBOOOOBO....','....OOBBBBOO....','....OEOBBOEO....','....OBBPPBBO....','.....OBBBBO.....','..OOOBSBBSBOOO..','.OBBOBSBBSBOBBO.','.OO.OBSBBSBO.OO.','....OBBBBBBO....','...OBBOOOOBBO.SO','...OO......OO.OS'],
@@ -33,7 +34,8 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const rnd = (a, b) => a + Math.random() * (b - a);
 const FLOOR = { floor: true };
 let plat = null, x = 0, y = 0, dir = 1, state = 'sit', timer = 1.5, anim = 0;
-let jump = null, vy = 0, last = 0, running = false;
+let jump = null, vy = 0, last = 0, running = false, squash = 0;
+const G = 1500;   // gravidade dos saltos, em px/s²
 
 // de noite (hora de quem visita) o gato quase só dorme
 const isNight = () => { const h = new Date().getHours(); return h >= 23 || h < 7; };
@@ -41,7 +43,7 @@ const nap = () => { state = 'sleep'; timer = isNight() ? rnd(25, 50) : rnd(7, 16
 
 // cartão acabado de abrir (barra de tarefas, ícones, prompt…): o gato vai lá ver. De noite não se levanta por isso.
 let wanted = null, wantedUntil = 0;
-on('goto', card => { if (card && !(state === 'sleep' && isNight())) { wanted = card; wantedUntil = performance.now() + 4000; } });
+on('goto', card => { if (card && !(state === 'sleep' && isNight())) { wanted = card; wantedUntil = performance.now() + 8000; } });
 
 // onde anda o cursor, para o gato olhar para ele quando está sentado
 let mouse = null;
@@ -79,15 +81,28 @@ function startJump(target) {
   const tr = rectOf(target); if (!tr) return false;
   const tx = rnd(tr.left + 4, Math.max(tr.left + 5, tr.right - W - 4));
   dir = tx >= x ? 1 : -1;
-  const dist = Math.hypot(tx - x, tr.top - y);
-  // altura do salto: mais alto para subir, mas sem sair pelo topo do ecrã
-  const h = Math.max(12, Math.min(50 + Math.max(0, y - tr.top) * 0.6, Math.min(y, tr.top) - H - 4));
-  jump = { target, sx: x, sy: y, tx, t: 0, dur: Math.min(1.1, 0.45 + dist / 900), h };
-  state = 'jump'; show('jump');
+  // salto balístico: sobe até passar o destino (mais alto quanto mais longe, sem sair pelo topo do ecrã) e cai com a
+  // gravidade, por isso a duração vem da física e não de um valor fixo
+  const rise = Math.max(0, y - tr.top);
+  const up = Math.max(rise + 8, Math.min(rise + 24 + Math.abs(tx - x) * 0.15, y - H - 4));
+  const down = up - (y - tr.top);
+  jump = { target, sx: x, sy: y, tx, t: 0, prep: 0.14, v0: Math.sqrt(2 * G * up), T: Math.sqrt(2 * up / G) + Math.sqrt(2 * down / G) };
+  state = 'crouch'; show('crouch');   // agacha-se um instante antes de saltar
   return true;
 }
+// longe demais para um salto só (um gato salta umas 6 vezes a sua altura): mais de 230 px a subir ou 560 px para o lado
+const far = r => y - r.top > 230 || Math.abs((r.left + r.right) / 2 - (x + W / 2)) > 560;
+// vai para um cartão; se estiver longe, salta primeiro para um cartão intermédio que fique mais perto do destino
+function hopToward(target) {
+  const tr = rectOf(target); if (!tr) return false;
+  if (!far(tr)) return startJump(target);
+  const mid = r => (r.left + r.right) / 2, d = r => Math.hypot(mid(r) - mid(tr), r.top - tr.top);
+  const here = Math.hypot(x + W / 2 - mid(tr), y - tr.top);
+  const via = platforms().filter(p => p.el !== plat && p.el !== target && !far(p.r) && d(p.r) < here - 40).sort((a, b) => d(a.r) - d(b.r))[0];
+  return startJump(via ? via.el : target);
+}
 function jumpSomewhere() {
-  const opts = platforms().filter(p => p.el !== plat && Math.abs(p.r.top - y) < 520 && Math.abs((p.r.left + p.r.right) / 2 - x) < 720);
+  const opts = platforms().filter(p => p.el !== plat && !far(p.r) && p.r.top - y < 520);
   if (!opts.length) return false;
   opts.sort((a, b) => Math.hypot(a.r.left - x, a.r.top - y) - Math.hypot(b.r.left - x, b.r.top - y));
   const pick = opts[Math.floor(Math.random() * Math.min(4, opts.length))];
@@ -101,7 +116,7 @@ function decide() {
   else { state = 'walk'; timer = rnd(2, 6); if (Math.random() < 0.4) dir = -dir; }
 }
 function land(target) {
-  plat = target; jump = null; state = 'sit'; timer = rnd(0.6, 1.6); vy = 0;
+  plat = target; jump = null; state = 'sit'; timer = rnd(0.6, 1.6); vy = 0; squash = 0.12;   // amortece a queda
   if (huff) {   // acabou de ser largado: resmunga e afasta-se
     huff = false; timer = 1.2;
     setTimeout(() => { if (state === 'sit') { say(t('cat.huff'), 1400); } }, 150);
@@ -123,14 +138,21 @@ function fallTarget(from = y) {   // from: onde o gato estava antes deste passo 
 function step(dt) {
   anim += dt;
   if (state === 'held' || grab) return;   // agarrado (ou com o rato premido): fica quieto
+  if (state === 'crouch') {
+    show('crouch');
+    jump.prep -= dt;
+    if (jump.prep <= 0) state = 'jump';
+    return;
+  }
   if (state === 'jump') {
     const tr = rectOf(jump.target);
-    if (!tr) { state = 'fall'; jump = null; return; }
-    jump.t = Math.min(1, jump.t + dt / jump.dur);
+    if (!tr) { state = 'fall'; vy = 0; jump = null; return; }
+    jump.t = Math.min(jump.T, jump.t + dt);
     const t = jump.t;
-    x = jump.sx + (jump.tx - jump.sx) * t;
-    y = jump.sy + (tr.top - jump.sy) * t - jump.h * 4 * t * (1 - t);
-    if (t >= 1) { y = tr.top; land(jump.target); }
+    x = jump.sx + (jump.tx - jump.sx) * t / jump.T;
+    y = jump.sy - (jump.v0 * t - G * t * t / 2);
+    show(jump.v0 - G * t > 0 ? 'jump' : 'walk1');   // a subir estica-se; a descer põe as patas para baixo
+    if (t >= jump.T) { y = tr.top; land(jump.target); }
     return;
   }
   if (state === 'fall') {
@@ -147,8 +169,9 @@ function step(dt) {
   y = r.top;
   if (wanted) {
     if (performance.now() > wantedUntil || wanted === plat) wanted = null;
-    else if (startJump(wanted)) { wanted = null; return; }   // se o cartão ainda não está à vista, tenta outra vez no próximo passo
+    else if (squash <= 0 && hopToward(wanted)) { if (jump.target === wanted) wanted = null; return; }   // se ainda não está à vista, tenta outra vez no próximo passo
   }
+  if (squash > 0) { squash -= dt; clampX(r); show('crouch'); return; }
   timer -= dt;
   if (state === 'walk') {
     x += dir * 42 * dt;
@@ -193,7 +216,7 @@ function meow() {
   say(app.lang === 'pt' ? 'miau!' : 'meow!');
   if (reduce) return;
   if (state === 'sleep') { state = 'sit'; timer = rnd(1, 2); }
-  else if (state !== 'jump' && state !== 'fall') jumpSomewhere();
+  else if (state !== 'jump' && state !== 'crouch' && state !== 'fall') jumpSomewhere();
 }
 
 // arrastar o gato: fica irritado enquanto está no ar e, ao largar, cai e pára na primeira aba que encontra
