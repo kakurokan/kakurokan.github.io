@@ -2,8 +2,8 @@
 export const PROJECTS = [
   { slug: 'enei-2027', name: { en: 'ENEI 2027 Platform', pt: 'Plataforma ENEI 2027' },
     meta: { en: 'Volunteer backend developer · Jun 2026 – present · hybrid', pt: 'Backend developer voluntário · jun 2026 – presente · híbrido' },
-    desc: { en: 'Backend of the website and ticketing platform for ENEI, the National Gathering of Informatics Students coming to Faro. Launching Nov 9. FastAPI with a domain-oriented modular architecture, SQLAlchemy 2 and PostgreSQL.',
-            pt: 'Backend do site e da plataforma de bilhetes do ENEI, o Encontro Nacional de Estudantes de Informática, que vem a Faro. Lançamento a 9 de novembro. FastAPI com arquitetura modular orientada a domínios, SQLAlchemy 2 e PostgreSQL.' },
+    desc: { en: 'Backend of the website and ticketing platform for ENEI, the National Gathering of Informatics Students coming to Faro. Live since Nov 9. FastAPI with a domain-oriented modular architecture, SQLAlchemy 2 and PostgreSQL.',
+            pt: 'Backend do site e da plataforma de bilhetes do ENEI, o Encontro Nacional de Estudantes de Informática, que vem a Faro. No ar desde 9 de novembro. FastAPI com arquitetura modular orientada a domínios, SQLAlchemy 2 e PostgreSQL.' },
     stats: [ ['23', { en: 'PRs merged', pt: 'PRs aceites' }], ['14', { en: 'PRs reviewed', pt: 'PRs revistos' }],
              ['~970', { en: 'test functions', pt: 'funções de teste' }], ['7', { en: 'migrations', pt: 'migrações' }] ],
     points: [
@@ -17,7 +17,7 @@ export const PROJECTS = [
         pt: 'Escrevi 7 das 28 migrações Alembic e tirei os tokens dos logs do nginx, numa stack Docker Compose de 8 serviços monitorizada com Prometheus.' }
     ],
     tags: ['Python', 'TDD', 'FastAPI', 'SQLAlchemy 2', 'PostgreSQL', 'Alembic', 'Docker Compose', 'Prometheus', 'CI/CD'],
-    links: [ ['website', 'https://www.eneifaro.pt/'] ],
+    links: [ ['website', 'https://eneiconf.pt/'] ],
     repo: 'https://github.com/Dep-tech-coenei-faro-27/event-site' },
   { slug: 'fintlist', name: 'FintList',
     meta: { en: 'High-performance int list · co-developed with a classmate', pt: 'Lista de int de alto desempenho · feita com um colega' },

@@ -9,7 +9,7 @@ export const DEFAULT_ORDER = ['welcome', 'projects', 'contests', 'stack', 'educa
 // cartões que começam fechados (ficam na barra de tarefas, nos ícones e no menu para reabrir)
 export const DEFAULT_CLOSED = ['about', 'now', 'path', 'more', 'cv', 'themes', 'drag'];
 // modo simples: uma coluna, sem desktop retro, para quem só quer ler o essencial
-export const SIMPLE_ORDER = ['welcome', 'projects', 'more', 'stack', 'education', 'contests', 'about', 'path', 'cv', 'contact'];
+export const SIMPLE_ORDER = ['welcome', 'projects', 'more', 'stack', 'education', 'contests', 'about', 'path', 'cv', 'activity', 'contact'];
 export const closed = new Set(DEFAULT_CLOSED);
 // cartões sem conteúdo (ainda ou por falha da rede): ficam escondidos, também na barra de tarefas
 export const unavailable = new Set(['activity']);

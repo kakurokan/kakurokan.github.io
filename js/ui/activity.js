@@ -1,7 +1,7 @@
 // Cartão "Activity": gráfico de contribuições e últimos commits, vindos de APIs públicas (sem token).
 // Fica escondido até haver dados; se tudo falhar (rede, limites) o cartão simplesmente não aparece,
 // e cada parte esconde-se sozinha se o seu pedido falhar.
-import { state, unavailable, on, emit } from '../state.js';
+import { unavailable, on, emit } from '../state.js';
 import { t, locale } from '../i18n/index.js';
 import { store } from '../store.js';
 
@@ -91,11 +91,9 @@ async function load() {
   if (c || g) reveal();
 }
 
-// só pede os dados quando o desktop retro está à vista, e só uma vez
-function start() { if (started || state.simple) return; started = true; load(); }
+function start() { if (started) return; started = true; load(); }
 
 export function initActivity() {
   on('lang', render);
-  on('simple', start);
   setTimeout(start, 800);   // depois do primeiro desenho: não compete com o arranque
 }

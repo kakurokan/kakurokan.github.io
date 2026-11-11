@@ -94,9 +94,9 @@
         <div class="post">
           <div class="who">
             <span class="av" aria-hidden="true">LS</span>
-            <div><b>léo @kakurokan</b><time class="local-date" datetime="2026-10-31">31 Oct 2026</time></div>
+            <div><b>léo @kakurokan</b><time class="local-date" datetime="2026-11-09">9 Nov 2026</time></div>
           </div>
-          <p data-t="now.text">Backend team for ENEI 2027, the national informatics students’ conference coming to Faro. The ticketing platform launches on November 9!</p>
+          <p data-t="now.text">Backend team for ENEI 2027, the national informatics students’ conference coming to Faro. The ticketing platform went live on November 9!</p>
         </div>
       </div>
     </article>
@@ -131,22 +131,22 @@
           <button class="btn raised" id="tag-clear" data-t="tags.clear">Show all</button>
         </div>
         <div class="projects" id="project-list"><!--prerender:projects-->
-    <details open>
+    <details id="enei-2027" open>
       <summary><svg class="px" data-px="folder"></svg>ENEI 2027 Platform<span class="arrow" aria-hidden="true">&gt;</span></summary>
       <div class="pbody">
         <span class="path">C:\Projects\enei-2027</span>
         <span class="pmeta">Volunteer backend developer · Jun 2026 – present · hybrid</span>
-        <p>Backend of the website and ticketing platform for ENEI, the National Gathering of Informatics Students coming to Faro. Launching Nov 9. FastAPI with a domain-oriented modular architecture, SQLAlchemy 2 and PostgreSQL.</p>
+        <p>Backend of the website and ticketing platform for ENEI, the National Gathering of Informatics Students coming to Faro. Live since Nov 9. FastAPI with a domain-oriented modular architecture, SQLAlchemy 2 and PostgreSQL.</p>
         <div class="stats"><span class="stat"><b>23</b><span>PRs merged</span></span><span class="stat"><b>14</b><span>PRs reviewed</span></span><span class="stat"><b>~970</b><span>test functions</span></span><span class="stat"><b>7</b><span>migrations</span></span></div>
         <ul class="points"><li>Shipped 23 merged PRs (80 of the repo’s 421 commits): JWT auth middleware, password recovery, remember-me, terms acceptance, login hardening (rate limits, hashed-IP auth events, recovery links revoked on password change), an admin-promotion CLI, and the HMAC-signed, PII-free QR payload generator for tickets.</li><li>Built the ticket email on top of the durable email outbox: multipart email with an inline QR (checked in Gmail and Outlook, light and dark) and a fallback SMTP transport that takes over when the primary hits its daily quota, with the daily count reserved in one atomic UPDATE and race-tested on PostgreSQL. Also built the student-proof flow, which pre-validates digital signatures against EU trusted lists.</li><li>Wrote ~200 of the suite’s ~970 test functions and reviewed 14 PRs from 4 teammates; every change passes CI before the SSH deploy: ruff, pytest on PostgreSQL, migration safety/drift/reversibility checks, a real-server end-to-end flow with simulated payments, container start-up, pip-audit and npm audit. Added a load-test harness (300 purchases + 300 logins in 10 s, 0 errors, measured locally) that informed the per-IP rate limits.</li><li>Wrote 7 of the 28 Alembic migrations and kept tokens out of the nginx logs, on an 8-service Docker Compose stack monitored with Prometheus.</li></ul>
         <div class="chips"><button type="button" class="chip" data-tag="Python">Python</button><button type="button" class="chip" data-tag="TDD">TDD</button><button type="button" class="chip" data-tag="FastAPI">FastAPI</button><button type="button" class="chip" data-tag="SQLAlchemy 2">SQLAlchemy 2</button><button type="button" class="chip" data-tag="PostgreSQL">PostgreSQL</button><button type="button" class="chip" data-tag="Alembic">Alembic</button><button type="button" class="chip" data-tag="Docker Compose">Docker Compose</button><button type="button" class="chip" data-tag="Prometheus">Prometheus</button><button type="button" class="chip" data-tag="CI/CD">CI/CD</button></div>
         <div class="row">
           <a class="btn raised" href="https://github.com/Dep-tech-coenei-faro-27/event-site" target="_blank" rel="noopener">View repository…</a>
-          <a class="btn raised" href="https://www.eneifaro.pt/" target="_blank" rel="noopener">Website</a>
+          <a class="btn raised" href="https://eneiconf.pt/" target="_blank" rel="noopener">Website</a>
         </div>
       </div>
     </details>
-    <details>
+    <details id="fintlist">
       <summary><svg class="px" data-px="folder"></svg>FintList<span class="arrow" aria-hidden="true">&gt;</span></summary>
       <div class="pbody">
         <span class="path">C:\Projects\fintlist</span>
@@ -161,7 +161,7 @@
         </div>
       </div>
     </details>
-    <details>
+    <details id="maritime-navigation">
       <summary><svg class="px" data-px="folder"></svg>Maritime Navigation Simulator<span class="arrow" aria-hidden="true">&gt;</span></summary>
       <div class="pbody">
         <span class="path">C:\Projects\maritime-navigation</span>
@@ -176,7 +176,7 @@
         </div>
       </div>
     </details>
-    <details>
+    <details id="hashing-trees">
       <summary><svg class="px" data-px="folder"></svg>Hash Table &amp; Tree Library<span class="arrow" aria-hidden="true">&gt;</span></summary>
       <div class="pbody">
         <span class="path">C:\Projects\hashing-trees</span>
@@ -191,7 +191,7 @@
         </div>
       </div>
     </details>
-    <details>
+    <details id="bookswipe">
       <summary><svg class="px" data-px="folder"></svg>BookSwipe<span class="arrow" aria-hidden="true">&gt;</span></summary>
       <div class="pbody">
         <span class="path">C:\Projects\bookswipe</span>

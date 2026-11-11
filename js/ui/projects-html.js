@@ -6,7 +6,7 @@ import { esc } from '../util.js';
 // open[i] diz se o projeto i está aberto; sem isso, só o primeiro
 export function projectsHtml(t, tr, open = []) {
   return PROJECTS.map((p, i) => `
-    <details${(open.length ? open[i] : i === 0) ? ' open' : ''}>
+    <details id="${esc(p.slug)}"${(open.length ? open[i] : i === 0) ? ' open' : ''}>
       <summary><svg class="px" data-px="folder"></svg>${esc(tr(p.name))}<span class="arrow" aria-hidden="true">&gt;</span></summary>
       <div class="pbody">
         <span class="path">C:\\${esc(t('projects.dir'))}\\${esc(p.slug)}</span>

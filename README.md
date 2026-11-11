@@ -17,7 +17,9 @@ The site is a retro desktop. Cards work like windows: you can drag one onto anot
 - **English / Portuguese**, switchable from the taskbar or with `?lang=pt` in the URL.
 - **Five themes:** Game Boy (default, with an animated pixel-art wallpaper drawn on a canvas), vaporwave, pink, mint and night.
 - **Search** across every card, including closed ones, accent-insensitive.
-- **Command prompt** with `HELP`, `DIR`, `TYPE stack.yml`, `START projects`, `THEME vapor` and `LANG pt`.
+- **Direct link to a project:** `https://kakurokan.github.io/#enei-2027` opens the Projects card on that project. Opening a project puts its link in the address bar.
+- **GitHub activity:** a contribution graph and the latest public commits, fetched from public APIs (no token) and cached for 30 minutes. If a request fails, that part simply does not show.
+- **Command prompt** with `HELP`, `DIR`, `TYPE stack.yml`, `START projects`, `THEME vapor`, `LANG pt`, `GIT LOG` and `NEOFETCH`.
 - **Accessible and lightweight:** real buttons and links, keyboard support, `prefers-reduced-motion` respected, and no build step or dependencies.
 
 ## Stack
@@ -67,6 +69,14 @@ node tools/prerender.mjs
 ```
 
 Browsers cache files for a few minutes on GitHub Pages. If a visitor (or you) still sees an old script right after a deploy, a hard refresh fixes it.
+
+## Tests
+
+```bash
+npm test
+```
+
+Runs with Node's built-in test runner (no dependencies). The tests check that both languages have the same keys, that every key used in `index.html` exists, that every card has a name and a place in the default order, the HTML generated for the projects, and that the prerendered `index.html` is up to date. GitHub Actions runs them on every push (`.github/workflows/test.yml`).
 
 ## Deploy
 

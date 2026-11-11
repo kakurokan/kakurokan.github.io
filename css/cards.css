@@ -156,7 +156,8 @@ mark { background: var(--head); color: var(--card); padding: 0 1px; }
 .activity { display: flex; flex-direction: column; margin-top: 4px; }
 .activity a { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-top: 2px dotted var(--bar); text-decoration: none; min-width: 0; }
 .activity a:last-child { border-bottom: 2px dotted var(--bar); }
-.activity .msg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+/* até 2 linhas, e quebra em qualquer sítio: uma mensagem comprida numa só linha alargava a página inteira no telemóvel */
+.activity .msg { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font-weight: 700; }
 .activity small { color: var(--muted); font-weight: 600; }
 .graph-cap { margin: 8px 0 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
 .graph { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; grid-template-rows: repeat(7, auto); gap: 2px; margin-bottom: 8px; }
@@ -165,3 +166,4 @@ mark { background: var(--head); color: var(--card); padding: 0 1px; }
 .graph i[data-l="2"] { opacity: .5; }
 .graph i[data-l="3"] { opacity: .75; }
 .graph i[data-l="4"] { opacity: 1; }
+.graph { max-width: 420px; }

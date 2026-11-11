@@ -7,7 +7,7 @@ import { hydrateIcons } from './fx/icons.js';
 import { initFx } from './fx/loader.js';
 import { initCards, goTo } from './ui/cards.js';
 import { initLayout, layout } from './ui/layout.js';
-import { initTags } from './ui/tags.js';
+import { initTags, openProject } from './ui/tags.js';
 import { initTaskbar } from './ui/taskbar.js';
 import { initTerminal } from './ui/terminal.js';
 import { initClock } from './ui/clock.js';
@@ -38,7 +38,8 @@ async function init() {
 
   document.fonts && document.fonts.ready.then(() => { layout(); startCat(); });
   setTimeout(startCat, 300);
-  const startCard = document.getElementById(location.hash.slice(1));
+  const target = location.hash.slice(1), startCard = document.getElementById(target);
   if (startCard && startCard.classList.contains('card')) setTimeout(() => goTo(startCard), 50);
+  else if (target) setTimeout(() => openProject(target), 50);   // #enei-2027: link direto para um projeto
 }
 init();

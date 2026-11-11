@@ -55,7 +55,24 @@ function setTag(tag) {
   }
 }
 
+// link direto: #enei-2027 abre o cartão de projetos com esse projeto aberto e à vista
+export function openProject(slug) {
+  const d = slug && [...projectList.querySelectorAll('details')].find(x => x.id === slug);
+  if (!d) return false;
+  emit('goto', projectsCard);
+  d.open = true;
+  d.scrollIntoView({ block: 'start' });
+  return true;
+}
+
 export function initTags() {
+  // abrir um projeto põe o link dele na barra de endereço, pronto a copiar
+  projectList.addEventListener('click', e => {
+    const s = e.target.closest('summary'); if (!s) return;
+    const d = s.parentElement;
+    setTimeout(() => { if (d.open) try { history.replaceState(null, '', '#' + d.id); } catch (e) {} });
+  });
+  window.addEventListener('hashchange', () => openProject(location.hash.slice(1)));
   document.addEventListener('click', e => {
     const b = e.target.closest('button.chip[data-tag]');
     if (b) setTag(b.dataset.tag);

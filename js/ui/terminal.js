@@ -3,6 +3,7 @@ import { state, on, emit } from '../state.js';
 import { LANGS } from '../i18n/index.js';
 import { GOTO, TERM } from '../data/terminal.js';
 import { esc } from '../util.js';
+import { store } from '../store.js';
 import { THEMES, THEME_ALIAS, setTheme } from './themes.js';
 import { setLang } from './lang.js';
 
@@ -43,7 +44,19 @@ const CMDS = {
   GITHUB: () => { window.open('https://github.com/kakurokan', '_blank', 'noopener'); return T().opening('github.com/kakurokan'); },
   VER: () => T().ver,
   CLS: () => { termOut.innerHTML = ''; return null; },
-  SUDO: () => T().sudo
+  // os commits são os que o cartão Activity guardou no localStorage
+  GIT: arg => {
+    if (!/^log\b/i.test(arg || '')) return T().gitUsage;
+    let data = null;
+    try { data = JSON.parse(store.get('activity')).data; } catch (e) {}
+    if (!Array.isArray(data) || !data.length) return T().gitEmpty;
+    return data.map(c => `<span class="y">${esc(String(c.url).split('/').pop().slice(0, 7))}</span> ${esc(c.msg)} <span class="c">(${esc(c.repo)})</span>`).join('\n');
+  },
+  NEOFETCH: () => T().neofetch,
+  SUDO: arg => {
+    if (!/^hire\b/i.test(arg || '')) return T().sudo;
+    emit('goto', document.getElementById('contact')); return T().hired;
+  }
 };
 Object.assign(CMDS, { LS: CMDS.DIR, CAT: CMDS.TYPE, OPEN: CMDS.START, CLEAR: CMDS.CLS, '?': CMDS.HELP });
 

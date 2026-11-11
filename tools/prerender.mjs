@@ -2,7 +2,8 @@
 // antes de o JavaScript correr: motores de busca, pré-visualizações de links (LinkedIn, WhatsApp…) e
 // quem tem JS desligado. Não faz parte do deploy: corre-se à mão depois de mudar textos ou projetos.
 //
-//   node tools/prerender.mjs
+//   node tools/prerender.mjs            (ou `npm run prerender`)
+//   node tools/prerender.mjs --check    só verifica, sem escrever
 //
 // É idempotente. Os textos vêm de js/i18n/en.js e os projetos de js/data/projects.js.
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -57,5 +58,11 @@ block('more', moreHtml(tr));
 html = html.replace(/(<meta name="description" content=")[^"]*(")/, `$1${escAttr(t('meta.description'))}$2`);
 html = html.replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escAttr(t('meta.description'))}$2`);
 
-writeFileSync(file, html);
-console.log('index.html atualizado');
+// --check: não escreve, só diz se o index.html está em dia (usado pelos testes e pelo CI)
+if (process.argv.includes('--check')) {
+  if (html !== readFileSync(file, 'utf8')) { console.error('index.html desatualizado: corre `node tools/prerender.mjs`'); process.exit(1); }
+  console.log('index.html em dia');
+} else {
+  writeFileSync(file, html);
+  console.log('index.html atualizado');
+}

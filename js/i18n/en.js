@@ -13,7 +13,7 @@ export default {
   'welcome.text': "I'm <b>Léo Souza</b>, a software engineer (Java, Python) finishing my Informatics Engineering degree at the University of the Algarve. Measuring, then finding out why, is how I like to work.",
   'welcome.contact': 'contact',
   'now.title': '#Now',
-  'now.text': 'Backend team for ENEI 2027, the national informatics students’ conference coming to Faro. The ticketing platform launches on November 9!',
+  'now.text': 'Backend team for ENEI 2027, the national informatics students’ conference coming to Faro. The ticketing platform went live on November 9!',
   'themes.title': '#Themes', 'themes.text': 'Pick a theme to change the look of the site. Your choice is saved.',
   'themes.rosa': 'pink', 'themes.menta': 'mint', 'themes.noite': 'night',
   'themes.gameboy.aria': 'Game Boy theme', 'themes.vapor.aria': 'Vaporwave theme', 'themes.rosa.aria': 'Pink theme', 'themes.menta.aria': 'Mint theme', 'themes.noite.aria': 'Night theme',

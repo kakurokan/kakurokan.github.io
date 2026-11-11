@@ -46,10 +46,14 @@ function highlight(q) {
   }
   if (!savedOpen) savedOpen = details.map(d => d.open);
   details.forEach(d => { d.open = norm(d.textContent).includes(q); });
-  const walker = document.createTreeWalker(board, NodeFilter.SHOW_TEXT, {
-    acceptNode: n => (n.parentElement.closest('.bar, svg, script, style, .card[hidden], input') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT)
+  // só percorre os cartões à vista: os escondidos não têm nada para destacar
+  const nodes = [];
+  cards.filter(c => !c.hidden).forEach(card => {
+    const walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => (n.parentElement.closest('.bar, svg, script, style, input') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT)
+    });
+    while (walker.nextNode()) nodes.push(walker.currentNode);
   });
-  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach(node => {
     const text = node.nodeValue;
     // texto normalizado + mapa de volta para as posições originais (para ignorar acentos)
