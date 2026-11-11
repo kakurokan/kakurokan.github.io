@@ -4,7 +4,7 @@ Personal portfolio of **Léo Souza**, software engineer (Java, Python), finishin
 
 **Live:** https://kakurokan.github.io · Portuguese: https://kakurokan.github.io/?lang=pt
 
-The site is a retro desktop. Cards work like windows: you can drag one onto another to swap them, minimize, expand or close them, and reopen any of them from the taskbar. A small pixel-art cat, Koji, walks across the cards, jumps between them and naps now and then.
+The site is a retro desktop. Cards work like windows: you can drag one onto another to swap them, minimize, expand or close them, and reopen any of them from the taskbar. A small pixel-art cat, Koji, walks across the cards, jumps between them and naps now and then. He turns his head towards the cursor, goes to check the card you just opened, and sleeps most of the night (your local time).
 
 ![Screenshot of the retro desktop, Game Boy theme](docs/screenshot.png)
 

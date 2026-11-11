@@ -1,5 +1,7 @@
-// Koji, o gato: anda pelos cartões, salta entre eles e às vezes dorme. Só é descarregado no ecrã grande.
-import { state as app, cards, isSmall } from '../state.js';
+// Koji, o gato: anda pelos cartões, salta entre eles e às vezes dorme. Segue o cursor com a cabeça quando está
+// sentado, vai ver o cartão que acabou de ser aberto e de noite passa quase o tempo todo a dormir.
+// Só é descarregado no ecrã grande.
+import { state as app, cards, isSmall, on } from '../state.js';
 import { t } from '../i18n/index.js';
 
 const el = document.getElementById('cat');
@@ -11,6 +13,7 @@ const F = {
   walk1: ['...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OS......OBBPBO','..OBOOOOOOOBBBO.','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','..OBSBBSBBSBBO..','..OBOOOOOOOOBO..','..OBO....OBO....','..OO.....OO.....'],
   walk2: ['...........O..O.','O.........OBOOBO','OS........OBSSBO','.OB.......OBEBEO','..OS......OBBPBO','..OBOOOOOOOBBBO.','..OBSBBSBBSBBBO.','..OBSBBSBBSBBO..','..OBSBBSBBSBBO..','..OBOOOOOOOOBO..','...OBO..OBO.....','....OO...OO.....'],
   sit:   ['...........O..O.','..........OBOOBO','..........OBSSBO','..........OBEBEO','..........OBBPBO','........OOOBBBO.','.......OBSBBSBO.','......OBBSBBSBO.','......OBBSBBSBO.','O.....OBBSBBSBO.','OS....OBBOBBBBO.','.OOOOOOOOOOOOOO.'],
+  sitUp: ['...........O..O.','..........OBOOBO','..........OBEBEO','..........OBBBBO','..........OBBPBO','........OOOBBBO.','.......OBSBBSBO.','......OBBSBBSBO.','......OBBSBBSBO.','O.....OBBSBBSBO.','OS....OBBOBBBBO.','.OOOOOOOOOOOOOO.'],   // olhos para cima
   sleep: ['................','................','................','................','................','........O..O....','...OOOOOOBOOBO..','..OBSBBSBBSBBBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
   sleep2:['................','................','................','................','................','................','...OOOOOO.O..O..','..OBSBBSBOBOOBO.','.OBBSBBSBBOOBBO.','.OBBSBBSBBSBPBO.','.OOBSBBSBBSBBBO.','..OOOOOOOOOOOOO.'],
   angry: ['...OOO....OOO...','....OBOOOOBO....','....OOBBBBOO....','....OEOBBOEO....','....OBBPPBBO....','.....OBBBBO.....','..OOOBSBBSBOOO..','.OBBOBSBBSBOBBO.','.OO.OBSBBSBO.OO.','....OBBBBBBO....','...OBBOOOOBBO.SO','...OO......OO.OS'],
@@ -31,6 +34,19 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 const FLOOR = { floor: true };
 let plat = null, x = 0, y = 0, dir = 1, state = 'sit', timer = 1.5, anim = 0;
 let jump = null, vy = 0, last = 0, running = false;
+
+// de noite (hora de quem visita) o gato quase só dorme
+const isNight = () => { const h = new Date().getHours(); return h >= 23 || h < 7; };
+const nap = () => { state = 'sleep'; timer = isNight() ? rnd(25, 50) : rnd(7, 16); };
+
+// cartão acabado de abrir (barra de tarefas, ícones, prompt…): o gato vai lá ver. De noite não se levanta por isso.
+let wanted = null, wantedUntil = 0;
+on('goto', card => { if (card && !(state === 'sleep' && isNight())) { wanted = card; wantedUntil = performance.now() + 4000; } });
+
+// onde anda o cursor, para o gato olhar para ele quando está sentado
+let mouse = null;
+window.addEventListener('pointermove', e => { mouse = { x: e.clientX, y: e.clientY }; }, { passive: true });
+document.documentElement.addEventListener('mouseleave', () => { mouse = null; });
 
 // plataformas = topo de cada cartão visível (dentro da área visível da sua coluna) + a barra de tarefas
 // loose: usado ao cair, aceita cartões cujo topo está quase no fundo da coluna ou do ecrã
@@ -79,7 +95,7 @@ function jumpSomewhere() {
 }
 function decide() {
   const r = Math.random();
-  if (r < 0.14) { state = 'sleep'; timer = rnd(7, 16); }
+  if (r < (isNight() ? 0.7 : 0.14)) nap();
   else if (r < 0.38) { state = 'sit'; timer = rnd(1.5, 4); }
   else if (r < 0.62 && jumpSomewhere()) {}
   else { state = 'walk'; timer = rnd(2, 6); if (Math.random() < 0.4) dir = -dir; }
@@ -129,6 +145,10 @@ function step(dt) {
   const r = rectOf(plat);
   if (!r) { state = 'fall'; vy = 0; return; }
   y = r.top;
+  if (wanted) {
+    if (performance.now() > wantedUntil || wanted === plat) wanted = null;
+    else if (startJump(wanted)) { wanted = null; return; }   // se o cartão ainda não está à vista, tenta outra vez no próximo passo
+  }
   timer -= dt;
   if (state === 'walk') {
     x += dir * 42 * dt;
@@ -140,7 +160,10 @@ function step(dt) {
     }
     if (timer <= 0) decide();
   } else if (state === 'sit') {
-    clampX(r); show('sit');
+    clampX(r);
+    const dx = mouse ? mouse.x - (x + W / 2) : 0;
+    if (Math.abs(dx) > 14) dir = dx > 0 ? 1 : -1;   // vira a cabeça para o cursor
+    show(mouse && y - mouse.y > 70 && Math.abs(dx) < 260 ? 'sitUp' : 'sit');
     if (timer <= 0) decide();
   } else if (state === 'sleep') {
     clampX(r); show(Math.floor(anim / 1.2) % 2 ? 'sleep' : 'sleep2');
@@ -212,6 +235,7 @@ function start() {
     plat = document.getElementById('welcome');
     const r = rectOf(plat) || (plat = FLOOR, rectOf(FLOOR));
     x = r.left + 24; y = r.top;
+    if (isNight()) nap();
   }
   if (reduce) { state = 'sleep'; show('sleep'); render(); running = false; return; }
   if (!running) { running = true; last = 0; requestAnimationFrame(loop); }
