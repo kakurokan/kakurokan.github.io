@@ -86,7 +86,7 @@ function startJump(target) {
   const rise = Math.max(0, y - tr.top);
   const up = Math.max(rise + 8, Math.min(rise + 24 + Math.abs(tx - x) * 0.15, y - H - 4));
   const down = up - (y - tr.top);
-  jump = { target, sx: x, sy: y, tx, t: 0, prep: 0.14, v0: Math.sqrt(2 * G * up), T: Math.sqrt(2 * up / G) + Math.sqrt(2 * down / G) };
+  jump = { target, sx: x, sy: y, tx, ty: tr.top, t: 0, prep: 0.14, v0: Math.sqrt(2 * G * up), T: Math.sqrt(2 * up / G) + Math.sqrt(2 * down / G) };
   state = 'crouch'; show('crouch');   // agacha-se um instante antes de saltar
   return true;
 }
@@ -150,7 +150,7 @@ function step(dt) {
     jump.t = Math.min(jump.T, jump.t + dt);
     const t = jump.t;
     x = jump.sx + (jump.tx - jump.sx) * t / jump.T;
-    y = jump.sy - (jump.v0 * t - G * t * t / 2);
+    y = jump.sy - (jump.v0 * t - G * t * t / 2) + (tr.top - jump.ty) * t / jump.T;   // acompanha o cartão se ele se mexer a meio do salto
     show(jump.v0 - G * t > 0 ? 'jump' : 'walk1');   // a subir estica-se; a descer põe as patas para baixo
     if (t >= jump.T) { y = tr.top; land(jump.target); }
     return;
